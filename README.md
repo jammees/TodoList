@@ -7,6 +7,8 @@
 A simple todo widget to keep track of things in the editor. Saves to each project. The library allows to import and export the entries in case the cookies that are used to
 save the data expire or to have different branches of todos.
 
+<br>
+
 # Installation
 
 The library can be found in the s&box library manager! It is recommended to install the library from there!
