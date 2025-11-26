@@ -13,7 +13,7 @@ using Todo.Widgets;
 namespace Todo;
 
 [Dock( "Editor", "Todos", "checklist" )]
-public sealed class TodoWidget : Widget
+public sealed partial class TodoWidget : Widget
 {
 	TodoList List;
 	LineEdit SearchBar;
@@ -49,51 +49,7 @@ public sealed class TodoWidget : Widget
 
 		Build();
 	}
-
-	[Menu( "Editor", "Todo List/Import Entries" )]
-	internal static void Import()
-	{
-		if ( Instance.IsValid() is false)
-			return;
-
-		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
-		string filePath = EditorUtility.OpenFileDialog( "Import Todo Entries", "txt", defaultPath );
-
-		if ( string.IsNullOrEmpty( filePath ) )
-		{
-			EditorUtility.DisplayDialog( "Invalid path", "An invalid or empty path had been provided!" );
-			return;
-		}
-
-		string json = System.IO.File.ReadAllText( filePath );
-
-		Instance.Datas = JsonSerializer.Deserialize<List<TodoEntry>>( json );
-
-		Instance.TriggerSave();
-	}
-
-	[Menu( "Editor", "Todo List/Export Entries" )]
-	internal static void Export()
-	{
-		if ( Instance.IsValid() is false )
-			return;
-
-		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
-		string filePath = EditorUtility.SaveFileDialog( "Export Todo Entries", "txt", defaultPath + "\\TodoEntries.txt" );
-
-		if ( string.IsNullOrEmpty( filePath ) )
-		{
-			EditorUtility.DisplayDialog( "Invalid path", "An invalid or empty path had been provided!" );
-			return;
-		}
-
-		string json = JsonSerializer.Serialize( Instance.Datas );
-
-		StreamWriter file = System.IO.File.CreateText( filePath );
-		file.Write( json );
-		file.Close();
-	}
-
+	
 	internal void TriggerSave()
 	{
 		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
