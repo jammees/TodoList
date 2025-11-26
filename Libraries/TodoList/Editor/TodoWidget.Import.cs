@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Todo.List;
+using static Sandbox.Resources.ResourceGenerator;
 
 namespace Todo;
 
@@ -57,9 +58,15 @@ public sealed partial class TodoWidget : Widget
 			IgnoreInaccessible = true,
 		};
 
-		string[] paths = System.IO.Directory.GetFiles( codeFolderPath, "*.cs", options );
-
 		Instance.Datas.Clear();
+
+		ProcessFiles( codeFolderPath, "*.cs", options );
+		ProcessFiles( codeFolderPath, "*.razor", options );
+	}
+
+	private static void ProcessFiles( string root, string extension, EnumerationOptions options )
+	{
+		string[] paths = System.IO.Directory.GetFiles( root, extension, options );
 
 		foreach ( string path in paths )
 		{
@@ -67,7 +74,6 @@ public sealed partial class TodoWidget : Widget
 				continue;
 
 			string fileName = new FileInfo( path ).Name;
-			fileName = fileName.Remove( fileName.IndexOf( ".cs" ) );
 
 			string lines = System.IO.File.ReadAllText( path );
 			lines = lines.CollapseSpacesAndPreserveLines();
