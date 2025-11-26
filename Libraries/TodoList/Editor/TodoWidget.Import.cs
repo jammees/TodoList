@@ -94,7 +94,7 @@ public sealed partial class TodoWidget : Widget
 
 	private static string GetComments( string lines )
 	{
-		Regex commentRegex = new( "(?<=^\\/\\/).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
+		Regex commentRegex = new( "(?<=\\/\\/).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
 		MatchCollection results = commentRegex.Matches( lines );
 
 		StringBuilder commentString = new();
