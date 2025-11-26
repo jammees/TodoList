@@ -4,10 +4,11 @@ public sealed class MyComponent : Component
 	[Property] public string StringProperty { get; set; }
 
 	// TODO: finish working on this
-	public void Empty()
+	public void Empty() // this even works!
 	{
 		// TODO: this is inside of the thing
 		// TODO: under this one ^
+		// TODO:very much YES
 	}
 
 	//toDo:this is some uneven formatting
