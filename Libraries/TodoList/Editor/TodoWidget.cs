@@ -23,7 +23,6 @@ public sealed partial class TodoWidget : Widget
 
 	string SettingCookie;
 	string SearchText = "";
-	int SaveCounter = 0;
 	int VericalScrollHeight = 0;
 
 	public TodoWidget( Widget parent ) : base( parent, true )
@@ -166,15 +165,5 @@ public sealed partial class TodoWidget : Widget
 			List.VerticalScrollbar.Value = VericalScrollHeight;
 			VericalScrollHeight = 0;
 		}
-
-		if ( SetContentHash( ContentHash, 0.1f ) )
-		{
-			if ( List.IsValid() )
-				VericalScrollHeight = List.VerticalScrollbar.Value;
-
-			LoadItems();
-		}
 	}
-
-	private int ContentHash() => HashCode.Combine( SaveCounter, SearchText );
 }
