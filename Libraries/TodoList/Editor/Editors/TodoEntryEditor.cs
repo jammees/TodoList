@@ -70,7 +70,7 @@ internal class TodoEntryEditor : Widget
 		Data.Message = MessageEdit.PlainText;
 		Data.Group = GroupControl.GetGroupName();
 
-		TodoWidget.TriggerSave();
+		TodoWidget.SaveAndRefresh();
 
 		Close();
 	}

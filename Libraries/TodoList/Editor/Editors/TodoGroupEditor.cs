@@ -59,7 +59,7 @@ internal class TodoGroupEditor : Widget
 	{
 		TodoWidget.Datas.RemoveAll( x => x.Group == Group.Group );
 
-		TodoWidget.TriggerSave();
+		TodoWidget.SaveAndRefresh();
 
 		Close();
 	}
@@ -73,7 +73,7 @@ internal class TodoGroupEditor : Widget
 			entry.Group = newGroup;	
 		}
 
-		TodoWidget.TriggerSave();
+		TodoWidget.SaveAndRefresh();
 
 		Close();
 	}

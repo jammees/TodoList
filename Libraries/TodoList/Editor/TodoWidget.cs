@@ -49,18 +49,15 @@ public sealed partial class TodoWidget : Widget
 		Build();
 	}
 
-	internal void TriggerSave( bool doRefresh = true )
+	internal void TriggerSave()
 	{
 		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
 		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );
 		ProjectCookie.Set( $"{SettingCookie}.ShowManual", ShowManualEntries );
 		ProjectCookie.Set( $"{SettingCookie}.ShowCode", ShowCodeEntries );
-
-		if ( doRefresh is true )
-			Refresh();
 	}
 
-	internal void Refresh()
+	internal void RefreshItems()
 	{
 		if ( List.IsValid() )
 			VericalScrollHeight = List.VerticalScrollbar.Value;
@@ -68,16 +65,22 @@ public sealed partial class TodoWidget : Widget
 		LoadItems();
 	}
 
+	internal void SaveAndRefresh()
+	{
+		TriggerSave();
+		RefreshItems();
+	}
+
 	internal void SetGroupState( string group, bool state )
 	{
 		GroupsState[group] = state;
-		TriggerSave();
+		SaveAndRefresh();
 	}
 
 	internal void DeleteData( TodoEntry data )
 	{
 		Datas.Remove( data );
-		TriggerSave();
+		SaveAndRefresh();
 	}
 
 	private void Build()
@@ -90,7 +93,7 @@ public sealed partial class TodoWidget : Widget
 		searchBar.TextChanged += ( searchText ) =>
 		{
 			SearchText = searchText.ToLower().Trim();
-			Refresh();
+			RefreshItems();
 		};
 
 		Widget controlWidget = Layout.Add( new Widget( this ) );
@@ -120,7 +123,7 @@ public sealed partial class TodoWidget : Widget
 		buttonLayout.Spacing = 2f;
 
 		ToolButton refreshButton = buttonLayout.Add( new ToolButton( "", "refresh", buttonWidget ) );
-		refreshButton.MouseClick = Refresh;
+		refreshButton.MouseClick = RefreshItems;
 		refreshButton.ToolTip = "Refresh All";
 
 		ToolButton showVisibilityButton = buttonLayout.Add( new ToolButton( "", "visibility", buttonWidget ) );
@@ -156,7 +159,7 @@ public sealed partial class TodoWidget : Widget
 			option.Toggled = ( b ) =>
 			{
 				ShowManualEntries = b;
-				TriggerSave( false );
+				TriggerSave();
 			};
 		}
 
@@ -167,7 +170,7 @@ public sealed partial class TodoWidget : Widget
 			option.Toggled = ( b ) =>
 			{
 				ShowCodeEntries = b;
-				TriggerSave( false );
+				TriggerSave();
 			};
 		}
 

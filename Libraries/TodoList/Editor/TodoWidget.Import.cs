@@ -31,6 +31,6 @@ public sealed partial class TodoWidget : Widget
 
 		Instance.Datas = JsonSerializer.Deserialize<List<TodoEntry>>( json );
 
-		Instance.TriggerSave();
+		Instance.SaveAndRefresh();
 	}
 }

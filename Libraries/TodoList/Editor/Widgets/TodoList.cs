@@ -148,7 +148,7 @@ internal sealed class TodoList : ListView
 
 		entry.IsDone = !entry.IsDone;
 
-		TodoWidget.TriggerSave();
+		TodoWidget.SaveAndRefresh();
 	}
 
 	private void OpenGroupEditor( EntryGroup group )

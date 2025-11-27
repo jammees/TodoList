@@ -61,7 +61,7 @@ internal class TodoEntryCreatorWidget : Widget
 
 		TodoWidget.Datas.Add( entry );
 
-		TodoWidget.TriggerSave();
+		TodoWidget.SaveAndRefresh();
 
 		Close();
 	}

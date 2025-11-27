@@ -64,7 +64,7 @@ public sealed partial class TodoWidget : Widget
 			}
 		}
 
-		Instance.TriggerSave();
+		Instance.SaveAndRefresh();
 	}
 
 	private static string GetComments( string lines )
