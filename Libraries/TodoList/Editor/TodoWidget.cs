@@ -20,6 +20,8 @@ public sealed partial class TodoWidget : Widget
 
 	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
+	bool ShowManualEntries = true;
+	bool ShowCodeEntries = false;
 	string SettingCookie;
 	string SearchText = "";
 	int VericalScrollHeight = 0;
@@ -37,6 +39,8 @@ public sealed partial class TodoWidget : Widget
 
 		Datas = ProjectCookie.Get( $"{SettingCookie}.List", new List<TodoEntry>() );
 		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
+		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
+		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
 
 		Layout = Layout.Column();
 		Layout.Spacing = 4f;
@@ -49,6 +53,8 @@ public sealed partial class TodoWidget : Widget
 	{
 		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
 		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );
+		ProjectCookie.Set( $"{SettingCookie}.ShowManual", ShowManualEntries );
+		ProjectCookie.Set( $"{SettingCookie}.ShowCode", ShowCodeEntries );
 
 		if ( doRefresh is true )
 			Refresh();
@@ -87,11 +93,38 @@ public sealed partial class TodoWidget : Widget
 			Refresh();
 		};
 
-		Layout controlLayout = Layout.Add( new Widget( this ) ).Layout = Layout.Row();
+		Widget controlWidget = Layout.Add( new Widget( this ) );
+		Layout controlLayout = controlWidget.Layout = Layout.Row();
 		controlLayout.Spacing = 4f;
 
-		Button addButton = controlLayout.Add( new Button( "Add new entry", this ) );
+		Button addButton = controlLayout.Add( new Button( "Add new entry", "add", this ) );
 		addButton.Clicked = OpenEntryWidget;
+
+		Splitter splitter = new( controlWidget );
+		splitter.IsHorizontal = true;
+		splitter.AddWidget( addButton );
+		splitter.SetStretch( 0, 9 );
+		controlLayout.Add( splitter, 1 );
+
+		Widget buttonWidget = controlLayout.Add( new Widget( this ) );
+		buttonWidget.OnPaintOverride = () =>
+		{
+			Paint.ClearPen();
+			Paint.SetBrush( Theme.ControlBackground );
+			Paint.DrawRect( buttonWidget.LocalRect, 4 );
+
+			return true;
+		};
+
+		Layout buttonLayout = buttonWidget.Layout = Layout.Row();
+		buttonLayout.Spacing = 2f;
+
+		ToolButton refreshButton = buttonLayout.Add( new ToolButton( "", "refresh", buttonWidget ) );
+		refreshButton.MouseClick = Refresh;
+		refreshButton.ToolTip = "Refresh All";
+
+		ToolButton showVisibilityButton = buttonLayout.Add( new ToolButton( "", "visibility", buttonWidget ) );
+		showVisibilityButton.MouseClick = OpenVisibilityMenu;
 
 		List = Layout.Add( new TodoList( this ) );
 
@@ -111,9 +144,34 @@ public sealed partial class TodoWidget : Widget
 		windowExample.Show();
 	}
 
-	private void OnSearchChanged( string search )
+	private void OpenVisibilityMenu()
 	{
-		SearchText = search.ToLower();
+		var menu = new Menu( this );
+
+		{
+			var option = menu.AddOption( new Option( this, "Show Manual Entries", "checklist" ) );
+			option.Checkable = true;
+			option.Checked = ShowManualEntries;
+			option.Toggled = ( b ) =>
+			{
+				ShowManualEntries = b;
+				TriggerSave( false );
+			};
+		}
+
+		{
+			var option = menu.AddOption( new Option( this, "Show Code Entries", "code" ) );
+			option.Checkable = true;
+			option.Checked = ShowCodeEntries;
+			option.Toggled = ( b ) =>
+			{
+				ShowCodeEntries = b;
+				TriggerSave( false );
+			};
+		}
+
+		menu.DeleteOnClose = true;
+		menu.OpenAtCursor( true );
 	}
 
 	private void LoadItems()
