@@ -51,7 +51,7 @@ public sealed partial class TodoWidget : Widget
 			string fileName = new FileInfo( path ).Name;
 
 			string lines = System.IO.File.ReadAllText( path );
-			lines = lines.CollapseSpacesAndPreserveLines();
+			//lines = lines.CollapseSpacesAndPreserveLines();
 			lines = GetComments( lines );
 
 			foreach ( var message in ScanFor( lines, "TODO:" ) )
