@@ -19,7 +19,7 @@ internal sealed class GroupControl
 		GroupEdit.Text = CurrentGroup;
 		GroupEdit.PlaceholderText = "Group";
 
-		Button groupEditButton = parent.Layout.Add( new Button( $"Change to existing group", "folder_copy", parent ) );
+		Button groupEditButton = parent.Layout.Add( new Button( $"Change To Existing Group", "folder_copy", parent ) );
 		groupEditButton.Clicked = BuildGroupOptions;
 	}
 
@@ -34,7 +34,7 @@ internal sealed class GroupControl
 
 		popupMenu.AddLineEdit(
 			"Search",
-			placeholder: "for group...",
+			placeholder: "For Group...",
 			autoFocus: true,
 			onChange: searchText => PopulateGroupMenu( ref popupMenu, searchText.ToLower() )
 		);
