@@ -97,7 +97,7 @@ public sealed partial class TodoWidget : Widget
 		Layout controlLayout = controlWidget.Layout = Layout.Row();
 		controlLayout.Spacing = 4f;
 
-		Button addButton = controlLayout.Add( new Button( "Add new entry", "add", this ) );
+		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ) );
 		addButton.Clicked = OpenEntryWidget;
 
 		Splitter splitter = new( controlWidget );
