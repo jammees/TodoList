@@ -13,7 +13,6 @@ namespace Todo;
 public sealed partial class TodoWidget : Widget
 {
 	TodoList List;
-	LineEdit SearchBar;
 
 	internal Dictionary<string, bool> GroupsState;
 	internal List<TodoEntry> Datas;
@@ -79,10 +78,14 @@ public sealed partial class TodoWidget : Widget
 	{
 		Layout.Clear( true );
 
-		SearchBar = Layout.Add( new LineEdit( this ) );
-		SearchBar.PlaceholderText = "Search...";
-		SearchBar.MinimumHeight = 30f;
-		SearchBar.TextChanged += OnSearchChanged;
+		LineEdit searchBar = Layout.Add( new LineEdit( this ) );
+		searchBar.PlaceholderText = "Search...";
+		searchBar.MinimumHeight = 30f;
+		searchBar.TextChanged += ( searchText ) =>
+		{
+			SearchText = searchText.ToLower().Trim();
+			Refresh();
+		};
 
 		Layout controlLayout = Layout.Add( new Widget( this ) ).Layout = Layout.Row();
 		controlLayout.Spacing = 4f;
