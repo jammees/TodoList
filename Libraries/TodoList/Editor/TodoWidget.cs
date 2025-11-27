@@ -46,13 +46,22 @@ public sealed partial class TodoWidget : Widget
 
 		Build();
 	}
-	
-	internal void TriggerSave()
+
+	internal void TriggerSave( bool doRefresh = true )
 	{
 		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
 		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );
 
-		SaveCounter++;
+		if ( doRefresh is true )
+			Refresh();
+	}
+
+	internal void Refresh()
+	{
+		if ( List.IsValid() )
+			VericalScrollHeight = List.VerticalScrollbar.Value;
+
+		LoadItems();
 	}
 
 	internal void SetGroupState( string group, bool state )
