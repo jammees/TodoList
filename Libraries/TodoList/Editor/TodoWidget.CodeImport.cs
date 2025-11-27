@@ -78,7 +78,6 @@ public sealed partial class TodoWidget : Widget
 		{
 			commentString.AppendLine( match.Value.Trim() );
 		}
-		;
 
 		return commentString.ToString();
 	}
