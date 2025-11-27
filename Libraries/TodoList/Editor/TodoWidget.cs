@@ -125,6 +125,7 @@ public sealed partial class TodoWidget : Widget
 
 		ToolButton showVisibilityButton = buttonLayout.Add( new ToolButton( "", "visibility", buttonWidget ) );
 		showVisibilityButton.MouseClick = OpenVisibilityMenu;
+		showVisibilityButton.ToolTip = "Change Visibility";
 
 		List = Layout.Add( new TodoList( this ) );
 
