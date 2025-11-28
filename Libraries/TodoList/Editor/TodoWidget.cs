@@ -99,14 +99,8 @@ public sealed partial class TodoWidget : Widget
 		Layout controlLayout = controlWidget.Layout = Layout.Row();
 		controlLayout.Spacing = 4f;
 
-		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ) );
+		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ), 9 );
 		addButton.Clicked = OpenEntryWidget;
-
-		Splitter splitter = new( controlWidget );
-		splitter.IsHorizontal = true;
-		splitter.AddWidget( addButton );
-		splitter.SetStretch( 0, 9 );
-		controlLayout.Add( splitter, 1 );
 
 		Widget buttonWidget = controlLayout.Add( new Widget( this ) );
 		buttonWidget.OnPaintOverride = () =>
