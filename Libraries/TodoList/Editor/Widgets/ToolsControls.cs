@@ -5,8 +5,8 @@ namespace Todo.Widgets;
 
 internal sealed class ToolsControls : Widget
 {
-	public Action OnRefreshClicked;
-	public Action OnVisibilityClicked;
+	public Action OnRefreshClicked { get; set; }
+	public Action OnVisibilityClicked { get; set; }
 
 	public ToolsControls( Widget parent ) : base( parent )
 	{
@@ -14,11 +14,11 @@ internal sealed class ToolsControls : Widget
 		Layout.Spacing = 2f;
 
 		ToolButton refreshButton = Layout.Add( new ToolButton( "", "refresh", this ) );
-		refreshButton.MouseClick = OnRefreshClicked;
+		refreshButton.MouseClick = () => OnRefreshClicked?.Invoke();
 		refreshButton.ToolTip = "Refresh All";
 
 		ToolButton showVisibilityButton = Layout.Add( new ToolButton( "", "visibility", this ) );
-		showVisibilityButton.MouseClick = OnVisibilityClicked;
+		showVisibilityButton.MouseClick = () => OnVisibilityClicked?.Invoke();
 		showVisibilityButton.ToolTip = "Change Visibility";
 	}
 
