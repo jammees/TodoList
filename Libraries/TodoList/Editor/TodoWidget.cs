@@ -9,6 +9,15 @@ using Todo.Widgets;
 
 namespace Todo;
 
+internal sealed class TodoCodeStyle
+{
+	public Color Tint { get; set; }
+
+	public string CodeWord { get; set; }
+
+	public string Icon { get; set; }
+}
+
 [Dock( "Editor", "Todos", "checklist" )]
 public sealed partial class TodoWidget : Widget
 {
