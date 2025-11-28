@@ -95,8 +95,7 @@ public sealed partial class TodoWidget : Widget
 			RefreshItems();
 		};
 
-		Widget controlWidget = Layout.Add( new Widget( this ) );
-		Layout controlLayout = controlWidget.Layout = Layout.Row();
+		Layout controlLayout = Layout.Add( new Widget( this ) ).Layout = Layout.Row();
 		controlLayout.Spacing = 4f;
 
 		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ), 9 );
