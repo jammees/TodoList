@@ -181,19 +181,39 @@ public sealed partial class TodoWidget : Widget
 	{
 		List.Clear();
 
-		HashSet<string> groups = new();
-		Dictionary<string, List<TodoEntry>> entries = new();
+		HashSet<string> usedGroups = new();
 
-		foreach ( var item in Datas )
-		{
-			groups.Add( item.Group );
-			entries.GetOrCreate( item.Group ).Add( item );
-		}
+		if ( ShowManualEntries )
+			LoadManualEntries( ref usedGroups );
 
+		if ( ShowCodeEntries )
+			LoadCodeEntries( ref usedGroups );
+
+		PurgeDeadGroups( usedGroups );
+	}
+
+	private void PurgeDeadGroups( HashSet<string> groups )
+	{
 		string[] deadGroups = GroupsState.Keys.Except( groups ).ToArray();
 		foreach ( string deadGroup in deadGroups )
 		{
 			GroupsState.Remove( deadGroup );
+		}
+	}
+
+	private void LoadManualEntries( ref HashSet<string> groups )
+	{
+		if ( ShowCodeEntries )
+		{
+			List.AddItem( new GroupsTitle( "Manual Entries" ) );
+		}
+
+		Dictionary<string, List<TodoEntry>> grouppedEntries = new();
+
+		foreach ( var item in Datas )
+		{
+			groups.Add( item.Group );
+			grouppedEntries.GetOrCreate( item.Group ).Add( item );
 		}
 
 		List<string> sortedGroups = groups.ToList();
@@ -206,16 +226,49 @@ public sealed partial class TodoWidget : Widget
 				GroupsState.Add( group, true );
 			}
 
-			List.AddItem( new EntryGroup() { Group = group, Datas = entries[group], IsOpen = GroupsState[group] } );
+			List.AddItem( new EntryGroup() { Group = group, Datas = grouppedEntries[group], IsOpen = GroupsState[group] } );
+
+			if ( GroupsState[group] is false )
+				continue;
+
+			foreach ( var entry in grouppedEntries[group] )
+			{
+				if ( IsSearching && entry.Message.ToLower().Contains( SearchText ) is false )
+					continue;
+
+				List.AddItem( entry );
+			}
+		}
+	}
+
+	private void LoadCodeEntries( ref HashSet<string> groups )
+	{
+		if ( ShowManualEntries )
+		{
+			List.AddItem( new GroupsTitle( "Code Entries" ) );
+		}
+
+		Dictionary<string, List<CodeEntry>> entries = ImportFromCode();
+
+		List<string> sortedGroups = entries.Keys.ToList();
+		sortedGroups.Sort();
+
+		foreach ( var group in sortedGroups )
+		{
+			groups.Add( group );
+
+			if ( GroupsState.ContainsKey( group ) is false )
+			{
+				GroupsState.Add( group, true );
+			}
+
+			List.AddItem( new CodeGroup() { Group = group, IsOpen = GroupsState[group] } );
 
 			if ( GroupsState[group] is false )
 				continue;
 
 			foreach ( var entry in entries[group] )
 			{
-				if ( IsSearching && entry.Message.ToLower().Contains( SearchText ) is false )
-					continue;
-
 				List.AddItem( entry );
 			}
 		}
