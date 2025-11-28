@@ -116,6 +116,7 @@ public sealed partial class TodoWidget : Widget
 		ToolsControls controls = controlLayout.Add( new ToolsControls( this ) );
 		controls.OnRefreshClicked = RefreshItems;
 		controls.OnVisibilityClicked = OpenVisibilityMenu;
+		controls.OnMoreClicked = OpenMoreMenu;
 
 		List = Layout.Add( new TodoList( this ) );
 
@@ -218,6 +219,37 @@ public sealed partial class TodoWidget : Widget
 
 		menu.DeleteOnClose = true;
 		menu.OpenAtCursor( true );
+	}
+
+	private void OpenMoreMenu()
+	{
+		var menu = new Menu( this );
+
+		{
+			var option = menu.AddOption( new Option( this, "Import Entries", "download" ) );
+			option.Triggered = () => Import();
+		}
+
+		{
+			var option = menu.AddOption( new Option( this, "Export Entries", "upload" ) );
+			option.Triggered = () => Export();
+		}
+
+		menu.AddSeparator();
+
+		{
+			var option = menu.AddOption( new Option( this, "Settings", "settings" ) );
+			option.Triggered = () => OpenSettingsWidget();
+		}
+
+		menu.DeleteOnClose = true;
+		menu.OpenAtCursor( true );
+	}
+
+	private void OpenSettingsWidget()
+	{
+		var widget = new SettingsWidget( null, this );
+		widget.Show();
 	}
 
 	private void LoadItems()
