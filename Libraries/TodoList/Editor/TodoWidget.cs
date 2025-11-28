@@ -101,26 +101,9 @@ public sealed partial class TodoWidget : Widget
 		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ), 9 );
 		addButton.Clicked = OpenEntryWidget;
 
-		Widget buttonWidget = controlLayout.Add( new Widget( this ) );
-		buttonWidget.OnPaintOverride = () =>
-		{
-			Paint.ClearPen();
-			Paint.SetBrush( Theme.ControlBackground );
-			Paint.DrawRect( buttonWidget.LocalRect, 4 );
-
-			return true;
-		};
-
-		Layout buttonLayout = buttonWidget.Layout = Layout.Row();
-		buttonLayout.Spacing = 2f;
-
-		ToolButton refreshButton = buttonLayout.Add( new ToolButton( "", "refresh", buttonWidget ) );
-		refreshButton.MouseClick = RefreshItems;
-		refreshButton.ToolTip = "Refresh All";
-
-		ToolButton showVisibilityButton = buttonLayout.Add( new ToolButton( "", "visibility", buttonWidget ) );
-		showVisibilityButton.MouseClick = OpenVisibilityMenu;
-		showVisibilityButton.ToolTip = "Change Visibility";
+		ToolsControls controls = controlLayout.Add( new ToolsControls( this ) );
+		controls.OnRefreshClicked = RefreshItems;
+		controls.OnVisibilityClicked = OpenVisibilityMenu;
 
 		List = Layout.Add( new TodoList( this ) );
 
