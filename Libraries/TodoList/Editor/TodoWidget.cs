@@ -158,7 +158,7 @@ public sealed partial class TodoWidget : Widget
 			option.Toggled = ( b ) =>
 			{
 				ShowManualEntries = b;
-				TriggerSave();
+				SaveAndRefresh();
 			};
 		}
 
@@ -169,7 +169,7 @@ public sealed partial class TodoWidget : Widget
 			option.Toggled = ( b ) =>
 			{
 				ShowCodeEntries = b;
-				TriggerSave();
+				SaveAndRefresh();
 			};
 		}
 
