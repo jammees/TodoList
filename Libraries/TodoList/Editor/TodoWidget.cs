@@ -119,8 +119,8 @@ public sealed partial class TodoWidget : Widget
 
 	private void OpenEntryWidget()
 	{
-		var windowExample = new TodoEntryCreatorWidget( null, this );
-		windowExample.Show();
+		var widget = new TodoEntryCreatorWidget( null, this );
+		widget.Show();
 	}
 
 	private void OpenVisibilityMenu()
