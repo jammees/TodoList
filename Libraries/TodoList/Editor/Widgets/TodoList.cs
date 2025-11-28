@@ -28,6 +28,18 @@ internal sealed class TodoList : ListView
 		{
 			PaintData( data, item.Rect );
 		}
+		else if ( item.Object is CodeEntry code )
+		{
+			PaintCode( code, item.Rect );
+		}
+		else if ( item.Object is GroupsTitle title )
+		{
+			PaintTitle( title, item.Rect );
+		}
+		else if ( item.Object is CodeGroup codeGroup )
+		{
+			PaintCodeGroup( codeGroup, item.Rect );
+		}
 	}
 
 	protected override bool OnItemPressed( VirtualWidget pressedItem, MouseEvent e )
@@ -39,6 +51,14 @@ internal sealed class TodoList : ListView
 		else if ( pressedItem.Object is TodoEntry data )
 		{
 			OnEntryClicked( pressedItem, e );
+		}
+		else if ( pressedItem.Object is CodeGroup codeGroup )
+		{
+			OnCodeGroupClicked( pressedItem, e );
+		}
+		else if ( pressedItem.Object is CodeEntry codeEntry )
+		{
+			OnCodeEntryClicked( pressedItem, e );
 		}
 
 		return false;
@@ -54,6 +74,35 @@ internal sealed class TodoList : ListView
 		Paint.TextAntialiasing = true;
 
 		base.OnPaint();
+	}
+
+	private void PaintCodeGroup( CodeGroup group, Rect rect )
+	{
+		Color color = Theme.Text;
+		if ( Paint.HasPressed )
+		{
+			color = Theme.Yellow;
+		}
+		else if ( Paint.HasMouseOver )
+		{
+			color = Theme.Green;
+		}
+
+		Paint.SetFont( Theme.HeadingFont, 9, 800 );
+		Paint.SetPen( in color );
+
+		Rect arrowRect = new( rect.Position.x, rect.Position.y + 5f, 20f, 20f );
+		Paint.DrawIcon( arrowRect, group.IsOpen ? "keyboard_arrow_up" : "keyboard_arrow_down", 20 );
+		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), group.Group, TextFlag.LeftCenter );
+	}
+
+	private void PaintTitle( GroupsTitle title, Rect rect )
+	{
+		Paint.ClearBrush();
+		Paint.ClearPen();
+		Paint.SetFont( Theme.HeadingFont, 13, 800 );
+		Paint.SetPen( Theme.Text );
+		Paint.DrawText( rect, title.Title, TextFlag.LeftCenter );
 	}
 
 	private void PaintGroup( EntryGroup group, Rect rect )
@@ -83,6 +132,32 @@ internal sealed class TodoList : ListView
 		Rect arrowRect = new( rect.Position.x, rect.Position.y + 5f, 20f, 20f );
 		Paint.DrawIcon( arrowRect, group.IsOpen ? "keyboard_arrow_up" : "keyboard_arrow_down", 20 );
 		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), groupName, TextFlag.LeftCenter );
+	}
+
+	private void PaintCode( CodeEntry data, Rect rect )
+	{
+		Color color = Theme.Text;
+		if ( Paint.HasPressed )
+		{
+			color = Theme.Yellow;
+		}
+		else if ( Paint.HasMouseOver )
+		{
+			color = Theme.Green;
+		}
+
+		Paint.SetFont( Theme.HeadingFont, 9, 800 );
+
+		Paint.ClearPen();
+		Paint.SetBrush( Paint.HasMouseOver ? color.WithAlpha( 0.2f ) : Color.Transparent );
+		Paint.DrawRect( rect.Shrink( 1f ), 6f );
+
+		Rect checkboxRect = new( rect.Position.x + 5, rect.Position.y + 5f, 20f, 20f );
+		Paint.SetPen( Theme.Red );
+		Paint.DrawIcon( checkboxRect, "bug_report", 16f );
+
+		Paint.SetPen( in color );
+		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
 	private void PaintData( TodoEntry data, Rect rect )
@@ -121,6 +196,15 @@ internal sealed class TodoList : ListView
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
+	private void OnCodeGroupClicked( VirtualWidget pressedItem, MouseEvent e )
+	{
+		CodeGroup group = (CodeGroup)pressedItem.Object;
+
+		group.IsOpen = !group.IsOpen;
+
+		TodoWidget.SetGroupState( group.Group, group.IsOpen );
+	}
+
 	private void OnGroupClicked( VirtualWidget pressedItem, MouseEvent e )
 	{
 		EntryGroup group = (EntryGroup)pressedItem.Object;
@@ -134,6 +218,21 @@ internal sealed class TodoList : ListView
 		group.IsOpen = !group.IsOpen;
 
 		TodoWidget.SetGroupState( group.Group, group.IsOpen );
+	}
+
+	private void OnCodeEntryClicked( VirtualWidget pressedItem, MouseEvent e )
+	{
+		CodeEntry entry = (CodeEntry)pressedItem.Object;
+
+		if ( CodeEditor.CanOpenFile( entry.SourceFile ) is false )
+		{
+			Log.Error($"Failed to open file at: {entry.SourceFile}");
+			return;
+		}
+
+		Log.Info( $"Opening {entry.SourceFile} at {entry.SourceLine}" );
+
+		CodeEditor.OpenFile( entry.SourceFile, entry.SourceLine, 0 );
 	}
 
 	private void OnEntryClicked( VirtualWidget pressedItem, MouseEvent e )
