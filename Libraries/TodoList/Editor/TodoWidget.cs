@@ -12,8 +12,7 @@ namespace Todo;
 [Dock( "Editor", "Todos", "checklist" )]
 public sealed partial class TodoWidget : Widget
 {
-	TodoList List;
-
+	internal TodoList List;
 	internal Dictionary<string, bool> GroupsState;
 	internal List<TodoEntry> Datas;
 	internal static TodoWidget Instance;
