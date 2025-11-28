@@ -7,6 +7,7 @@ internal sealed class ToolsControls : Widget
 {
 	public Action OnRefreshClicked { get; set; }
 	public Action OnVisibilityClicked { get; set; }
+	public Action OnMoreClicked { get; set; }
 
 	public ToolsControls( Widget parent ) : base( parent )
 	{
@@ -20,6 +21,10 @@ internal sealed class ToolsControls : Widget
 		ToolButton showVisibilityButton = Layout.Add( new ToolButton( "", "visibility", this ) );
 		showVisibilityButton.MouseClick = () => OnVisibilityClicked?.Invoke();
 		showVisibilityButton.ToolTip = "Change Visibility";
+
+		ToolButton moreButton = Layout.Add( new ToolButton( "", "more_vert", this ) );
+		moreButton.MouseClick = () => OnMoreClicked?.Invoke();
+		moreButton.ToolTip = "More";
 	}
 
 	protected override void OnPaint()
