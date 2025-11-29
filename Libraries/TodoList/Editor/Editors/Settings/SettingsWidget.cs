@@ -6,7 +6,7 @@ internal class SettingsWidget : Widget
 {
 	TodoDock TodoWidget;
 
-	public SettingsWidget( Widget parent, TodoDock todoWidget ) : base( parent )
+	public SettingsWidget( Widget parent, TodoDock todoWidget ) : base( parent, true )
 	{
 		TodoWidget = todoWidget;
 
