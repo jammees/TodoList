@@ -64,7 +64,9 @@ internal class SettingsWidget : Widget
 		foreach ( TodoCodeStyle style in TodoWidget.CodeStyles )
 		{
 			codeContainer.Add( new StyleWidget( this, style ) );
-			codeContainer.Add( new Separator( 5f ) );
+			codeContainer.Add( new Separator( 5 ) );
+			codeContainer.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
+			codeContainer.Add( new Separator( 5 ) );
 		}
 
 		canvas.AddStretchCell();
