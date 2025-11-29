@@ -75,6 +75,9 @@ public sealed partial class TodoWidget : Widget
 				}
 			}
 
+			foreach ( var item in results.Values )
+			{
+				item.Sort( (x, y) => x.SourceLine.CompareTo(y.SourceLine) );
 			}
 		}
 	}
