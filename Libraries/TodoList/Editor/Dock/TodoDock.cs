@@ -192,4 +192,13 @@ internal sealed partial class TodoDock : Widget
 			VericalScrollHeight = 0;
 		}
 	}
+
+	[EditorEvent.Hotload]
+	public void OnHotload()
+	{
+		if ( Cookies.ShowCodeEntries is false )
+			return;
+
+		RefreshItems();
+	}
 }
