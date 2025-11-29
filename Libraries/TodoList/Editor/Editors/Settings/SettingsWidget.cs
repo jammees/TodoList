@@ -75,8 +75,8 @@ internal class SettingsWidget : Widget
 			Layout layout = Layout.Add( Layout.Row() );
 			layout.Spacing = 5f;
 
-			layout.Add( new Button.Primary( "Save", this ) );
-			layout.Add( new Button( "Cancel", this ) );
+			layout.Add( new Button.Primary( "Save", "save", this ) );
+			layout.Add( new Button( "Cancel", "cancel", this ) );
 		}
 	}
 
