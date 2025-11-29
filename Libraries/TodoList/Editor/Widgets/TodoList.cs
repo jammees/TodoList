@@ -137,8 +137,9 @@ internal sealed class TodoList : ListView
 	private void PaintCode( CodeEntry data, Rect rect )
 	{
 		Color color = Theme.Text;
+		if ( Paint.HasMouseOver )
 		{
-			color = Theme.Green;
+			color = data.Style.Tint;
 		}
 
 		Paint.SetFont( Theme.HeadingFont, 9, 800 );
@@ -148,8 +149,8 @@ internal sealed class TodoList : ListView
 		Paint.DrawRect( rect.Shrink( 1f ), 6f );
 
 		Rect checkboxRect = new( rect.Position.x + 5, rect.Position.y + 5f, 20f, 20f );
-		Paint.SetPen( Theme.Red );
-		Paint.DrawIcon( checkboxRect, "bug_report", 16f );
+		Paint.SetPen( data.Style.Tint );
+		Paint.DrawIcon( checkboxRect, data.Style.Icon, 16f );
 
 		Paint.SetPen( in color );
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
