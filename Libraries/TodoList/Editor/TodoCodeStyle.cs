@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using Editor;
+using Sandbox;
+using System.Collections.Generic;
 
 namespace Todo;
 
@@ -10,4 +12,59 @@ internal sealed class TodoCodeStyle
 
 	[IconName]
 	public string Icon { get; set; }
+
+	internal static List<TodoCodeStyle> GetDefaultStyles()
+	{
+		return new List<TodoCodeStyle>()
+		{
+			new()
+			{
+				Icon = "checklist",
+				CodeWord = "todo:",
+				Tint = Theme.Green
+			},
+
+			new()
+			{
+				Icon = "build",
+				CodeWord = "fixme:",
+				Tint = Theme.Yellow
+			},
+
+			new()
+			{
+				Icon = "bug_report",
+				CodeWord = "bug:",
+				Tint = Theme.Red
+			},
+
+			new()
+			{
+				Icon = "priority_high",
+				CodeWord = "hack:",
+				Tint = Theme.Red
+			},
+
+			new()
+			{
+				Icon = "sticky_note_2",
+				CodeWord = "note:",
+				Tint = Theme.Blue
+			},
+
+			new()
+			{
+				Icon = "question_mark",
+				CodeWord = "xxx:",
+				Tint = Theme.Pink
+			},
+
+			new()
+			{
+				Icon = "electric_bolt",
+				CodeWord = "optimize:",
+				Tint = Theme.Yellow
+			}
+		};
+	}
 }
