@@ -37,7 +37,6 @@ internal sealed class StyleWidget: Widget
 			Layout.Add( sheet );
 		}
 
-		FolderMetadataDialog h;
 
 
 		Layout.AddStretchCell();
