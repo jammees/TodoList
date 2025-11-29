@@ -39,7 +39,7 @@ internal class SettingsWidget : Widget
 
 	private void Build()
 	{
-		ScrollArea scroll = Layout.Add( new ScrollArea(this) );
+		ScrollArea scroll = Layout.Add( new ScrollArea( this ) );
 		scroll.Canvas = new Widget( this );
 		Layout canvas = scroll.Canvas.Layout = Layout.Column();
 		canvas.Spacing = 10f;
