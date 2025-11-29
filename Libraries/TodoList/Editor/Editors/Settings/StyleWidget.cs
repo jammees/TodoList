@@ -29,7 +29,7 @@ internal sealed class StyleWidget: Widget
 	{
 		{
 			ControlSheet sheet = new ControlSheet();
-			sheet.Spacing = 4f;
+			sheet.Spacing = 1f;
 			foreach ( var entry in EditedStyle.GetSerialized() )
 			{
 				sheet.AddRow( entry );
