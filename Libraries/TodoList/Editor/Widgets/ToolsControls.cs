@@ -1,4 +1,5 @@
 ﻿using Editor;
+using Sandbox;
 using Todo.Editors;
 
 namespace Todo.Widgets;
@@ -17,6 +18,11 @@ internal sealed class ToolsControls : Widget
 		ToolButton showVisibilityButton = Layout.Add( new ToolButton( "", "visibility", this ) );
 		showVisibilityButton.MouseClick = OpenVisibilityMenu;
 		showVisibilityButton.ToolTip = "Change Visibility";
+		showVisibilityButton.OnPaintOverride = () =>
+		{
+			OnVisibilityPaint( showVisibilityButton.LocalRect, showVisibilityButton );
+			return true;
+		};
 
 		ToolButton moreButton = Layout.Add( new ToolButton( "", "more_vert", this ) );
 		moreButton.MouseClick = OpenMoreMenu;
@@ -28,6 +34,41 @@ internal sealed class ToolsControls : Widget
 		Paint.ClearPen();
 		Paint.SetBrush( Theme.ControlBackground );
 		Paint.DrawRect( LocalRect, 4 );
+	}
+
+	// Edited version of ToolButton's OnPaint method
+	private void OnVisibilityPaint( Rect rect, ToolButton button )
+	{
+		Color color = Color.White;
+
+		bool showManual = TodoDock.Instance.Cookies.ShowManualEntries;
+		bool showCode = TodoDock.Instance.Cookies.ShowCodeEntries;
+
+		if ( showManual && showCode )
+		{
+			color = Theme.Blue;
+		}
+		else if ( showCode )
+		{
+			color = Theme.Green;
+		}
+		else if ( showManual is false && showCode is false )
+		{
+			color = Theme.TextDisabled;
+		}
+
+		Paint.ClearPen();
+		if ( Paint.HasMouseOver )
+			Paint.SetBrush( Theme.SurfaceBackground );
+		else
+			Paint.SetBrush( Theme.ControlBackground );
+
+		Paint.DrawRect( rect.Shrink( 1.0f ), Theme.ControlRadius );
+
+		Paint.SetPen( color );
+		Paint.DrawIcon( rect, button.Icon, 14, TextFlag.Center );
+
+		Update();
 	}
 
 	private void OpenVisibilityMenu()
@@ -52,13 +93,13 @@ internal sealed class ToolsControls : Widget
 		menu.OpenAtCursor( true );
 	}
 
-	[Shortcut( "todo.toggle-manual-entries", "CTRL+1", typeof( TodoDock ), ShortcutType.Widget )]
+	[Shortcut( "todo.toggle-manual-entries", "CTRL+1", typeof( TodoDock ), ShortcutType.Application )]
 	private void ToggleManual()
 	{
 		SetManual( !TodoDock.Instance.Cookies.ShowManualEntries );
 	}
 
-	[Shortcut( "todo.toggle-code-entries", "CTRL+2", typeof( TodoDock ), ShortcutType.Widget )]
+	[Shortcut( "todo.toggle-code-entries", "CTRL+2", typeof( TodoDock ), ShortcutType.Application )]
 	private void ToggleCode()
 	{
 		SetCode( !TodoDock.Instance.Cookies.ShowCodeEntries );
