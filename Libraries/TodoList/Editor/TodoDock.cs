@@ -13,7 +13,6 @@ namespace Todo;
 [Dock( "Editor", "Todos", "checklist" )]
 internal sealed partial class TodoDock : Widget
 {
-	internal TodoList List;
 	internal TodoCookies Cookies;
 
 	internal static TodoDock Instance;
@@ -22,6 +21,7 @@ internal sealed partial class TodoDock : Widget
 
 	string SearchText = "";
 	int VericalScrollHeight = 0;
+	TodoList List;
 
 	public TodoDock( Widget parent ) : base( parent, true )
 	{
