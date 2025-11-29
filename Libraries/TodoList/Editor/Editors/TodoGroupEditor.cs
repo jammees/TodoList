@@ -2,7 +2,6 @@
 using System.Linq;
 using Todo.List;
 using Todo.Widgets;
-using static Editor.Button;
 
 namespace Todo.Editors;
 

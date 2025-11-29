@@ -1,12 +1,8 @@
 ﻿using Editor;
 using Sandbox;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using Todo.List;
-using static Sandbox.Resources.ResourceGenerator;
 
 namespace Todo;
 

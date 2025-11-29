@@ -1,9 +1,4 @@
 ﻿using Editor;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Sandbox;
-using SkiaSharp;
-using Todo.List;
-using Todo.Widgets;
 
 namespace Todo.Editors.Settings;
 
