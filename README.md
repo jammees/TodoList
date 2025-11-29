@@ -67,6 +67,33 @@ Here are a list of default _code words_:
 
 Can be changed in the [Settings](#settings).
 
+### Example:
+
+```cs
+// note: this is a class
+public sealed class MyClass
+{
+  public float MyValue { get; set; } = 1f; // todo: change default value
+
+  // fIxMe: fix this really
+  // incosistent naming, also this is
+  // mutliline!
+  public void My_Method_1()
+  {
+    var myValue; // works even in here
+  }
+
+  // TODO: this is a todo
+  // that spans mutliple lines
+  //
+  // TODO: this a different todo
+  public void MyMethod1()
+  {
+
+  }
+}
+```
+
 <br>
 
 # Settings
