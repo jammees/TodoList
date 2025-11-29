@@ -3,24 +3,20 @@ using Sandbox;
 
 namespace Todo.Editors.Settings;
 
-internal sealed class StyleWidget: Widget
+internal sealed class StyleWidget : Widget
 {
-	TodoCodeWord Style;
-	TodoCodeWord EditedStyle;
+	TodoCodeWord CodeWord;
 
-	public StyleWidget( Widget parent, TodoCodeWord style ): base( parent, false )
+	SettingsWidget SettingsWidget;
+
+	public StyleWidget( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
 	{
-		Style = style;
+		SettingsWidget = settingsWidget;
+
+		CodeWord = style;
 
 		MinimumHeight = Theme.RowHeight;
 		Layout = Layout.Row();
-
-		EditedStyle = new()
-		{
-			CodeWord = Style.CodeWord,
-			Icon = Style.Icon,
-			Tint = Style.Tint,
-		};
 
 		Build();
 	}
@@ -30,13 +26,26 @@ internal sealed class StyleWidget: Widget
 		{
 			ControlSheet sheet = new ControlSheet();
 			sheet.Spacing = 1f;
-			foreach ( var entry in EditedStyle.GetSerialized() )
+			foreach ( var entry in CodeWord.GetSerialized() )
 			{
 				sheet.AddRow( entry );
 			}
 			Layout.Add( sheet );
 		}
 
-		Layout.Add( new Button.Danger("Delete", "delete") );
+		Button deleteButton = Layout.Add( new Button.Danger( "Delete", "delete" ) );
+		deleteButton.Clicked = PromptDelete;
+	}
+
+	private void PromptDelete()
+	{
+		Dialog.AskConfirm(Delete, $"Are you sure you want to delete {CodeWord.CodeWord}?", "Delete Code Word?");
+	}
+
+	private void Delete()
+	{
+		TodoDock.Instance.CodeWords.Remove( CodeWord );
+		TodoDock.Instance.SaveAndRefresh();
+		SettingsWidget.Build();
 	}
 }
