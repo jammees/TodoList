@@ -16,8 +16,8 @@ internal class SettingsWidget : Widget
 		SetWindowIcon( "settings" );
 
 		Layout = Layout.Column();
-		Layout.Margin = 4;
-		Layout.Spacing = 5;
+		Layout.Margin = 4f;
+		Layout.Spacing = 5f;
 
 		Build();
 	}
