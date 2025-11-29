@@ -7,7 +7,6 @@ namespace Todo;
 
 public sealed partial class TodoWidget : Widget
 {
-	[Menu( "Editor", "Todo List/Export Entries" )]
 	internal static void Export()
 	{
 		if ( Instance.IsValid() is false )

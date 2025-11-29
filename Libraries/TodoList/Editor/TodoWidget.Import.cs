@@ -12,7 +12,6 @@ namespace Todo;
 
 public sealed partial class TodoWidget : Widget
 {
-	[Menu( "Editor", "Todo List/Import Entries" )]
 	internal static void Import()
 	{
 		if ( Instance.IsValid() is false )
