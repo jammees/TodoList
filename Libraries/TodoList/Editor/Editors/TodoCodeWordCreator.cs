@@ -4,14 +4,14 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-internal class TodoStyleCreator : Widget
+internal class TodoCodeWordCreator : Widget
 {
 	TextEdit MessageEdit;
 	GroupControl GroupControl;
 
 	TodoDock TodoWidget;
 
-	public TodoStyleCreator( Widget parent, TodoDock todoWidget ) : base( parent, true )
+	public TodoCodeWordCreator( Widget parent, TodoDock todoWidget ) : base( parent, true )
 	{
 		TodoWidget = todoWidget;
 
