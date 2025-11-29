@@ -36,23 +36,23 @@ internal sealed class TodoList : ListView
 		}
 	}
 
-	protected override bool OnItemPressed( VirtualWidget pressedItem, MouseEvent e )
+	protected override bool OnItemPressed( VirtualWidget pressedItem, MouseEvent @event )
 	{
 		if ( pressedItem.Object is EntryGroup group )
 		{
-			ItemManualGroup.OnClicked( group, e );
+			ItemManualGroup.OnClicked( group, @event );
 		}
 		else if ( pressedItem.Object is TodoEntry data )
 		{
-			ItemManualEntry.OnClicked( data, e );
+			ItemManualEntry.OnClicked( data, @event );
 		}
 		else if ( pressedItem.Object is CodeGroup codeGroup )
 		{
-			ItemCodeGroup.OnClicked( codeGroup, e );
+			ItemCodeGroup.OnClicked( codeGroup, @event );
 		}
 		else if ( pressedItem.Object is CodeEntry codeEntry )
 		{
-			ItemCodeEntry.OnClicked( codeEntry, e );
+			ItemCodeEntry.OnClicked( codeEntry, @event );
 		}
 
 		return false;
