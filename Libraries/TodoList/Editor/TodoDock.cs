@@ -61,12 +61,6 @@ internal sealed partial class TodoDock : Widget
 		SaveAndRefresh();
 	}
 
-	internal void DeleteData( TodoEntry data )
-	{
-		Cookies.Datas.Remove( data );
-		SaveAndRefresh();
-	}
-
 	private void Build()
 	{
 		Layout.Clear( true );
