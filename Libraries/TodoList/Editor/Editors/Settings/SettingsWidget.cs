@@ -89,7 +89,9 @@ internal class SettingsWidget : Widget
 			ResetAll,
 			"Are you sure you want to reset all code words to the " +
 			"default ones?",
-			"Reset All Code Words?"
+			"Reset All Code Words?",
+			"Yes",
+			"No"
 		);
 	}
 

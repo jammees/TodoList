@@ -39,7 +39,7 @@ internal sealed class CodeWordWidget : Widget
 
 	private void PromptDelete()
 	{
-		Dialog.AskConfirm(Delete, $"Are you sure you want to delete {CodeWord.CodeWord}?", "Delete Code Word?");
+		Dialog.AskConfirm(Delete, $"Are you sure you want to delete {CodeWord.CodeWord}?", "Delete Code Word?", "Yes", "No" );
 	}
 
 	private void Delete()
