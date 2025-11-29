@@ -54,7 +54,7 @@ public sealed partial class TodoWidget : Widget
 			// just to combine them is because for some reason
 			// regex is unable to find the comments if the file is using
 			// CR but LF and CRLF are fine... what?
-			string[] stubLines = System.IO.File.ReadAllLines(path);
+			string[] stubLines = System.IO.File.ReadAllLines( path );
 			string sourceText = CombineLineStubs( stubLines );
 
 			string lines = GetComments( sourceText, out MatchCollection lineMatches );
