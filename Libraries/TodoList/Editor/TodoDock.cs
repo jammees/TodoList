@@ -74,10 +74,7 @@ internal sealed partial class TodoDock : Widget
 		Button addButton = controlLayout.Add( new Button( "Add New Entry", "add", this ), 9 );
 		addButton.Clicked = OpenEntryWidget;
 
-		ToolsControls controls = controlLayout.Add( new ToolsControls( this ) );
-		controls.OnRefreshClicked = RefreshItems;
-		controls.OnVisibilityClicked = OpenVisibilityMenu;
-		controls.OnMoreClicked = OpenMoreMenu;
+		controlLayout.Add( new ToolsControls( this ) );
 
 		List = Layout.Add( new TodoList( this ) );
 
@@ -87,67 +84,6 @@ internal sealed partial class TodoDock : Widget
 	private void OpenEntryWidget()
 	{
 		var widget = new TodoEntryCreatorWidget( null, this );
-		widget.Show();
-	}
-
-	private void OpenVisibilityMenu()
-	{
-		var menu = new Menu( this );
-
-		{
-			var option = menu.AddOption( new Option( this, "Show Manual Entries", "checklist" ) );
-			option.Checkable = true;
-			option.Checked = Cookies.ShowManualEntries;
-			option.Toggled = ( b ) =>
-			{
-				Cookies.ShowManualEntries = b;
-				SaveAndRefresh();
-			};
-		}
-
-		{
-			var option = menu.AddOption( new Option( this, "Show Code Entries", "code" ) );
-			option.Checkable = true;
-			option.Checked = Cookies.ShowCodeEntries;
-			option.Toggled = ( b ) =>
-			{
-				Cookies.ShowCodeEntries = b;
-				SaveAndRefresh();
-			};
-		}
-
-		menu.DeleteOnClose = true;
-		menu.OpenAtCursor( true );
-	}
-
-	private void OpenMoreMenu()
-	{
-		var menu = new Menu( this );
-
-		{
-			var option = menu.AddOption( new Option( this, "Import Entries", "download" ) );
-			option.Triggered = () => Import();
-		}
-
-		{
-			var option = menu.AddOption( new Option( this, "Export Entries", "upload" ) );
-			option.Triggered = () => Export();
-		}
-
-		menu.AddSeparator();
-
-		{
-			var option = menu.AddOption( new Option( this, "Settings", "settings" ) );
-			option.Triggered = () => OpenSettingsWidget();
-		}
-
-		menu.DeleteOnClose = true;
-		menu.OpenAtCursor( true );
-	}
-
-	private void OpenSettingsWidget()
-	{
-		var widget = new SettingsWidget( null );
 		widget.Show();
 	}
 
