@@ -11,8 +11,9 @@ internal sealed class TodoEntry
 
 internal struct CodeEntry
 {
-	public string SourceFile = "";
 	public string Message = "";
+
+	public string SourceFile = "";
 	public int SourceLine = 0;
 
 	public CodeEntry()
