@@ -4,12 +4,8 @@ namespace Todo.Editors.Settings;
 
 internal class SettingsWidget : Widget
 {
-	TodoDock TodoWidget;
-
-	public SettingsWidget( Widget parent, TodoDock todoWidget ) : base( parent, true )
+	public SettingsWidget( Widget parent ) : base( parent, true )
 	{
-		TodoWidget = todoWidget;
-
 		DeleteOnClose = true;
 		MinimumSize = new( 500f, 400f );
 		WindowTitle = $"Settings";
@@ -33,12 +29,21 @@ internal class SettingsWidget : Widget
 	protected override void OnPaint()
 	{
 		Paint.ClearPen();
-		Paint.SetBrush( Theme.SurfaceBackground );
+		Paint.SetBrush( Theme.ButtonBackground );
 		Paint.DrawRect( LocalRect, 6f );
 	}
 
-	private void Build()
+	protected override bool OnClose()
 	{
+		TodoDock.Instance.SaveAndRefresh();
+
+		return base.OnClose();
+	}
+
+	internal void Build()
+	{
+		Layout.Clear( true );
+
 		ScrollArea scroll = Layout.Add( new ScrollArea( this ) );
 		scroll.Canvas = new Widget( this );
 		Layout canvas = scroll.Canvas.Layout = Layout.Column();
@@ -56,12 +61,18 @@ internal class SettingsWidget : Widget
 
 		Layout codeContainer = canvas.Add( new Widget( this ) ).Layout = Layout.Column();
 
-		Button addStyleButton = codeContainer.Add( new Button( "Add New Code Word", "add", this ) );
+		Layout buttonLayout = codeContainer.Add( Layout.Row() );
+		buttonLayout.Spacing = 4f;
+
+		Button addStyleButton = buttonLayout.Add( new Button( "Add New Code Word", "add", this ), 2 );
 		addStyleButton.Clicked = OpenStyleCreatorWidget;
+
+		Button resetButton = buttonLayout.Add( new Button.Danger( "Reset All", "refresh", this ) );
+		resetButton.Clicked = PromptReset;
 
 		codeContainer.Add( new Separator( 8f ) );
 
-		foreach ( TodoCodeWord style in TodoWidget.CodeStyles )
+		foreach ( TodoCodeWord style in TodoDock.Instance.CodeWords )
 		{
 			codeContainer.Add( new StyleWidget( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );
@@ -70,19 +81,29 @@ internal class SettingsWidget : Widget
 		}
 
 		canvas.AddStretchCell();
+	}
 
-		{
-			Layout layout = Layout.Add( Layout.Row() );
-			layout.Spacing = 5f;
+	private void PromptReset()
+	{
+		Dialog.AskConfirm(
+			ResetAll,
+			"Are you sure you want to reset all code words to the " +
+			"default ones?",
+			"Reset All Code Words?"
+		);
+	}
 
-			layout.Add( new Button.Primary( "Save", "save", this ) );
-			layout.Add( new Button( "Cancel", "cancel", this ) );
-		}
+	private void ResetAll()
+	{
+		TodoDock.Instance.CodeWords = TodoCodeWord.GetDefault();
+		TodoDock.Instance.TriggerSave();
+		Build();
 	}
 
 	private void OpenStyleCreatorWidget()
 	{
-		Log.Info( "h" );
+		var widget = new CodeWordCreatorWidget( null, this );
+		widget.Show();
 	}
 
 	private void AddTitle( Layout canvas, string title )
