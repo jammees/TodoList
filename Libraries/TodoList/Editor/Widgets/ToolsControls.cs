@@ -1,7 +1,5 @@
 ﻿using Editor;
-using System;
-using System.Net;
-using Todo.Editors.Settings;
+using Todo.Editors;
 
 namespace Todo.Widgets;
 

@@ -1,6 +1,5 @@
 ﻿using Editor;
 using Sandbox;
-using Todo.Editors.Settings;
 using Todo.Widgets;
 
 namespace Todo.Editors;

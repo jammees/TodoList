@@ -1,6 +1,7 @@
 ﻿using Editor;
+using Todo.Widgets;
 
-namespace Todo.Editors.Settings;
+namespace Todo.Editors;
 
 internal class SettingsWidget : Widget
 {
@@ -74,7 +75,7 @@ internal class SettingsWidget : Widget
 
 		foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
 		{
-			codeContainer.Add( new CodeWordWidget( this, style ) );
+			codeContainer.Add( new CodeWordControl( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );
 			codeContainer.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
 			codeContainer.Add( new Separator( 5 ) );

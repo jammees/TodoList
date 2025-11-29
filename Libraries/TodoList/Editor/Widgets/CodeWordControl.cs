@@ -1,15 +1,16 @@
 ﻿using Editor;
 using Sandbox;
+using Todo.Editors;
 
-namespace Todo.Editors.Settings;
+namespace Todo.Widgets;
 
-internal sealed class CodeWordWidget : Widget
+internal sealed class CodeWordControl : Widget
 {
 	TodoCodeWord CodeWord;
 
 	SettingsWidget SettingsWidget;
 
-	public CodeWordWidget( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
+	public CodeWordControl( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
 	{
 		SettingsWidget = settingsWidget;
 
