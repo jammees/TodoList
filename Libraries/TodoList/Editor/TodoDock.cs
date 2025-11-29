@@ -42,7 +42,7 @@ internal sealed partial class TodoDock : Widget
 		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
 		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
 		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
-		CodeStyles = ProjectCookie.Get( $"{SettingCookie}.CodeStyles", GetDefaultStyles() );
+		CodeStyles = ProjectCookie.Get( $"{SettingCookie}.CodeStyles", TodoCodeStyle.GetDefaultStyles() );
 
 		Layout = Layout.Column();
 		Layout.Spacing = 4f;
@@ -113,61 +113,6 @@ internal sealed partial class TodoDock : Widget
 		List = Layout.Add( new TodoList( this ) );
 
 		LoadItems();
-	}
-
-	private List<TodoCodeStyle> GetDefaultStyles()
-	{
-		return new List<TodoCodeStyle>()
-		{
-			new()
-			{
-				Icon = "checklist",
-				CodeWord = "todo:",
-				Tint = Theme.Green
-			},
-
-			new()
-			{
-				Icon = "build",
-				CodeWord = "fixme:",
-				Tint = Theme.Yellow
-			},
-
-			new()
-			{
-				Icon = "bug_report",
-				CodeWord = "bug:",
-				Tint = Theme.Red
-			},
-
-			new()
-			{
-				Icon = "priority_high",
-				CodeWord = "hack:",
-				Tint = Theme.Red
-			},
-
-			new()
-			{
-				Icon = "sticky_note_2",
-				CodeWord = "note:",
-				Tint = Theme.Blue
-			},
-
-			new()
-			{
-				Icon = "question_mark",
-				CodeWord = "xxx:",
-				Tint = Theme.Pink
-			},
-
-			new()
-			{
-				Icon = "electric_bolt",
-				CodeWord = "optimize:",
-				Tint = Theme.Yellow
-			}
-		};
 	}
 
 	private string GetCookie()
