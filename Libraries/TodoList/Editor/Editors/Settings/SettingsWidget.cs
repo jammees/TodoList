@@ -1,0 +1,87 @@
+﻿using Editor;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Sandbox;
+using SkiaSharp;
+using Todo.List;
+using Todo.Widgets;
+
+namespace Todo.Editors.Settings;
+
+internal class SettingsWidget : Widget
+{
+	TodoWidget TodoWidget;
+
+	public SettingsWidget( Widget parent, TodoWidget todoWidget ) : base( parent )
+	{
+		TodoWidget = todoWidget;
+
+		DeleteOnClose = true;
+		MinimumSize = new( 500f, 400f );
+		WindowTitle = $"Settings";
+		SetWindowIcon( "settings" );
+		WindowFlags |= WindowFlags.Widget;
+
+		Layout = Layout.Column();
+		Layout.Margin = 4;
+		Layout.Spacing = 5;
+
+		Build();
+	}
+
+	protected override void OnKeyPress( KeyEvent e )
+	{
+		if ( e.Key == KeyCode.Escape )
+		{
+			Close();
+		}
+	}
+
+	protected override void OnPaint()
+	{
+		Paint.ClearPen();
+		Paint.SetBrush( Theme.SurfaceBackground );
+		Paint.DrawRect( LocalRect, 6f );
+	}
+
+	private void Build()
+	{
+		ScrollArea scroll = Layout.Add( new ScrollArea(this) );
+		scroll.Canvas = new Widget( this );
+		Layout canvas = scroll.Canvas.Layout = Layout.Column();
+		canvas.Spacing = 10f;
+
+		AddTitle( canvas, "Miscellaneous" );
+
+		canvas.Add( new Checkbox( "Refresh on Hotload", this ) );
+		canvas.Add( new Checkbox( "Widgets Stay on Top", this ) );
+
+		canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
+
+		AddTitle( canvas, "Code Words" );
+
+		Layout codeContainer = canvas.Add( new Widget(this) ).Layout = Layout.Column();
+
+		foreach ( TodoCodeStyle style in TodoWidget.CodeStyles )
+		{
+			codeContainer.Add( new StyleWidget( this, style ) );
+			codeContainer.Add( new Separator( 5f ) );
+		}
+
+		canvas.AddStretchCell();
+
+		{
+			Layout layout = Layout.Add( Layout.Row() );
+			layout.Spacing = 5f;
+
+			layout.Add( new Button.Primary( "Save", this ) );
+			layout.Add( new Button( "Cancel", this ) );
+		}
+	}
+
+	private void AddTitle( Layout canvas, string title )
+	{
+		Label label = new Label( title, this );
+		label.SetStyles( "font-size: 20px; font-weight: 400;" );
+		canvas.Add( label );
+	}
+}
