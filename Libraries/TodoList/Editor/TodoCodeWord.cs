@@ -13,7 +13,7 @@ internal sealed class TodoCodeWord
 	[IconName]
 	public string Icon { get; set; }
 
-	internal static List<TodoCodeWord> GetDefaultStyles()
+	internal static List<TodoCodeWord> GetDefault()
 	{
 		return new List<TodoCodeWord>()
 		{
