@@ -1,8 +1,4 @@
 ﻿using Editor;
-using Sandbox;
-using System.Collections.Generic;
-using System.Linq;
-using Todo.Editors;
 using Todo.List;
 using Todo.Widgets.List.Items;
 
