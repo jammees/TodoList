@@ -44,7 +44,7 @@ internal sealed class CodeWordWidget : Widget
 
 	private void Delete()
 	{
-		TodoDock.Instance.CodeWords.Remove( CodeWord );
+		TodoDock.Instance.Cookies.CodeWords.Remove( CodeWord );
 		TodoDock.Instance.SaveAndRefresh();
 		SettingsWidget.Build();
 	}

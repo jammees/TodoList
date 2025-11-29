@@ -56,7 +56,7 @@ internal class TodoGroupEditor : Widget
 
 	private void DeleteData()
 	{
-		TodoWidget.Datas.RemoveAll( x => x.Group == Group.Group );
+		TodoWidget.Cookies.Datas.RemoveAll( x => x.Group == Group.Group );
 
 		TodoWidget.SaveAndRefresh();
 
@@ -67,7 +67,7 @@ internal class TodoGroupEditor : Widget
 	{
 		string newGroup = GroupControl.GetGroupName();
 
-		foreach ( TodoEntry entry in TodoWidget.Datas.Where( x => x.Group == Group.Group ) )
+		foreach ( TodoEntry entry in TodoWidget.Cookies.Datas.Where( x => x.Group == Group.Group ) )
 		{
 			entry.Group = newGroup;	
 		}

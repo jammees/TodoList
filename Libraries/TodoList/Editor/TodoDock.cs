@@ -14,16 +14,12 @@ namespace Todo;
 internal sealed partial class TodoDock : Widget
 {
 	internal TodoList List;
-	internal Dictionary<string, bool> GroupsState;
-	internal List<TodoEntry> Datas;
-	internal List<TodoCodeWord> CodeWords;
+	internal TodoCookies Cookies;
+
 	internal static TodoDock Instance;
 
 	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
-	bool ShowManualEntries = true;
-	bool ShowCodeEntries = false;
-	string SettingCookie;
 	string SearchText = "";
 	int VericalScrollHeight = 0;
 
@@ -31,18 +27,12 @@ internal sealed partial class TodoDock : Widget
 	{
 		Instance = this;
 
+		Cookies = new();
+
 		DeleteOnClose = true;
 		MinimumSize = new( 320f, 400f );
 
 		FocusMode = FocusMode.Click;
-
-		SettingCookie = GetCookie();
-
-		Datas = ProjectCookie.Get( $"{SettingCookie}.List", new List<TodoEntry>() );
-		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
-		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
-		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
-		CodeWords = ProjectCookie.Get( $"{SettingCookie}.CodeWords", TodoCodeWord.GetDefault() );
 
 		Layout = Layout.Column();
 		Layout.Spacing = 4f;
@@ -53,11 +43,7 @@ internal sealed partial class TodoDock : Widget
 
 	internal void TriggerSave()
 	{
-		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
-		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );
-		ProjectCookie.Set( $"{SettingCookie}.ShowManual", ShowManualEntries );
-		ProjectCookie.Set( $"{SettingCookie}.ShowCode", ShowCodeEntries );
-		ProjectCookie.Set( $"{SettingCookie}.CodeWords", CodeWords );
+		Cookies.Save();
 	}
 
 	internal void RefreshItems()
@@ -76,13 +62,13 @@ internal sealed partial class TodoDock : Widget
 
 	internal void SetGroupState( string group, bool state )
 	{
-		GroupsState[group] = state;
+		Cookies.GroupsState[group] = state;
 		SaveAndRefresh();
 	}
 
 	internal void DeleteData( TodoEntry data )
 	{
-		Datas.Remove( data );
+		Cookies.Datas.Remove( data );
 		SaveAndRefresh();
 	}
 
@@ -115,13 +101,6 @@ internal sealed partial class TodoDock : Widget
 		LoadItems();
 	}
 
-	private string GetCookie()
-	{
-		StringBuilder cookie = new StringBuilder( "Jammees.TodoList" );
-
-		return cookie.ToString();
-	}
-
 	private void OpenEntryWidget()
 	{
 		var widget = new TodoEntryCreatorWidget( null, this );
@@ -135,10 +114,10 @@ internal sealed partial class TodoDock : Widget
 		{
 			var option = menu.AddOption( new Option( this, "Show Manual Entries", "checklist" ) );
 			option.Checkable = true;
-			option.Checked = ShowManualEntries;
+			option.Checked = Cookies.ShowManualEntries;
 			option.Toggled = ( b ) =>
 			{
-				ShowManualEntries = b;
+				Cookies.ShowManualEntries = b;
 				SaveAndRefresh();
 			};
 		}
@@ -146,10 +125,10 @@ internal sealed partial class TodoDock : Widget
 		{
 			var option = menu.AddOption( new Option( this, "Show Code Entries", "code" ) );
 			option.Checkable = true;
-			option.Checked = ShowCodeEntries;
+			option.Checked = Cookies.ShowCodeEntries;
 			option.Toggled = ( b ) =>
 			{
-				ShowCodeEntries = b;
+				Cookies.ShowCodeEntries = b;
 				SaveAndRefresh();
 			};
 		}
@@ -195,10 +174,10 @@ internal sealed partial class TodoDock : Widget
 
 		HashSet<string> usedGroups = new();
 
-		if ( ShowManualEntries )
+		if ( Cookies.ShowManualEntries )
 			LoadManualEntries( ref usedGroups );
 
-		if ( ShowCodeEntries )
+		if ( Cookies.ShowCodeEntries )
 			LoadCodeEntries( ref usedGroups );
 
 		PurgeDeadGroups( usedGroups );
@@ -206,23 +185,23 @@ internal sealed partial class TodoDock : Widget
 
 	private void PurgeDeadGroups( HashSet<string> groups )
 	{
-		string[] deadGroups = GroupsState.Keys.Except( groups ).ToArray();
+		string[] deadGroups = Cookies.GroupsState.Keys.Except( groups ).ToArray();
 		foreach ( string deadGroup in deadGroups )
 		{
-			GroupsState.Remove( deadGroup );
+			Cookies.GroupsState.Remove( deadGroup );
 		}
 	}
 
 	private void LoadManualEntries( ref HashSet<string> groups )
 	{
-		if ( ShowCodeEntries )
+		if ( Cookies.ShowCodeEntries )
 		{
 			List.AddItem( new GroupsTitle( "Manual Entries" ) );
 		}
 
 		Dictionary<string, List<TodoEntry>> grouppedEntries = new();
 
-		foreach ( var item in Datas )
+		foreach ( var item in Cookies.Datas )
 		{
 			groups.Add( item.Group );
 			grouppedEntries.GetOrCreate( item.Group ).Add( item );
@@ -233,14 +212,14 @@ internal sealed partial class TodoDock : Widget
 
 		foreach ( string group in sortedGroups )
 		{
-			if ( GroupsState.ContainsKey( group ) is false )
+			if ( Cookies.GroupsState.ContainsKey( group ) is false )
 			{
-				GroupsState.Add( group, true );
+				Cookies.GroupsState.Add( group, true );
 			}
 
-			List.AddItem( new EntryGroup() { Group = group, Datas = grouppedEntries[group], IsOpen = GroupsState[group] } );
+			List.AddItem( new EntryGroup() { Group = group, Datas = grouppedEntries[group], IsOpen = Cookies.GroupsState[group] } );
 
-			if ( GroupsState[group] is false )
+			if ( Cookies.GroupsState[group] is false )
 				continue;
 
 			foreach ( var entry in grouppedEntries[group] )
@@ -255,7 +234,7 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadCodeEntries( ref HashSet<string> groups )
 	{
-		if ( ShowManualEntries )
+		if ( Cookies.ShowManualEntries )
 		{
 			List.AddItem( new GroupsTitle( "Code Entries" ) );
 		}
@@ -269,14 +248,14 @@ internal sealed partial class TodoDock : Widget
 		{
 			groups.Add( group );
 
-			if ( GroupsState.ContainsKey( group ) is false )
+			if ( Cookies.GroupsState.ContainsKey( group ) is false )
 			{
-				GroupsState.Add( group, true );
+				Cookies.GroupsState.Add( group, true );
 			}
 
-			List.AddItem( new CodeGroup() { Group = group, IsOpen = GroupsState[group] } );
+			List.AddItem( new CodeGroup() { Group = group, IsOpen = Cookies.GroupsState[group] } );
 
-			if ( GroupsState[group] is false )
+			if ( Cookies.GroupsState[group] is false )
 				continue;
 
 			foreach ( var entry in entries[group] )

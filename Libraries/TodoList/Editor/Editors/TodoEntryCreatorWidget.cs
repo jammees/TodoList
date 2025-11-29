@@ -59,7 +59,7 @@ internal class TodoEntryCreatorWidget : Widget
 			Group = GroupControl.GetGroupName()
 		};
 
-		TodoWidget.Datas.Add( entry );
+		TodoWidget.Cookies.Datas.Add( entry );
 
 		TodoWidget.SaveAndRefresh();
 

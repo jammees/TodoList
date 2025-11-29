@@ -53,7 +53,7 @@ internal sealed class GroupControl
 
 		menu.AddHeading( $"Current Group: {CurrentGroup}" );
 
-		foreach ( var item in TodoDock.Instance.GroupsState.Keys )
+		foreach ( var item in TodoDock.Instance.Cookies.GroupsState.Keys )
 		{
 			if ( item == GroupEdit.Text || ( isSearching && item.Contains(searchText) is false ) )
 				continue;

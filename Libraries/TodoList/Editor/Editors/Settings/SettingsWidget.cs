@@ -72,7 +72,7 @@ internal class SettingsWidget : Widget
 
 		codeContainer.Add( new Separator( 8f ) );
 
-		foreach ( TodoCodeWord style in TodoDock.Instance.CodeWords )
+		foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
 		{
 			codeContainer.Add( new CodeWordWidget( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );
@@ -95,7 +95,7 @@ internal class SettingsWidget : Widget
 
 	private void ResetAll()
 	{
-		TodoDock.Instance.CodeWords = TodoCodeWord.GetDefault();
+		TodoDock.Instance.Cookies.CodeWords = TodoCodeWord.GetDefault();
 		TodoDock.Instance.TriggerSave();
 		Build();
 	}

@@ -65,7 +65,7 @@ internal class CodeWordCreatorWidget : Widget
 
 	private void CreateCodeWord()
 	{
-		TodoDock.Instance.CodeWords.Add( CodeWord );
+		TodoDock.Instance.Cookies.CodeWords.Add( CodeWord );
 		TodoDock.Instance.SaveAndRefresh();
 
 		SettingsWidget.Build();
