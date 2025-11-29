@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Todo;
 
-internal sealed class TodoCodeStyle
+internal sealed class TodoCodeWord
 {
 	public string CodeWord { get; set; }
 
@@ -13,9 +13,9 @@ internal sealed class TodoCodeStyle
 	[IconName]
 	public string Icon { get; set; }
 
-	internal static List<TodoCodeStyle> GetDefaultStyles()
+	internal static List<TodoCodeWord> GetDefaultStyles()
 	{
-		return new List<TodoCodeStyle>()
+		return new List<TodoCodeWord>()
 		{
 			new()
 			{

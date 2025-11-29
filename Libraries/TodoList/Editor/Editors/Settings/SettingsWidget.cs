@@ -61,7 +61,7 @@ internal class SettingsWidget : Widget
 
 		codeContainer.Add( new Separator( 8f ) );
 
-		foreach ( TodoCodeStyle style in TodoWidget.CodeStyles )
+		foreach ( TodoCodeWord style in TodoWidget.CodeStyles )
 		{
 			codeContainer.Add( new StyleWidget( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );

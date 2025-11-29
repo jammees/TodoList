@@ -16,7 +16,7 @@ internal struct CodeEntry
 	public string SourceFile = "";
 	public int SourceLine = 0;
 
-	public TodoCodeStyle Style;
+	public TodoCodeWord Style;
 
 	public CodeEntry()
 	{

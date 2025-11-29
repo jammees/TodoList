@@ -16,7 +16,7 @@ internal sealed partial class TodoDock : Widget
 	internal TodoList List;
 	internal Dictionary<string, bool> GroupsState;
 	internal List<TodoEntry> Datas;
-	internal List<TodoCodeStyle> CodeStyles;
+	internal List<TodoCodeWord> CodeStyles;
 	internal static TodoDock Instance;
 
 	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
@@ -42,7 +42,7 @@ internal sealed partial class TodoDock : Widget
 		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
 		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
 		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
-		CodeStyles = ProjectCookie.Get( $"{SettingCookie}.CodeStyles", TodoCodeStyle.GetDefaultStyles() );
+		CodeStyles = ProjectCookie.Get( $"{SettingCookie}.CodeStyles", TodoCodeWord.GetDefaultStyles() );
 
 		Layout = Layout.Column();
 		Layout.Spacing = 4f;

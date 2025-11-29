@@ -5,10 +5,10 @@ namespace Todo.Editors.Settings;
 
 internal sealed class StyleWidget: Widget
 {
-	TodoCodeStyle Style;
-	TodoCodeStyle EditedStyle;
+	TodoCodeWord Style;
+	TodoCodeWord EditedStyle;
 
-	public StyleWidget( Widget parent, TodoCodeStyle style ): base( parent, false )
+	public StyleWidget( Widget parent, TodoCodeWord style ): base( parent, false )
 	{
 		Style = style;
 
