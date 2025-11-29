@@ -151,14 +151,14 @@ public sealed partial class TodoWidget : Widget
 
 			new()
 			{
-				Icon = "exclamation",
+				Icon = "priority_high",
 				CodeWord = "hack:",
 				Tint = Theme.Red
 			},
 
 			new()
 			{
-				Icon = "note_stack",
+				Icon = "sticky_note_2",
 				CodeWord = "note:",
 				Tint = Theme.Blue
 			},
