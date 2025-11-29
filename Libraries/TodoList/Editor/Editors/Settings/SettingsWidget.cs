@@ -43,6 +43,7 @@ internal class SettingsWidget : Widget
 		scroll.Canvas = new Widget( this );
 		Layout canvas = scroll.Canvas.Layout = Layout.Column();
 		canvas.Spacing = 10f;
+		canvas.Margin = new Sandbox.UI.Margin( 0f, 0f, 20f, 0f );
 
 		AddTitle( canvas, "Miscellaneous" );
 
