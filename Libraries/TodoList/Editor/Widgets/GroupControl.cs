@@ -34,7 +34,7 @@ internal sealed class GroupControl
 
 		popupMenu.AddLineEdit(
 			"Search",
-			placeholder: "For Group...",
+			placeholder: "for Group...",
 			autoFocus: true,
 			onChange: searchText => PopulateGroupMenu( ref popupMenu, searchText.ToLower() )
 		);
