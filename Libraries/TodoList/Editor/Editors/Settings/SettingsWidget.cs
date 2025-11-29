@@ -96,7 +96,7 @@ internal class SettingsWidget : Widget
 	private void ResetAll()
 	{
 		TodoDock.Instance.Cookies.CodeWords = TodoCodeWord.GetDefault();
-		TodoDock.Instance.TriggerSave();
+		TodoDock.Instance.SaveAndRefresh();
 		Build();
 	}
 

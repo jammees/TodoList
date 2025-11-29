@@ -41,11 +41,6 @@ internal sealed partial class TodoDock : Widget
 		Build();
 	}
 
-	internal void TriggerSave()
-	{
-		Cookies.Save();
-	}
-
 	internal void RefreshItems()
 	{
 		if ( List.IsValid() )
@@ -56,7 +51,7 @@ internal sealed partial class TodoDock : Widget
 
 	internal void SaveAndRefresh()
 	{
-		TriggerSave();
+		Cookies.Save();
 		RefreshItems();
 	}
 
