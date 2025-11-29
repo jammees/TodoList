@@ -75,7 +75,7 @@ internal sealed partial class TodoDock : Widget
 
 		controlLayout.Add( new ToolsControls( this ) );
 
-		List = Layout.Add( new TodoList( this ) );
+		List = Layout.Add( new TodoList() );
 
 		LoadItems();
 	}

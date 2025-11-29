@@ -6,13 +6,10 @@ namespace Todo.Widgets.List;
 
 internal sealed class TodoList : ListView
 {
-	TodoDock TodoWidget { get; set; }
-
-	public TodoList( TodoDock widget )
+	public TodoList()
 	{
 		ItemSize = new Vector2( -1f, 30f );
 		Layout = Layout.Column();
-		TodoWidget = widget;
 	}
 
 	protected override void PaintItem( VirtualWidget item )
