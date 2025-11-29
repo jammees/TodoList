@@ -174,7 +174,15 @@ public sealed partial class TodoWidget : Widget
 
 	private string[] ScanFor( string lines, string searchString, out MatchCollection stubResults )
 	{
-		Regex searchRegex = new( $"(?<=^{searchString}).*(?:\\n(?!\\s*$|{searchString}).*)*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
+		string terminatorWords = "";
+		for ( int i = 0; i < CodeStyles.Count; i++ )
+		{
+			terminatorWords += CodeStyles[i].CodeWord;
+			if ( i + 1 < CodeStyles.Count )
+				terminatorWords += "|";
+		}
+
+		Regex searchRegex = new( $"(?<=^{searchString}).*(?:\\n(?!\\s*$|{terminatorWords}).*)*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
 		MatchCollection results = searchRegex.Matches( lines );
 
 		Regex stubSearchRegex = new( $"(?<=^{searchString}).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
