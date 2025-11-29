@@ -55,12 +55,6 @@ internal sealed partial class TodoDock : Widget
 		RefreshItems();
 	}
 
-	internal void SetGroupState( string group, bool state )
-	{
-		Cookies.GroupsState[group] = state;
-		SaveAndRefresh();
-	}
-
 	private void Build()
 	{
 		Layout.Clear( true );

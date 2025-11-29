@@ -2,8 +2,8 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
-using Todo.List;
 using Todo.Editors;
+using Todo.List;
 
 namespace Todo.Widgets;
 
@@ -198,7 +198,8 @@ internal sealed class TodoList : ListView
 
 		group.IsOpen = !group.IsOpen;
 
-		TodoWidget.SetGroupState( group.Group, group.IsOpen );
+		TodoWidget.Cookies.GroupsState[group.Group] = group.IsOpen;
+		TodoWidget.SaveAndRefresh();
 	}
 
 	private void OnGroupClicked( VirtualWidget pressedItem, MouseEvent e )
@@ -213,7 +214,8 @@ internal sealed class TodoList : ListView
 
 		group.IsOpen = !group.IsOpen;
 
-		TodoWidget.SetGroupState( group.Group, group.IsOpen );
+		TodoWidget.Cookies.GroupsState[group.Group] = group.IsOpen;
+		TodoWidget.SaveAndRefresh();
 	}
 
 	private void OnCodeEntryClicked( VirtualWidget pressedItem, MouseEvent e )
