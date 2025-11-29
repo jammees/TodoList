@@ -80,6 +80,7 @@ internal sealed partial class TodoDock : Widget
 		LoadItems();
 	}
 
+	[Shortcut( "todo.new-entry", "CTRL+W", ShortcutType.Application )]
 	private void OpenEntryWidget()
 	{
 		var widget = new TodoEntryCreatorWidget( null );
