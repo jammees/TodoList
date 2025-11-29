@@ -19,7 +19,6 @@ internal class CodeWordCreatorWidget : Widget
 		FixedSize = new( 500f, 200f );
 		WindowTitle = $"Create New Code Word";
 		SetWindowIcon( "edit" );
-		WindowFlags |= WindowFlags.Widget;
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;

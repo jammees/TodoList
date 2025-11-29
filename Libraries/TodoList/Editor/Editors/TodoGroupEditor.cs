@@ -19,7 +19,6 @@ internal class TodoGroupEditor : Widget
 		FixedSize = new( 500f, 200f );
 		WindowTitle = $"Edit {data.Group}";
 		SetWindowIcon( "edit" );
-		WindowFlags |= WindowFlags.Widget;
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;

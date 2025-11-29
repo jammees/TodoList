@@ -21,7 +21,6 @@ internal class TodoEntryEditor : Widget
 		FixedSize = new( 500f, 400f );
 		WindowTitle = $"Edit {data.Message}";
 		SetWindowIcon( "edit" );
-		WindowFlags |= WindowFlags.Widget;
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;
