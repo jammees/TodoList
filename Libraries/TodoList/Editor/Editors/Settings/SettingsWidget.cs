@@ -80,6 +80,11 @@ internal class SettingsWidget : Widget
 		}
 	}
 
+	private void OpenStyleCreatorWidget()
+	{
+		Log.Info( "h" );
+	}
+
 	private void AddTitle( Layout canvas, string title )
 	{
 		Label label = new Label( title, this );
