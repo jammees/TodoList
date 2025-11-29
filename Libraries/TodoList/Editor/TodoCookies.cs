@@ -11,8 +11,10 @@ internal sealed class TodoCookies
 
 	internal Dictionary<string, bool> GroupsState;
 
-	internal bool ShowManualEntries = true;
-	internal bool ShowCodeEntries = false;
+	internal bool ShowManualEntries;
+	internal bool ShowCodeEntries;
+	internal bool ReloadOnHotload;
+	internal bool WidgetsOnTop;
 
 	string SettingCookie;
 
@@ -30,6 +32,8 @@ internal sealed class TodoCookies
 		ProjectCookie.Set( $"{SettingCookie}.ShowManual", ShowManualEntries );
 		ProjectCookie.Set( $"{SettingCookie}.ShowCode", ShowCodeEntries );
 		ProjectCookie.Set( $"{SettingCookie}.CodeWords", CodeWords );
+		ProjectCookie.Set( $"{SettingCookie}.ReloadOnHotload", ReloadOnHotload );
+		ProjectCookie.Set( $"{SettingCookie}.WidgetsOnTop", WidgetsOnTop );
 	}
 
 	private void Load()
@@ -39,6 +43,8 @@ internal sealed class TodoCookies
 		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
 		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
 		CodeWords = ProjectCookie.Get( $"{SettingCookie}.CodeWords", TodoCodeWord.GetDefault() );
+		ReloadOnHotload = ProjectCookie.Get( $"{SettingCookie}.ReloadOnHotload", true );
+		WidgetsOnTop = ProjectCookie.Get( $"{SettingCookie}.WidgetsOnTop", false );
 	}
 
 	private string GetCookie()
