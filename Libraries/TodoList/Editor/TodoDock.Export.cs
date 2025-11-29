@@ -17,7 +17,7 @@ internal sealed partial class TodoDock : Widget
 
 		if ( string.IsNullOrEmpty( filePath ) )
 		{
-			EditorUtility.DisplayDialog( "Invalid path", "An invalid or empty path had been provided!" );
+			Log.Error( "An invalid or empty path had been provided!" );
 			return;
 		}
 
