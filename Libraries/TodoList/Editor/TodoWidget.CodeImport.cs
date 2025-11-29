@@ -59,16 +59,22 @@ public sealed partial class TodoWidget : Widget
 
 			string lines = GetComments( sourceText, out MatchCollection lineMatches );
 
-			string[] entries = ScanFor( lines, "TODO:", out MatchCollection stubEntries );
-
-			for ( int i = 0; i < entries.Length; i++ )
+			foreach ( TodoCodeStyle style in CodeStyles )
 			{
-				results.GetOrCreate( fileName ).Add( new()
+				string[] entries = ScanFor( lines, style.CodeWord, out MatchCollection stubEntries );
+
+				for ( int i = 0; i < entries.Length; i++ )
 				{
-					SourceFile = GetRelativePath( path ),
-					Message = entries[i],
-					SourceLine = GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineLenghts )
-				} );
+					results.GetOrCreate( fileName ).Add( new()
+					{
+						SourceFile = GetRelativePath( path ),
+						Message = entries[i],
+						SourceLine = GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineLenghts ),
+						Style = style
+					} );
+				}
+			}
+
 			}
 		}
 	}
