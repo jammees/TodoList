@@ -185,7 +185,7 @@ internal sealed partial class TodoDock : Widget
 
 	private void OpenSettingsWidget()
 	{
-		var widget = new SettingsWidget( null, this );
+		var widget = new SettingsWidget( null );
 		widget.Show();
 	}
 
