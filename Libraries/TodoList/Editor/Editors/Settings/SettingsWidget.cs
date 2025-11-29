@@ -14,7 +14,6 @@ internal class SettingsWidget : Widget
 		MinimumSize = new( 500f, 400f );
 		WindowTitle = $"Settings";
 		SetWindowIcon( "settings" );
-		WindowFlags |= WindowFlags.Widget;
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;
