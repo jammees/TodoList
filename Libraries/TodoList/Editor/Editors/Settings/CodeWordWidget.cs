@@ -3,13 +3,13 @@ using Sandbox;
 
 namespace Todo.Editors.Settings;
 
-internal sealed class StyleWidget : Widget
+internal sealed class CodeWordWidget : Widget
 {
 	TodoCodeWord CodeWord;
 
 	SettingsWidget SettingsWidget;
 
-	public StyleWidget( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
+	public CodeWordWidget( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
 	{
 		SettingsWidget = settingsWidget;
 

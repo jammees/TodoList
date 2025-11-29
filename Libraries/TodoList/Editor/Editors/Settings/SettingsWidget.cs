@@ -74,7 +74,7 @@ internal class SettingsWidget : Widget
 
 		foreach ( TodoCodeWord style in TodoDock.Instance.CodeWords )
 		{
-			codeContainer.Add( new StyleWidget( this, style ) );
+			codeContainer.Add( new CodeWordWidget( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );
 			codeContainer.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
 			codeContainer.Add( new Separator( 5 ) );
