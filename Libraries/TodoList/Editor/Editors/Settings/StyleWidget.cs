@@ -37,8 +37,5 @@ internal sealed class StyleWidget: Widget
 			Layout.Add( sheet );
 		}
 
-
-
-		Layout.AddStretchCell();
 	}
 }
