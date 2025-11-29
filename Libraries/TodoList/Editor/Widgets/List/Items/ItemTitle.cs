@@ -22,10 +22,8 @@ internal static class ItemCodeGroup
 		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), group.Group, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( VirtualWidget pressedItem, MouseEvent e )
+	internal static void OnClicked( CodeGroup group, MouseEvent e )
 	{
-		CodeGroup group = (CodeGroup)pressedItem.Object;
-
 		group.IsOpen = !group.IsOpen;
 
 		TodoDock.Instance.Cookies.GroupsState[group.Group] = group.IsOpen;

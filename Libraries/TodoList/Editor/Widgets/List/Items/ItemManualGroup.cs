@@ -35,10 +35,8 @@ internal static class ItemManualGroup
 		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), groupName, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( VirtualWidget pressedItem, MouseEvent e )
+	internal static void OnClicked( EntryGroup group, MouseEvent e )
 	{
-		EntryGroup group = (EntryGroup)pressedItem.Object;
-
 		if ( e.HasShift )
 		{
 			OpenGroupEditor( group );

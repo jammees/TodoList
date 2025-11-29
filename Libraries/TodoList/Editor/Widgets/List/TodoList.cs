@@ -40,19 +40,19 @@ internal sealed class TodoList : ListView
 	{
 		if ( pressedItem.Object is EntryGroup group )
 		{
-			ItemManualGroup.OnClicked( pressedItem, e );
+			ItemManualGroup.OnClicked( group, e );
 		}
 		else if ( pressedItem.Object is TodoEntry data )
 		{
-			ItemManualEntry.OnClicked( pressedItem, e );
+			ItemManualEntry.OnClicked( data, e );
 		}
 		else if ( pressedItem.Object is CodeGroup codeGroup )
 		{
-			ItemCodeGroup.OnClicked( pressedItem, e );
+			ItemCodeGroup.OnClicked( codeGroup, e );
 		}
 		else if ( pressedItem.Object is CodeEntry codeEntry )
 		{
-			ItemCodeEntry.OnClicked( pressedItem, e );
+			ItemCodeEntry.OnClicked( codeEntry, e );
 		}
 
 		return false;

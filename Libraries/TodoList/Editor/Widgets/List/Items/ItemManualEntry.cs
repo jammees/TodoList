@@ -39,10 +39,8 @@ internal static class ItemManualEntry
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( VirtualWidget pressedItem, MouseEvent e )
+	internal static void OnClicked( TodoEntry entry, MouseEvent e )
 	{
-		TodoEntry entry = (TodoEntry)pressedItem.Object;
-
 		if ( e.HasShift )
 		{
 			OpenEntryEditor( entry );

@@ -28,10 +28,8 @@ internal static class ItemCodeEntry
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( VirtualWidget pressedItem, MouseEvent e )
+	internal static void OnClicked( CodeEntry entry, MouseEvent e )
 	{
-		CodeEntry entry = (CodeEntry)pressedItem.Object;
-
 		if ( CodeEditor.CanOpenFile( entry.SourceFile ) is false )
 		{
 			Log.Error( $"Failed to open file at: {entry.SourceFile}" );
