@@ -11,10 +11,9 @@ namespace Todo;
 
 internal sealed class TodoCodeStyle
 {
-	public Color Tint { get; set; }
-
 	public string CodeWord { get; set; }
 
+	public Color Tint { get; set; }
 	public string Icon { get; set; }
 }
 
