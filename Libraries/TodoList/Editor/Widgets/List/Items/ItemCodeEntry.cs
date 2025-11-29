@@ -36,8 +36,6 @@ internal static class ItemCodeEntry
 			return;
 		}
 
-		Log.Info( $"Opening {entry.SourceFile} at {entry.SourceLine}" );
-
 		CodeEditor.OpenFile( entry.SourceFile, entry.SourceLine, 0 );
 	}
 }
