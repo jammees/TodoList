@@ -86,6 +86,8 @@ public sealed class MyClass
   // TODO: this is a todo
   // that spans mutliple lines
   //
+  // I'm just a simple comment
+  //
   // TODO: this a different todo
   public void MyMethod1()
   {
