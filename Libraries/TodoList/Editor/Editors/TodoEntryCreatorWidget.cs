@@ -17,7 +17,7 @@ internal class TodoEntryCreatorWidget : Widget
 
 		DeleteOnClose = true;
 		FixedSize = new( 500f, 400f );
-		WindowTitle = $"Create new entry";
+		WindowTitle = $"Create New Entry";
 		SetWindowIcon( "edit" );
 		WindowFlags |= WindowFlags.Widget;
 
@@ -27,7 +27,7 @@ internal class TodoEntryCreatorWidget : Widget
 
 		Layout.Add( new Label( "Message", this ) );
 		MessageEdit = Layout.Add( new TextEdit( this ) );
-		MessageEdit.PlaceholderText = "Todo message";
+		MessageEdit.PlaceholderText = "Todo Message";
 
 		GroupControl = new GroupControl( this, "Default" );
 
