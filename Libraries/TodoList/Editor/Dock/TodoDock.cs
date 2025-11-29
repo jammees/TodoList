@@ -19,7 +19,7 @@ internal sealed partial class TodoDock : Widget
 	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
 	string SearchText = "";
-	int VericalScrollHeight = 0;
+	int VerticalScrollHeight = 0;
 	TodoList List;
 
 	public TodoDock( Widget parent ) : base( parent, true )
@@ -43,7 +43,7 @@ internal sealed partial class TodoDock : Widget
 	internal void RefreshItems()
 	{
 		if ( List.IsValid() )
-			VericalScrollHeight = List.VerticalScrollbar.Value;
+			VerticalScrollHeight = List.VerticalScrollbar.Value;
 
 		LoadItems();
 	}
@@ -186,10 +186,10 @@ internal sealed partial class TodoDock : Widget
 	[EditorEvent.Frame]
 	public void Frame()
 	{
-		if ( VericalScrollHeight > 0 )
+		if ( VerticalScrollHeight > 0 )
 		{
-			List.VerticalScrollbar.Value = VericalScrollHeight;
-			VericalScrollHeight = 0;
+			List.VerticalScrollbar.Value = VerticalScrollHeight;
+			VerticalScrollHeight = 0;
 		}
 	}
 
