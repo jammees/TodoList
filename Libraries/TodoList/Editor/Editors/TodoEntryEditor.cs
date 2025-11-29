@@ -12,12 +12,10 @@ internal class TodoEntryEditor : Widget
 	GroupControl GroupControl;
 
 	TodoEntry Data;
-	TodoDock TodoWidget;
 
-	public TodoEntryEditor( Widget parent, TodoEntry data, TodoDock todoWidget ) : base( parent, true )
+	public TodoEntryEditor( Widget parent, TodoEntry data ) : base( parent, true )
 	{
 		Data = data;
-		TodoWidget = todoWidget;
 
 		DeleteOnClose = true;
 		FixedSize = new( 500f, 400f );
@@ -63,7 +61,7 @@ internal class TodoEntryEditor : Widget
 
 	private void DeleteData()
 	{
-		TodoWidget.Cookies.Datas.Remove( Data );
+		TodoDock.Instance.Cookies.Datas.Remove( Data );
 		Close();
 	}
 
@@ -72,7 +70,7 @@ internal class TodoEntryEditor : Widget
 		Data.Message = MessageEdit.PlainText;
 		Data.Group = GroupControl.GetGroupName();
 
-		TodoWidget.SaveAndRefresh();
+		TodoDock.Instance.SaveAndRefresh();
 
 		Close();
 	}

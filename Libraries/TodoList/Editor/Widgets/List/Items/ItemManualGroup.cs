@@ -51,7 +51,7 @@ internal static class ItemManualGroup
 
 	private static void OpenGroupEditor( EntryGroup group )
 	{
-		var windowExample = new TodoGroupEditor( null, group, TodoDock.Instance );
+		var windowExample = new TodoGroupEditor( null, group );
 		windowExample.Show();
 	}
 }

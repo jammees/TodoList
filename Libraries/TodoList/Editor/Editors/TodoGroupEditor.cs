@@ -10,12 +10,10 @@ internal class TodoGroupEditor : Widget
 	GroupControl GroupControl;
 
 	EntryGroup Group;
-	TodoDock TodoWidget;
 
-	public TodoGroupEditor( Widget parent, EntryGroup data, TodoDock todoWidget ) : base( parent, true )
+	public TodoGroupEditor( Widget parent, EntryGroup data ) : base( parent, true )
 	{
 		Group = data;
-		TodoWidget = todoWidget;
 
 		DeleteOnClose = true;
 		FixedSize = new( 500f, 200f );
@@ -56,9 +54,9 @@ internal class TodoGroupEditor : Widget
 
 	private void DeleteData()
 	{
-		TodoWidget.Cookies.Datas.RemoveAll( x => x.Group == Group.Group );
+		TodoDock.Instance.Cookies.Datas.RemoveAll( x => x.Group == Group.Group );
 
-		TodoWidget.SaveAndRefresh();
+		TodoDock.Instance.SaveAndRefresh();
 
 		Close();
 	}
@@ -67,12 +65,12 @@ internal class TodoGroupEditor : Widget
 	{
 		string newGroup = GroupControl.GetGroupName();
 
-		foreach ( TodoEntry entry in TodoWidget.Cookies.Datas.Where( x => x.Group == Group.Group ) )
+		foreach ( TodoEntry entry in TodoDock.Instance.Cookies.Datas.Where( x => x.Group == Group.Group ) )
 		{
 			entry.Group = newGroup;	
 		}
 
-		TodoWidget.SaveAndRefresh();
+		TodoDock.Instance.SaveAndRefresh();
 
 		Close();
 	}

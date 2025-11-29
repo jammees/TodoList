@@ -9,12 +9,8 @@ internal class TodoEntryCreatorWidget : Widget
 	TextEdit MessageEdit;
 	GroupControl GroupControl;
 
-	TodoDock TodoWidget;
-
-	public TodoEntryCreatorWidget( Widget parent, TodoDock todoWidget ) : base( parent, true )
+	public TodoEntryCreatorWidget( Widget parent ) : base( parent, true )
 	{
-		TodoWidget = todoWidget;
-
 		DeleteOnClose = true;
 		FixedSize = new( 500f, 400f );
 		WindowTitle = $"Create New Entry";
@@ -59,9 +55,9 @@ internal class TodoEntryCreatorWidget : Widget
 			Group = GroupControl.GetGroupName()
 		};
 
-		TodoWidget.Cookies.Datas.Add( entry );
+		TodoDock.Instance.Cookies.Datas.Add( entry );
 
-		TodoWidget.SaveAndRefresh();
+		TodoDock.Instance.SaveAndRefresh();
 
 		Close();
 	}

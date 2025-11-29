@@ -82,7 +82,7 @@ internal sealed partial class TodoDock : Widget
 
 	private void OpenEntryWidget()
 	{
-		var widget = new TodoEntryCreatorWidget( null, this );
+		var widget = new TodoEntryCreatorWidget( null );
 		widget.Show();
 	}
 
