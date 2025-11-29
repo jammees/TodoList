@@ -16,11 +16,7 @@ internal static class ItemManualGroup
 		int completedEntries = groupEntries.Where( x => x.IsDone ).Count();
 
 		Color color = Theme.Text;
-		if ( Paint.HasPressed )
-		{
-			color = Theme.Yellow;
-		}
-		else if ( Paint.HasMouseOver )
+		if ( Paint.HasMouseOver )
 		{
 			color = Theme.Green;
 		}

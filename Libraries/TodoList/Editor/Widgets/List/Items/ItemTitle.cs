@@ -9,11 +9,7 @@ internal static class ItemCodeGroup
 	internal static void OnPaint( CodeGroup group, Rect rect )
 	{
 		Color color = Theme.Text;
-		if ( Paint.HasPressed )
-		{
-			color = Theme.Yellow;
-		}
-		else if ( Paint.HasMouseOver )
+		if ( Paint.HasMouseOver )
 		{
 			color = Theme.Green;
 		}

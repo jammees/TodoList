@@ -10,11 +10,7 @@ internal static class ItemManualEntry
 	internal static void OnPaint( TodoEntry data, Rect rect )
 	{
 		Color color = Theme.Text;
-		if ( Paint.HasPressed )
-		{
-			color = Theme.Yellow;
-		}
-		else if ( Paint.HasMouseOver )
+		if ( Paint.HasMouseOver )
 		{
 			color = Theme.Green;
 		}
