@@ -1,10 +1,14 @@
 ﻿using Editor;
+using Sandbox;
 using Todo.Widgets;
 
 namespace Todo.Editors;
 
 internal class SettingsWidget : Widget
 {
+	ScrollArea Scroll { get; set; }
+	int VerticalScrollHeight { get; set; }
+
 	public SettingsWidget( Widget parent ) : base( parent, true )
 	{
 		WidgetUtility.SetProperties(
@@ -45,18 +49,40 @@ internal class SettingsWidget : Widget
 
 	internal void Build()
 	{
+		if ( Scroll.IsValid() )
+		{
+			VerticalScrollHeight = Scroll.VerticalScrollbar.Value;
+		}
+
 		Layout.Clear( true );
 
-		ScrollArea scroll = Layout.Add( new ScrollArea( this ) );
-		scroll.Canvas = new Widget( this );
-		Layout canvas = scroll.Canvas.Layout = Layout.Column();
+		Scroll = Layout.Add( new ScrollArea( this ) );
+		Scroll.Canvas = new Widget( this );
+		Layout canvas = Scroll.Canvas.Layout = Layout.Column();
 		canvas.Spacing = 10f;
 		canvas.Margin = new Sandbox.UI.Margin( 0f, 0f, 20f, 0f );
 
 		AddTitle( canvas, "Miscellaneous" );
 
-		canvas.Add( new Checkbox( "Refresh on Hotload", this ) );
-		canvas.Add( new Checkbox( "Widgets Stay on Top", this ) );
+		{
+			Checkbox checkbox = canvas.Add( new Checkbox( "Refresh on Hotload", this ) );
+			checkbox.State = TodoDock.Instance.Cookies.ReloadOnHotload ? CheckState.On : CheckState.Off;
+			checkbox.StateChanged = state =>
+			{
+				TodoDock.Instance.Cookies.ReloadOnHotload = state == CheckState.On ? true : false;
+				TodoDock.Instance.Cookies.Save();
+			};
+		}
+
+		{
+			Checkbox checkbox = canvas.Add( new Checkbox( "Widgets Stay on Top", this ) );
+			checkbox.State = TodoDock.Instance.Cookies.WidgetsOnTop ? CheckState.On : CheckState.Off;
+			checkbox.StateChanged = state =>
+			{
+				TodoDock.Instance.Cookies.WidgetsOnTop = state == CheckState.On ? true : false;
+				TodoDock.Instance.Cookies.Save();
+			};
+		}
 
 		canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
 
@@ -116,5 +142,15 @@ internal class SettingsWidget : Widget
 		Label label = new Label( title, this );
 		label.SetStyles( "font-size: 20px; font-weight: 400;" );
 		canvas.Add( label );
+	}
+
+	[EditorEvent.Frame]
+	public void Frame()
+	{
+		if ( VerticalScrollHeight > 0 )
+		{
+			Scroll.VerticalScrollbar.Value = VerticalScrollHeight;
+			VerticalScrollHeight = 0;
+		}
 	}
 }
