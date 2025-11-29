@@ -10,9 +10,9 @@ internal class TodoEntryEditor : Widget
 	GroupControl GroupControl;
 
 	TodoEntry Data;
-	TodoWidget TodoWidget;
+	TodoDock TodoWidget;
 
-	public TodoEntryEditor( Widget parent, TodoEntry data, TodoWidget todoWidget ) : base( parent, true )
+	public TodoEntryEditor( Widget parent, TodoEntry data, TodoDock todoWidget ) : base( parent, true )
 	{
 		Data = data;
 		TodoWidget = todoWidget;

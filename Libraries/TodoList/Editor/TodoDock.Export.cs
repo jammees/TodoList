@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace Todo;
 
-public sealed partial class TodoWidget : Widget
+public sealed partial class TodoDock : Widget
 {
 	internal static void Export()
 	{

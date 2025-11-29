@@ -42,7 +42,7 @@ internal sealed class GroupControl
 		popupMenu.AboutToShow += () => PopulateGroupMenu( ref popupMenu );
 		popupMenu.DeleteOnClose = true;
 		popupMenu.OpenAtCursor( true );
-		popupMenu.MinimumWidth = TodoWidget.Instance.ScreenRect.Width;
+		popupMenu.MinimumWidth = TodoDock.Instance.ScreenRect.Width;
 	}
 
 	private void PopulateGroupMenu( ref Menu menu, string searchText = "" )
@@ -53,7 +53,7 @@ internal sealed class GroupControl
 
 		menu.AddHeading( $"Current Group: {CurrentGroup}" );
 
-		foreach ( var item in TodoWidget.Instance.GroupsState.Keys )
+		foreach ( var item in TodoDock.Instance.GroupsState.Keys )
 		{
 			if ( item == GroupEdit.Text || ( isSearching && item.Contains(searchText) is false ) )
 				continue;

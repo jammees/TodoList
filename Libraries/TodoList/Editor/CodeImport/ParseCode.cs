@@ -25,7 +25,7 @@ internal static class ParseCode
 			string sourceText = FileUtility.GetFileContents( path );
 			string lines = GetComments( sourceText, out MatchCollection lineMatches );
 
-			foreach ( TodoCodeStyle style in TodoWidget.Instance.CodeStyles )
+			foreach ( TodoCodeStyle style in TodoDock.Instance.CodeStyles )
 			{
 				string[] entries = ScanFor( lines, style.CodeWord, out MatchCollection stubEntries );
 
@@ -68,11 +68,11 @@ internal static class ParseCode
 	private static string GetRegexTerminator()
 	{
 		StringBuilder builder = new();
-		int stylesCount = TodoWidget.Instance.CodeStyles.Count;
+		int stylesCount = TodoDock.Instance.CodeStyles.Count;
 
 		for ( int i = 0; i < stylesCount; i++ )
 		{
-			TodoCodeStyle style = TodoWidget.Instance.CodeStyles[i];
+			TodoCodeStyle style = TodoDock.Instance.CodeStyles[i];
 
 			builder.Append( style.CodeWord );
 			if ( i + 1 < stylesCount )

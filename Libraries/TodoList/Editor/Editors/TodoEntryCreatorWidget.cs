@@ -9,9 +9,9 @@ internal class TodoEntryCreatorWidget : Widget
 	TextEdit MessageEdit;
 	GroupControl GroupControl;
 
-	TodoWidget TodoWidget;
+	TodoDock TodoWidget;
 
-	public TodoEntryCreatorWidget( Widget parent, TodoWidget todoWidget ) : base( parent, true )
+	public TodoEntryCreatorWidget( Widget parent, TodoDock todoWidget ) : base( parent, true )
 	{
 		TodoWidget = todoWidget;
 

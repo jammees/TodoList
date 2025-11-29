@@ -11,13 +11,13 @@ using Todo.Widgets;
 namespace Todo;
 
 [Dock( "Editor", "Todos", "checklist" )]
-public sealed partial class TodoWidget : Widget
+public sealed partial class TodoDock : Widget
 {
 	internal TodoList List;
 	internal Dictionary<string, bool> GroupsState;
 	internal List<TodoEntry> Datas;
 	internal List<TodoCodeStyle> CodeStyles;
-	internal static TodoWidget Instance;
+	internal static TodoDock Instance;
 
 	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
@@ -27,7 +27,7 @@ public sealed partial class TodoWidget : Widget
 	string SearchText = "";
 	int VericalScrollHeight = 0;
 
-	public TodoWidget( Widget parent ) : base( parent, true )
+	public TodoDock( Widget parent ) : base( parent, true )
 	{
 		Instance = this;
 

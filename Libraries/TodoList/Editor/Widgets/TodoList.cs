@@ -9,9 +9,9 @@ namespace Todo.Widgets;
 
 internal sealed class TodoList : ListView
 {
-	TodoWidget TodoWidget { get; set; }
+	TodoDock TodoWidget { get; set; }
 
-	public TodoList( TodoWidget widget )
+	public TodoList( TodoDock widget )
 	{
 		ItemSize = new Vector2( -1f, 30f );
 		Layout = Layout.Column();

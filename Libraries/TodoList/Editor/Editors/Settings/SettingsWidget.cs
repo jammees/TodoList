@@ -4,9 +4,9 @@ namespace Todo.Editors.Settings;
 
 internal class SettingsWidget : Widget
 {
-	TodoWidget TodoWidget;
+	TodoDock TodoWidget;
 
-	public SettingsWidget( Widget parent, TodoWidget todoWidget ) : base( parent )
+	public SettingsWidget( Widget parent, TodoDock todoWidget ) : base( parent )
 	{
 		TodoWidget = todoWidget;
 
