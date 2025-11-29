@@ -54,7 +54,12 @@ internal class SettingsWidget : Widget
 
 		AddTitle( canvas, "Code Words" );
 
-		Layout codeContainer = canvas.Add( new Widget(this) ).Layout = Layout.Column();
+		Layout codeContainer = canvas.Add( new Widget( this ) ).Layout = Layout.Column();
+
+		Button addStyleButton = codeContainer.Add( new Button( "Add New Code Word", "add", this ) );
+		addStyleButton.Clicked = OpenStyleCreatorWidget;
+
+		codeContainer.Add( new Separator( 8f ) );
 
 		foreach ( TodoCodeStyle style in TodoWidget.CodeStyles )
 		{
