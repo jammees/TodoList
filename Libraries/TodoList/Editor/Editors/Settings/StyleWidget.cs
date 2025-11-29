@@ -37,5 +37,6 @@ internal sealed class StyleWidget: Widget
 			Layout.Add( sheet );
 		}
 
+		Layout.Add( new Button.Danger("Delete", "delete") );
 	}
 }
