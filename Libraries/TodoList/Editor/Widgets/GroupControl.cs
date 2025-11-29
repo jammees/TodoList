@@ -19,7 +19,7 @@ internal sealed class GroupControl
 		GroupEdit.Text = CurrentGroup;
 		GroupEdit.PlaceholderText = "Group";
 
-		Button groupEditButton = parent.Layout.Add( new Button( $"Change To Existing Group", "folder_copy", parent ) );
+		Button groupEditButton = parent.Layout.Add( new Button( $"Change to Existing Group", "folder_copy", parent ) );
 		groupEditButton.Clicked = BuildGroupOptions;
 	}
 
