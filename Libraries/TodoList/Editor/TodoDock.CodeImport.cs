@@ -7,7 +7,7 @@ using Todo.List;
 
 namespace Todo;
 
-public sealed partial class TodoDock : Widget
+internal sealed partial class TodoDock : Widget
 {
 	private Dictionary<string, List<CodeEntry>> ImportFromCode()
 	{

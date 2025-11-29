@@ -11,7 +11,7 @@ using Todo.Widgets;
 namespace Todo;
 
 [Dock( "Editor", "Todos", "checklist" )]
-public sealed partial class TodoDock : Widget
+internal sealed partial class TodoDock : Widget
 {
 	internal TodoList List;
 	internal Dictionary<string, bool> GroupsState;

@@ -6,7 +6,7 @@ using Todo.List;
 
 namespace Todo;
 
-public sealed partial class TodoDock : Widget
+internal sealed partial class TodoDock : Widget
 {
 	internal static void Import()
 	{
