@@ -7,10 +7,12 @@ internal class SettingsWidget : Widget
 {
 	public SettingsWidget( Widget parent ) : base( parent, true )
 	{
-		DeleteOnClose = true;
-		MinimumSize = new( 500f, 400f );
-		WindowTitle = $"Settings";
-		SetWindowIcon( "settings" );
+		WidgetUtility.SetProperties(
+			this,
+			400f,
+			"Settings",
+			"settings"
+		);
 
 		Layout = Layout.Column();
 		Layout.Margin = 4f;

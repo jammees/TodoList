@@ -15,10 +15,12 @@ internal class TodoGroupEditor : Widget
 	{
 		Group = data;
 
-		DeleteOnClose = true;
-		FixedSize = new( 500f, 200f );
-		WindowTitle = $"Edit {data.Group}";
-		SetWindowIcon( "edit" );
+		WidgetUtility.SetProperties(
+			this,
+			200f,
+			$"Edit {data.Group}",
+			"edit"
+		);
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;

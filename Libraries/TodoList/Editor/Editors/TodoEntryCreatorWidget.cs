@@ -1,6 +1,7 @@
 ﻿using Editor;
 using Todo.List;
 using Todo.Widgets;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Todo.Editors;
 
@@ -11,10 +12,12 @@ internal class TodoEntryCreatorWidget : Widget
 
 	public TodoEntryCreatorWidget( Widget parent ) : base( parent, true )
 	{
-		DeleteOnClose = true;
-		FixedSize = new( 500f, 400f );
-		WindowTitle = $"Create New Entry";
-		SetWindowIcon( "edit" );
+		WidgetUtility.SetProperties(
+			this,
+			400f,
+			"Create New Entry",
+			"edit"
+		);
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;

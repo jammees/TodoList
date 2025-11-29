@@ -17,10 +17,12 @@ internal class TodoEntryEditor : Widget
 	{
 		Data = data;
 
-		DeleteOnClose = true;
-		FixedSize = new( 500f, 400f );
-		WindowTitle = $"Edit {data.Message}";
-		SetWindowIcon( "edit" );
+		WidgetUtility.SetProperties(
+			this,
+			400f,
+			$"Edit {data.Group}",
+			"edit"
+		);
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;

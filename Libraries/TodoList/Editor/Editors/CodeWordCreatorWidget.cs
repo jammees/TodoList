@@ -15,10 +15,12 @@ internal class CodeWordCreatorWidget : Widget
 	{
 		SettingsWidget = settingsWidget;
 
-		DeleteOnClose = true;
-		FixedSize = new( 500f, 200f );
-		WindowTitle = $"Create New Code Word";
-		SetWindowIcon( "edit" );
+		WidgetUtility.SetProperties(
+			this,
+			200f,
+			"Create New Code Word",
+			"edit"
+		);
 
 		Layout = Layout.Column();
 		Layout.Margin = 4;
