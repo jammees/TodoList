@@ -143,7 +143,7 @@ internal sealed partial class TodoDock : Widget
 
 			foreach ( var entry in grouppedEntries[group] )
 			{
-				if ( IsSearching && entry.Message.ToLower().Contains( SearchText ) is false )
+				if ( IsSearching && entry.Message.Contains( SearchText, System.StringComparison.CurrentCultureIgnoreCase ) is false )
 					continue;
 
 				List.AddItem( entry );
@@ -179,6 +179,9 @@ internal sealed partial class TodoDock : Widget
 
 			foreach ( var entry in entries[group] )
 			{
+				if ( IsSearching && entry.Message.Contains( SearchText, System.StringComparison.CurrentCultureIgnoreCase ) is false )
+					continue;
+
 				List.AddItem( entry );
 			}
 		}
