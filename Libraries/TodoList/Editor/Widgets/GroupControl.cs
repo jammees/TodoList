@@ -58,6 +58,9 @@ internal sealed class GroupControl
 			if ( item == GroupEdit.Text || ( isSearching && item.Contains(searchText) is false ) )
 				continue;
 
+			if ( TodoDock.Instance.Cookies.ShowCodeEntries && (item.EndsWith( ".cs" ) || item.EndsWith( ".razor" )) )
+				continue;
+
 			menu.AddOption( $"{item}", action: () => GroupEdit.Text = item );
 		}
 	}
