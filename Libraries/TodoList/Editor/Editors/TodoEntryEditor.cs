@@ -63,6 +63,7 @@ internal class TodoEntryEditor : Widget
 	private void DeleteData()
 	{
 		TodoDock.Instance.Cookies.Datas.Remove( Data );
+		TodoDock.Instance.SaveAndRefresh();
 		Close();
 	}
 
