@@ -18,6 +18,7 @@ public sealed class MyComponent : Component
 
 	}
 
+	// hack: this is a hack
 	// fixme: this code is really broken!
 	// xxx: what?
 	// optimize: please make this work better
