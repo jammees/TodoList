@@ -16,7 +16,6 @@ internal sealed class TodoCookies
 	internal bool ReloadOnHotload;
 	internal bool WidgetsOnTop;
 	internal bool CollapseGroupsOnSearch;
-	internal bool EnableKeybinds;
 	internal bool ShowDefaultGroup;
 	internal string DefaultGroupName;
 
@@ -39,7 +38,6 @@ internal sealed class TodoCookies
 		ProjectCookie.Set( $"{SettingCookie}.ReloadOnHotload", ReloadOnHotload );
 		ProjectCookie.Set( $"{SettingCookie}.WidgetsOnTop", WidgetsOnTop );
 		ProjectCookie.Set( $"{SettingCookie}.CollapseGroupsOnSearch", CollapseGroupsOnSearch );
-		ProjectCookie.Set( $"{SettingCookie}.EnableKeybinds", EnableKeybinds );
 		ProjectCookie.Set( $"{SettingCookie}.ShowDefaultGroup", ShowDefaultGroup );
 		ProjectCookie.Set( $"{SettingCookie}.DefaultGroupName", DefaultGroupName );
 	}
@@ -54,7 +52,6 @@ internal sealed class TodoCookies
 		ReloadOnHotload = ProjectCookie.Get( $"{SettingCookie}.ReloadOnHotload", true );
 		WidgetsOnTop = ProjectCookie.Get( $"{SettingCookie}.WidgetsOnTop", false );
 		CollapseGroupsOnSearch = ProjectCookie.Get( $"{SettingCookie}.CollapseGroupsOnSearch", true );
-		EnableKeybinds = ProjectCookie.Get( $"{SettingCookie}.EnableKeybinds", true );
 		ShowDefaultGroup = ProjectCookie.Get( $"{SettingCookie}.ShowDefaultGroup", false );
 		DefaultGroupName = ProjectCookie.Get( $"{SettingCookie}.DefaultGroupName", "Default" );
 	}
