@@ -84,6 +84,44 @@ internal class SettingsWidget : Widget
 			};
 		}
 
+		AddTitle( canvas, "Groups" );
+
+		{
+			Checkbox checkbox = canvas.Add( new Checkbox( "Collapse on Search", this ) );
+			checkbox.State = TodoDock.Instance.Cookies.CollapseGroupsOnSearch ? CheckState.On : CheckState.Off;
+			checkbox.StateChanged = state =>
+			{
+				TodoDock.Instance.Cookies.CollapseGroupsOnSearch = state == CheckState.On ? true : false;
+				TodoDock.Instance.Cookies.Save();
+			};
+		}
+
+		{
+			Checkbox checkbox = canvas.Add( new Checkbox( "Show Default Group", this ) );
+			checkbox.ToolTip = "Show the default group if it is the only one.";
+			checkbox.State = TodoDock.Instance.Cookies.ShowDefaultGroup ? CheckState.On : CheckState.Off;
+			checkbox.StateChanged = state =>
+			{
+				TodoDock.Instance.Cookies.ShowDefaultGroup = state == CheckState.On ? true : false;
+				TodoDock.Instance.Cookies.Save();
+			};
+		}
+
+		{
+			Layout layout = canvas.Add( Layout.Row() );
+			layout.Spacing = 10f;
+
+			layout.Add( new Label( "Default Group Name", this ) );
+
+			LineEdit checkbox = layout.Add( new LineEdit( TodoDock.Instance.Cookies.DefaultGroupName, this ) );
+			checkbox.PlaceholderText = "Insert Group Name";
+			checkbox.EditingFinished += () =>
+			{
+				TodoDock.Instance.Cookies.DefaultGroupName = checkbox.Text;
+				TodoDock.Instance.Cookies.Save();
+			};
+		}
+
 		canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
 
 		AddTitle( canvas, "Code Words" );
