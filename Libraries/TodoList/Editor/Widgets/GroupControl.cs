@@ -23,6 +23,7 @@ internal sealed class GroupControl
 		GroupEdit = parent.Layout.Add( new LineEdit( parent ) );
 		GroupEdit.Text = CurrentGroup;
 		GroupEdit.TextChanged += OnTextEdited;
+		GroupEdit.EditingFinished += OnEditingFinished;
 		GroupEdit.PlaceholderText = "Group";
 
 		Button groupEditButton = parent.Layout.Add( new Button( $"Change to Existing Group", "folder_copy", parent ) );
@@ -32,6 +33,11 @@ internal sealed class GroupControl
 	public string GetGroupName()
 	{
 		return string.IsNullOrEmpty( GroupEdit.Text ) ? "Default" : GroupEdit.Text;
+	}
+
+	private void OnEditingFinished()
+	{
+		GroupEdit.Text = GroupEdit.Text.Trim();
 	}
 
 	private void OnTextEdited( string newString )
