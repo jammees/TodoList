@@ -41,6 +41,20 @@ internal static class Filter
 		}
 
 		{
+			bool isSuccess = Utility.GetFlagArguments( flagStubs, "pending", out List<string> flagArguments );
+			foreach ( var argument in flagArguments )
+			{
+				if ( entry.IsCode is true )
+					return false;
+
+				if ( entry.TodoEntry.IsDone is false )
+					continue;
+
+				return false;
+			}
+		}
+
+		{
 			foreach ( var codeWord in TodoDock.Instance.Cookies.CodeWords )
 			{
 				string word = codeWord.CodeWord.Replace( ":", "" );
