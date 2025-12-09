@@ -38,7 +38,7 @@ internal sealed class GroupControl
 	{
 		bool isValid = true;
 
-		if ( string.IsNullOrEmpty( newString ) is true )
+		if ( string.IsNullOrEmpty( newString.Trim() ) is true )
 		{
 			isValid = false;
 			SetWarningMessage( "Empty group name!" );
