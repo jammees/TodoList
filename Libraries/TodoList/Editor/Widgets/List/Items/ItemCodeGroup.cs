@@ -18,12 +18,24 @@ internal static class ItemCodeGroup
 		Paint.SetPen( in color );
 
 		Rect arrowRect = new( rect.Position.x, rect.Position.y + 5f, 20f, 20f );
-		Paint.DrawIcon( arrowRect, group.IsOpen ? "keyboard_arrow_up" : "keyboard_arrow_down", 20 );
+
+		if ( TodoDock.Instance.IsGroupUncollapsed )
+		{
+			Paint.DrawIcon( arrowRect, "horizontal_rule", 20 );
+		}
+		else
+		{
+			Paint.DrawIcon( arrowRect, group.IsOpen ? "keyboard_arrow_up" : "keyboard_arrow_down", 20 );
+		}
+
 		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), group.Group, TextFlag.LeftCenter );
 	}
 
 	internal static void OnClicked( CodeGroup group, MouseEvent e )
 	{
+		if ( TodoDock.Instance.IsGroupUncollapsed )
+			return;
+
 		group.IsOpen = !group.IsOpen;
 
 		TodoDock.Instance.Cookies.GroupsState[group.Group] = group.IsOpen;
