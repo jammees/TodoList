@@ -41,7 +41,7 @@ internal sealed class GroupControl
 		if ( string.IsNullOrEmpty( newString.Trim() ) is true )
 		{
 			isValid = false;
-			SetWarningMessage( "Empty group name!" );
+			SetWarningMessage( $"Empty group name, will default to {TodoDock.Instance.Cookies.DefaultGroupName}!" );
 		}
 
 		if ( (newString.EndsWith( ".cs" ) || newString.EndsWith( ".razor" )) is true )
