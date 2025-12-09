@@ -115,7 +115,7 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadManualEntries( ref HashSet<string> groups )
 	{
-		if ( Cookies.ShowCodeEntries&& IsSearching is false )
+		if ( Cookies.ShowCodeEntries && IsSearching is false )
 		{
 			List.AddItem( new GroupsTitle( "Manual Entries" ) );
 		}
@@ -143,7 +143,7 @@ internal sealed partial class TodoDock : Widget
 				{
 					Group = group,
 					Datas = grouppedEntries[group],
-					IsOpen = Cookies.GroupsState[group]
+					IsOpen = IsGroupOpen( group )
 				}
 			);
 
@@ -192,7 +192,7 @@ internal sealed partial class TodoDock : Widget
 				new CodeGroup()
 				{
 					Group = group,
-					IsOpen = Cookies.GroupsState[group]
+					IsOpen = IsGroupOpen( group )
 				}
 			);
 
@@ -233,5 +233,13 @@ internal sealed partial class TodoDock : Widget
 			return;
 
 		RefreshItems();
+	}
+
+	private bool IsGroupOpen( string group )
+	{
+		if ( IsSearching && Cookies.UnCollapseGroupsOnSearch )
+			return true;
+
+		return Cookies.GroupsState[group];
 	}
 }
