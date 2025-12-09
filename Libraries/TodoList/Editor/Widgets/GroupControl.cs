@@ -7,6 +7,7 @@ namespace Todo.Widgets;
 internal sealed class GroupControl
 {
 	LineEdit GroupEdit;
+	WarningBox WarningBox;
 
 	string CurrentGroup = "";
 
@@ -14,9 +15,14 @@ internal sealed class GroupControl
 	{
 		CurrentGroup = currentGroup;
 
+		WarningBox = parent.Layout.Add( new WarningBox( "Invalid Group! Reason:", parent ) );
+		WarningBox.BackgroundColor = Theme.Red;
+		WarningBox.Visible = false;
+
 		parent.Layout.Add( new Label( "Group", parent ) );
 		GroupEdit = parent.Layout.Add( new LineEdit( parent ) );
 		GroupEdit.Text = CurrentGroup;
+		GroupEdit.TextChanged += OnTextEdited;
 		GroupEdit.PlaceholderText = "Group";
 
 		Button groupEditButton = parent.Layout.Add( new Button( $"Change to Existing Group", "folder_copy", parent ) );
@@ -26,6 +32,31 @@ internal sealed class GroupControl
 	public string GetGroupName()
 	{
 		return string.IsNullOrEmpty( GroupEdit.Text ) ? "Default" : GroupEdit.Text;
+	}
+
+	private void OnTextEdited( string newString )
+	{
+		bool isValid = true;
+
+		if ( string.IsNullOrEmpty( newString ) is true )
+		{
+			isValid = false;
+			SetWarningMessage( "Empty group name!" );
+		}
+
+		if ( (newString.EndsWith( ".cs" ) || newString.EndsWith( ".razor" )) is true )
+		{
+			isValid = false;
+			SetWarningMessage( "Group ends with .cs or .razor extension, will break " +
+				"groups if a file is named the same!" );
+		}
+
+		WarningBox.Visible = isValid is false;
+	}
+
+	private void SetWarningMessage( string reason )
+	{
+		WarningBox.Label.Text = $"Invalid Group! Reason: {reason}";
 	}
 
 	private void BuildGroupOptions()
@@ -55,7 +86,7 @@ internal sealed class GroupControl
 
 		foreach ( var item in TodoDock.Instance.Cookies.GroupsState.Keys )
 		{
-			if ( item == GroupEdit.Text || ( isSearching && item.Contains(searchText) is false ) )
+			if ( item == GroupEdit.Text || (isSearching && item.Contains( searchText ) is false) )
 				continue;
 
 			if ( TodoDock.Instance.Cookies.ShowCodeEntries && (item.EndsWith( ".cs" ) || item.EndsWith( ".razor" )) )
