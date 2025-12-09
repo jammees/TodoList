@@ -87,22 +87,11 @@ internal class SettingsWidget : Widget
 		AddTitle( canvas, "Groups" );
 
 		{
-			Checkbox checkbox = canvas.Add( new Checkbox( "Collapse on Search", this ) );
-			checkbox.State = TodoDock.Instance.Cookies.CollapseGroupsOnSearch ? CheckState.On : CheckState.Off;
+			Checkbox checkbox = canvas.Add( new Checkbox( "Uncollapse on Search", this ) );
+			checkbox.State = TodoDock.Instance.Cookies.UnCollapseGroupsOnSearch ? CheckState.On : CheckState.Off;
 			checkbox.StateChanged = state =>
 			{
-				TodoDock.Instance.Cookies.CollapseGroupsOnSearch = state == CheckState.On ? true : false;
-				TodoDock.Instance.Cookies.Save();
-			};
-		}
-
-		{
-			Checkbox checkbox = canvas.Add( new Checkbox( "Show Default Group", this ) );
-			checkbox.ToolTip = "Show the default group if it is the only one.";
-			checkbox.State = TodoDock.Instance.Cookies.ShowDefaultGroup ? CheckState.On : CheckState.Off;
-			checkbox.StateChanged = state =>
-			{
-				TodoDock.Instance.Cookies.ShowDefaultGroup = state == CheckState.On ? true : false;
+				TodoDock.Instance.Cookies.UnCollapseGroupsOnSearch = state == CheckState.On ? true : false;
 				TodoDock.Instance.Cookies.Save();
 			};
 		}

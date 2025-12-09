@@ -15,8 +15,7 @@ internal sealed class TodoCookies
 	internal bool ShowCodeEntries;
 	internal bool ReloadOnHotload;
 	internal bool WidgetsOnTop;
-	internal bool CollapseGroupsOnSearch;
-	internal bool ShowDefaultGroup;
+	internal bool UnCollapseGroupsOnSearch;
 	internal string DefaultGroupName;
 
 	string SettingCookie;
@@ -37,8 +36,7 @@ internal sealed class TodoCookies
 		ProjectCookie.Set( $"{SettingCookie}.CodeWords", CodeWords );
 		ProjectCookie.Set( $"{SettingCookie}.ReloadOnHotload", ReloadOnHotload );
 		ProjectCookie.Set( $"{SettingCookie}.WidgetsOnTop", WidgetsOnTop );
-		ProjectCookie.Set( $"{SettingCookie}.CollapseGroupsOnSearch", CollapseGroupsOnSearch );
-		ProjectCookie.Set( $"{SettingCookie}.ShowDefaultGroup", ShowDefaultGroup );
+		ProjectCookie.Set( $"{SettingCookie}.CollapseGroupsOnSearch", UnCollapseGroupsOnSearch );
 		ProjectCookie.Set( $"{SettingCookie}.DefaultGroupName", DefaultGroupName );
 	}
 
@@ -51,8 +49,7 @@ internal sealed class TodoCookies
 		CodeWords = ProjectCookie.Get( $"{SettingCookie}.CodeWords", TodoCodeWord.GetDefault() );
 		ReloadOnHotload = ProjectCookie.Get( $"{SettingCookie}.ReloadOnHotload", true );
 		WidgetsOnTop = ProjectCookie.Get( $"{SettingCookie}.WidgetsOnTop", false );
-		CollapseGroupsOnSearch = ProjectCookie.Get( $"{SettingCookie}.CollapseGroupsOnSearch", true );
-		ShowDefaultGroup = ProjectCookie.Get( $"{SettingCookie}.ShowDefaultGroup", false );
+		UnCollapseGroupsOnSearch = ProjectCookie.Get( $"{SettingCookie}.CollapseGroupsOnSearch", true );
 		DefaultGroupName = ProjectCookie.Get( $"{SettingCookie}.DefaultGroupName", "Default" );
 	}
 
