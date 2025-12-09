@@ -102,11 +102,11 @@ internal class SettingsWidget : Widget
 
 			layout.Add( new Label( "Default Group Name", this ) );
 
-			LineEdit checkbox = layout.Add( new LineEdit( TodoDock.Instance.Cookies.DefaultGroupName, this ) );
-			checkbox.PlaceholderText = "Insert Group Name";
-			checkbox.EditingFinished += () =>
+			LineEdit group = layout.Add( new LineEdit( TodoDock.Instance.Cookies.DefaultGroupName, this ) );
+			group.PlaceholderText = "Insert Group Name";
+			group.EditingFinished += () =>
 			{
-				TodoDock.Instance.Cookies.DefaultGroupName = checkbox.Text;
+				TodoDock.Instance.Cookies.DefaultGroupName = group.Text;
 				TodoDock.Instance.Cookies.Save();
 			};
 		}
