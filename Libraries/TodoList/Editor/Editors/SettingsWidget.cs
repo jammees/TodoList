@@ -109,6 +109,8 @@ internal class SettingsWidget : Widget
 				TodoDock.Instance.Cookies.DefaultGroupName = group.Text;
 				TodoDock.Instance.Cookies.Save();
 			};
+
+			canvas.Add( new GroupWarningBox( this, group ) );
 		}
 
 		canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
