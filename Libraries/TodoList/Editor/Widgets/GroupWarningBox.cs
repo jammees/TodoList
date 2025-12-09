@@ -11,6 +11,7 @@ internal sealed class GroupWarningBox: WarningBox
 		Visible = false;
 
 		groupEdit.TextChanged += OnTextEdited;
+		OnTextEdited( groupEdit.Text );
 	}
 
 	private void OnTextEdited( string newString )
