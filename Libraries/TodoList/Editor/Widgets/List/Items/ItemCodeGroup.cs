@@ -4,14 +4,29 @@ using Todo.List;
 
 namespace Todo.Widgets.List.Items;
 
-internal static class ItemTitle
+internal static class ItemCodeGroup
 {
-	internal static void OnPaint( GroupsTitle title, Rect rect )
+	internal static void OnPaint( CodeGroup group, Rect rect )
 	{
-		Paint.ClearBrush();
-		Paint.ClearPen();
-		Paint.SetFont( Theme.HeadingFont, 13, 800 );
-		Paint.SetPen( Theme.Text );
-		Paint.DrawText( rect, title.Title, TextFlag.LeftCenter );
+		Color color = Theme.Text;
+		if ( Paint.HasMouseOver )
+		{
+			color = Theme.Green;
+		}
+
+		Paint.SetFont( Theme.HeadingFont, 9, 800 );
+		Paint.SetPen( in color );
+
+		Rect arrowRect = new( rect.Position.x, rect.Position.y + 5f, 20f, 20f );
+		Paint.DrawIcon( arrowRect, group.IsOpen ? "keyboard_arrow_up" : "keyboard_arrow_down", 20 );
+		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), group.Group, TextFlag.LeftCenter );
+	}
+
+	internal static void OnClicked( CodeGroup group, MouseEvent e )
+	{
+		group.IsOpen = !group.IsOpen;
+
+		TodoDock.Instance.Cookies.GroupsState[group.Group] = group.IsOpen;
+		TodoDock.Instance.SaveAndRefresh();
 	}
 }
