@@ -6,6 +6,7 @@ using Todo.Editors;
 using Todo.List;
 using Todo.Widgets;
 using Todo.Widgets.List;
+using Todo.Search;
 
 namespace Todo;
 
@@ -14,11 +15,12 @@ internal sealed partial class TodoDock : Widget
 {
 	internal TodoCookies Cookies;
 
+	internal string SearchText = "";
+
 	internal static TodoDock Instance;
 
-	bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
+	internal bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
-	string SearchText = "";
 	int VerticalScrollHeight = 0;
 	TodoList List;
 
@@ -113,7 +115,7 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadManualEntries( ref HashSet<string> groups )
 	{
-		if ( Cookies.ShowCodeEntries )
+		if ( Cookies.ShowCodeEntries&& IsSearching is false )
 		{
 			List.AddItem( new GroupsTitle( "Manual Entries" ) );
 		}
@@ -136,24 +138,38 @@ internal sealed partial class TodoDock : Widget
 				Cookies.GroupsState.Add( group, true );
 			}
 
-			List.AddItem( new EntryGroup() { Group = group, Datas = grouppedEntries[group], IsOpen = Cookies.GroupsState[group] } );
+			EntryGroup groupListItem = List.AddItem(
+				new EntryGroup()
+				{
+					Group = group,
+					Datas = grouppedEntries[group],
+					IsOpen = Cookies.GroupsState[group]
+				}
+			);
 
 			if ( Cookies.GroupsState[group] is false )
 				continue;
 
+			int validSearches = 0;
+
 			foreach ( var entry in grouppedEntries[group] )
 			{
-				if ( IsSearching && entry.Message.Contains( SearchText, System.StringComparison.CurrentCultureIgnoreCase ) is false )
+				if ( SearchEntries.IsFilterEntry( entry, ref validSearches ) is false )
 					continue;
 
 				List.AddItem( entry );
+			}
+
+			if ( validSearches == 0 )
+			{
+				List.RemoveItem( groupListItem );
 			}
 		}
 	}
 
 	private void LoadCodeEntries( ref HashSet<string> groups )
 	{
-		if ( Cookies.ShowManualEntries )
+		if ( Cookies.ShowManualEntries && IsSearching is false )
 		{
 			List.AddItem( new GroupsTitle( "Code Entries" ) );
 		}
@@ -172,17 +188,30 @@ internal sealed partial class TodoDock : Widget
 				Cookies.GroupsState.Add( group, true );
 			}
 
-			List.AddItem( new CodeGroup() { Group = group, IsOpen = Cookies.GroupsState[group] } );
+			CodeGroup groupListItem = List.AddItem(
+				new CodeGroup()
+				{
+					Group = group,
+					IsOpen = Cookies.GroupsState[group]
+				}
+			);
 
 			if ( Cookies.GroupsState[group] is false )
 				continue;
 
+			int validSearches = 0;
+
 			foreach ( var entry in entries[group] )
 			{
-				if ( IsSearching && entry.Message.Contains( SearchText, System.StringComparison.CurrentCultureIgnoreCase ) is false )
+				if ( SearchEntries.IsFilterCode( entry, group, ref validSearches ) is false )
 					continue;
 
 				List.AddItem( entry );
+			}
+
+			if ( validSearches == 0 )
+			{
+				List.RemoveItem( groupListItem );
 			}
 		}
 	}
