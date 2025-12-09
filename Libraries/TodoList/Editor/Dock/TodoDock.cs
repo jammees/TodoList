@@ -19,6 +19,8 @@ internal sealed partial class TodoDock : Widget
 
 	internal static TodoDock Instance;
 
+	internal bool IsGroupUncollapsed => IsSearching && Cookies.UnCollapseGroupsOnSearch;
+
 	internal bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
 	int VerticalScrollHeight = 0;
@@ -143,11 +145,11 @@ internal sealed partial class TodoDock : Widget
 				{
 					Group = group,
 					Datas = grouppedEntries[group],
-					IsOpen = IsGroupOpen( group )
+					IsOpen = Cookies.GroupsState[group]
 				}
 			);
 
-			if ( Cookies.GroupsState[group] is false )
+			if ( Cookies.GroupsState[group] is false && IsGroupUncollapsed is false )
 				continue;
 
 			int validSearches = 0;
@@ -192,11 +194,11 @@ internal sealed partial class TodoDock : Widget
 				new CodeGroup()
 				{
 					Group = group,
-					IsOpen = IsGroupOpen( group )
+					IsOpen = Cookies.GroupsState[group]
 				}
 			);
 
-			if ( Cookies.GroupsState[group] is false )
+			if ( Cookies.GroupsState[group] is false && IsGroupUncollapsed is false )
 				continue;
 
 			int validSearches = 0;
@@ -233,13 +235,5 @@ internal sealed partial class TodoDock : Widget
 			return;
 
 		RefreshItems();
-	}
-
-	private bool IsGroupOpen( string group )
-	{
-		if ( IsSearching && Cookies.UnCollapseGroupsOnSearch )
-			return true;
-
-		return Cookies.GroupsState[group];
 	}
 }
