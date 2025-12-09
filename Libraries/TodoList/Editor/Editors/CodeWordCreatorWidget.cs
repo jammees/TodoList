@@ -34,7 +34,7 @@ internal class CodeWordCreatorWidget : Widget
 		};
 
 		Layout.Add( new WarningBox( "It is recommended to make code words end with a \":\"" +
-			"to keep in style with the rest of them", this ) );
+			"to keep in style with the rest of them and to avoid false positives", this ) );
 
 		ControlSheet sheet = new ControlSheet();
 		foreach ( var prop in CodeWord.GetSerialized() )

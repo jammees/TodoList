@@ -62,7 +62,7 @@ internal class SettingsWidget : Widget
 		canvas.Spacing = 10f;
 		canvas.Margin = new Sandbox.UI.Margin( 0f, 0f, 20f, 0f );
 
-		AddTitle( canvas, "Miscellaneous" );
+		AddTitle( canvas, "Miscellaneous", false );
 
 		{
 			Checkbox checkbox = canvas.Add( new Checkbox( "Refresh on Hotload", this ) );
@@ -84,7 +84,7 @@ internal class SettingsWidget : Widget
 			};
 		}
 
-		AddTitle( canvas, "Groups" );
+		AddTitle( canvas, "Groups", true );
 
 		{
 			Checkbox checkbox = canvas.Add( new Checkbox( "Uncollapse on Search", this ) );
@@ -113,9 +113,10 @@ internal class SettingsWidget : Widget
 			canvas.Add( new GroupWarningBox( this, group ) );
 		}
 
-		canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
+		AddTitle( canvas, "Code Words", true );
 
-		AddTitle( canvas, "Code Words" );
+		Layout.Add( new WarningBox( "It is recommended to make code words end with a \":\"" +
+			"to keep in style with the rest of them and to avoid false positives", this ) );
 
 		Layout codeContainer = canvas.Add( new Widget( this ) ).Layout = Layout.Column();
 
@@ -166,8 +167,13 @@ internal class SettingsWidget : Widget
 		widget.Show();
 	}
 
-	private void AddTitle( Layout canvas, string title )
+	private void AddTitle( Layout canvas, string title, bool useSeparator )
 	{
+		if ( useSeparator )
+		{
+			canvas.Add( new Separator( 2f ) ).Color = Theme.SurfaceLightBackground;
+		}
+
 		Label label = new Label( title, this );
 		label.SetStyles( "font-size: 20px; font-weight: 400;" );
 		canvas.Add( label );
