@@ -32,8 +32,7 @@ internal static class CodeUtility
 	{
 		List<int> lineLengths = new();
 
-		using FileStream stream = file.OpenRead();
-		using StreamReader reader = new( stream );
+		using StreamReader reader = file.OpenText();
 
 		int globalSum = 0;
 		while ( reader.EndOfStream is false )
