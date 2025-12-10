@@ -15,7 +15,7 @@ internal static class ParseCode
 
 		foreach ( FileInfo file in files )
 		{
-			List<int> lineLenghts = CodeUtility.GetLineLengths( file );
+			List<int> lineOffsets = CodeUtility.GetLineOffsets( file );
 
 			string sourceText = FileUtility.GetFileContents( file );
 			string lines = GetComments( sourceText, out MatchCollection lineMatches );
@@ -30,7 +30,7 @@ internal static class ParseCode
 					{
 						SourceFile = FileUtility.GetRelativePath( file.FullName ),
 						Message = entries[i],
-						SourceLine = CodeUtility.GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineLenghts ),
+						SourceLine = CodeUtility.GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineOffsets ),
 						Style = style
 					} );
 				}
