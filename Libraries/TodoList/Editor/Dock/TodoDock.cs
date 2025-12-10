@@ -2,11 +2,12 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
+using Todo.CodeImport;
 using Todo.Editors;
 using Todo.List;
+using Todo.Search;
 using Todo.Widgets;
 using Todo.Widgets.List;
-using Todo.Search;
 
 namespace Todo;
 
@@ -93,6 +94,8 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadItems()
 	{
+		Log.Info( $"[DEBUG] Current group states amount: {Cookies.GroupsState.Count}" );
+
 		List.Clear();
 
 		HashSet<string> usedGroups = new();
@@ -103,16 +106,41 @@ internal sealed partial class TodoDock : Widget
 		if ( Cookies.ShowCodeEntries )
 			LoadCodeEntries( ref usedGroups );
 
-		PurgeDeadGroups( usedGroups );
+		PurgeDeadGroups();
 	}
 
-	private void PurgeDeadGroups( HashSet<string> groups )
+	private void PurgeDeadGroups()
 	{
-		string[] deadGroups = Cookies.GroupsState.Keys.Except( groups ).ToArray();
-		foreach ( string deadGroup in deadGroups )
+		HashSet<string> manualGroups = GetAllManualGroups();
+		HashSet<string> codeGroups = GetAllCodeGroups();
+
+		List<string> deadGroups = new List<string>();
+		foreach ( string group in Cookies.GroupsState.Keys )
+		{
+			if ( manualGroups.Contains( group ) || codeGroups.Contains( group ) )
+				continue;
+
+			deadGroups.Add( group );
+		}
+
+		foreach ( var deadGroup in deadGroups )
 		{
 			Cookies.GroupsState.Remove( deadGroup );
 		}
+	}
+
+	private HashSet<string> GetAllManualGroups()
+	{
+		HashSet<string> groups = new();
+
+		Cookies.Datas.ForEach( data => groups.Add( data.Group ) );
+
+		return groups;
+	}
+
+	private HashSet<string> GetAllCodeGroups()
+	{
+		return FileUtility.GetAllFiles( new() { ".cs", ".razor" } ).Select( x => x.Name ).ToHashSet();
 	}
 
 	private void LoadManualEntries( ref HashSet<string> groups )
