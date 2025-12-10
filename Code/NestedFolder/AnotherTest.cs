@@ -3,5 +3,10 @@
 // TODO: must implement this class!
 internal class AnotherTest
 {
-	public bool Yes; // TODO: rename haha yes this
+	public bool Yes { get; set; } // TODO: rename haha yes this
+
+	public AnotherTest()
+	{
+		// Yes = true;
+	}
 }
