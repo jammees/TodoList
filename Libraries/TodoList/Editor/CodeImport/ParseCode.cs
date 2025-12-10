@@ -9,20 +9,15 @@ namespace Todo.CodeImport;
 
 internal static class ParseCode
 {
-	internal static void ProcessFiles( string root, string extension, EnumerationOptions options, ref Dictionary<string, List<CodeEntry>> results )
+	internal static Dictionary<string, List<CodeEntry>> ProcessFiles( FileInfo[] files )
 	{
-		string[] paths = System.IO.Directory.GetFiles( root, extension, options );
+		Dictionary<string, List<CodeEntry>> results = new();
 
-		foreach ( string path in paths )
+		foreach ( FileInfo file in files )
 		{
-			if ( IgnoredFolders.IsIgnored( path ) )
-				continue;
+			List<int> lineLenghts = CodeUtility.GetLineLengths( file );
 
-			string fileName = new FileInfo( path ).Name;
-
-			List<int> lineLenghts = CodeUtility.GetLineLengths( path );
-
-			string sourceText = FileUtility.GetFileContents( path );
+			string sourceText = FileUtility.GetFileContents( file );
 			string lines = GetComments( sourceText, out MatchCollection lineMatches );
 
 			foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
@@ -31,9 +26,9 @@ internal static class ParseCode
 
 				for ( int i = 0; i < entries.Length; i++ )
 				{
-					results.GetOrCreate( fileName ).Add( new()
+					results.GetOrCreate( file.Name ).Add( new()
 					{
-						SourceFile = FileUtility.GetRelativePath( path ),
+						SourceFile = FileUtility.GetRelativePath( file.FullName ),
 						Message = entries[i],
 						SourceLine = CodeUtility.GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineLenghts ),
 						Style = style
@@ -46,6 +41,8 @@ internal static class ParseCode
 				item.Sort( ( x, y ) => x.SourceLine.CompareTo( y.SourceLine ) );
 			}
 		}
+
+		return results;
 	}
 
 	private static string GetComments( string lines, out MatchCollection matches )

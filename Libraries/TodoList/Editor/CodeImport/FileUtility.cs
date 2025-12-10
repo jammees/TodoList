@@ -38,15 +38,15 @@ internal static class FileUtility
 		return infos.ToArray();
 	}
 
-	internal static string GetFileContents( string path )
+	internal static string GetFileContents( FileInfo file )
 	{
-		string[] stubLines = System.IO.File.ReadAllLines( path );
+		using StreamReader reader = file.OpenText();
 
 		StringBuilder builder = new();
 
-		foreach ( var line in stubLines )
+		while ( reader.EndOfStream is false )
 		{
-			builder.AppendLine( line );
+			builder.AppendLine( reader.ReadLine() );
 		}
 
 		return builder.ToString();

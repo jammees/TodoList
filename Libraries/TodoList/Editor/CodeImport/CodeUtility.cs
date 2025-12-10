@@ -28,12 +28,12 @@ internal static class CodeUtility
 	// oh my god
 	// I'm not sure which is worse, this, or my regex that I don't even
 	// remember what it does anymore
-	internal static List<int> GetLineLengths( string path )
+	internal static List<int> GetLineLengths( FileInfo file )
 	{
 		List<int> lineLengths = new();
 
-		using FileStream file = System.IO.File.OpenRead( path );
-		using StreamReader reader = new( file );
+		using FileStream stream = file.OpenRead();
+		using StreamReader reader = new( stream );
 
 		int globalSum = 0;
 		while ( reader.EndOfStream is false )
