@@ -7,7 +7,7 @@ namespace Todo.CodeImport;
 
 internal static class CodeUtility
 {
-	internal static int GetSourceLine( string source, string stubTarget, List<Match> comments, List<int> lineLenghts )
+	internal static int GetSourceLine( string source, string stubTarget, MatchCollection comments, List<int> lineLenghts )
 	{
 		int targetIndex = comments.First( x => x.Value.Trim().Contains( stubTarget.Trim() ) ).Index;
 

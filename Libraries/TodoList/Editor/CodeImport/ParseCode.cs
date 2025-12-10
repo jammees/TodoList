@@ -18,7 +18,7 @@ internal static class ParseCode
 			List<int> lineOffsets = CodeUtility.GetLineOffsets( file );
 
 			string sourceText = FileUtility.GetFileContents( file );
-			string lines = GetComments( file, out List<Match> lineMatches );
+			string lines = GetComments( sourceText, out MatchCollection lineMatches );
 
 			foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
 			{
@@ -45,47 +45,19 @@ internal static class ParseCode
 		return results;
 	}
 
-	private static string GetComments( FileInfo file, out List<Match> matches )
+	private static string GetComments( string lines, out MatchCollection matches )
 	{
-		using StreamReader reader = file.OpenText();
+		Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace );
+		MatchCollection results = commentRegex.Matches( lines );
 
-		List<Match> foundMatches = new();
 		StringBuilder commentString = new();
-		bool lastLineWasComment = false;
 
-		while ( reader.EndOfStream is false )
+		foreach ( Match match in results )
 		{
-			string line = reader.ReadLine();
-
-			if ( line.Contains( "//" ) is false )
-			{
-				if ( lastLineWasComment )
-				{
-					lastLineWasComment = false;
-					commentString.AppendLine( "" );
-				}
-				continue;
-			}
-
-			lastLineWasComment = true;
-
-			Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace );
-			Match commentMatch = commentRegex.Match( line );
-
-			if ( commentMatch.Success is false )
-			{
-				lastLineWasComment = false;
-				continue;
-			}
-
-			foundMatches.Add( commentMatch );
-
-			commentString.AppendLine( commentMatch.Value.Trim() );
+			commentString.AppendLine( match.Value.Trim() );
 		}
 
-		matches = foundMatches;
-
-		Log.Info(commentString.ToString());
+		matches = results;
 
 		return commentString.ToString();
 	}
