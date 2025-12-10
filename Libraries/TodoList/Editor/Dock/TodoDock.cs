@@ -129,11 +129,7 @@ internal sealed partial class TodoDock : Widget
 
 	private HashSet<string> GetAllManualGroups()
 	{
-		HashSet<string> groups = new();
-
-		Cookies.Datas.ForEach( data => groups.Add( data.Group ) );
-
-		return groups;
+		return Cookies.Datas.Select( data => data.Group ).ToHashSet();
 	}
 
 	private HashSet<string> GetAllCodeGroups()
