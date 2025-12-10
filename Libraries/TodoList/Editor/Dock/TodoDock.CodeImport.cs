@@ -11,9 +11,6 @@ internal sealed partial class TodoDock : Widget
 {
 	private Dictionary<string, List<CodeEntry>> ImportFromCode()
 	{
-		if ( Instance.IsValid() is false )
-			return default;
-
 		string codeFolderPath = Project.Current.GetCodePath();
 
 		EnumerationOptions options = new()
