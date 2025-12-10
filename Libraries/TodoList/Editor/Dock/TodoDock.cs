@@ -94,8 +94,6 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadItems()
 	{
-		Log.Info( $"[DEBUG] Current group states amount: {Cookies.GroupsState.Count}" );
-
 		List.Clear();
 
 		HashSet<string> usedGroups = new();
