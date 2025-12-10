@@ -16,6 +16,26 @@ internal static class FileUtility
 		return "./" + truncatedPath;
 	}
 
+	internal static FileInfo[] GetAllFiles( string root, HashSet<string> allowedExtensions )
+	{
+		List<FileInfo> infos = new();
+
+		DirectoryInfo rootDirectory = new( root );
+
+		foreach ( FileInfo info in rootDirectory.EnumerateFiles("", SearchOption.AllDirectories) )
+		{
+			if ( info.Exists is false || IgnoredFolders.IsIgnored( info.FullName ) )
+				continue;
+
+			if ( allowedExtensions.Contains( info.Extension.ToLower() ) is false )
+				continue;
+
+			infos.Add( info );
+		}
+
+		return infos.ToArray();
+	}
+
 	internal static string GetFileContents( string path )
 	{
 		string[] stubLines = System.IO.File.ReadAllLines( path );
