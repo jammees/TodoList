@@ -11,6 +11,11 @@ internal static class CodeUtility
 	{
 		int targetIndex = comments.First( x => x.Value.Trim().Contains( stubTarget.Trim() ) ).Index;
 
+		return GetSourceLine( targetIndex, lineLenghts );
+	}
+
+	internal static int GetSourceLine( int targetIndex, List<int> lineLenghts )
+	{
 		for ( int i = 0; i < lineLenghts.Count; i++ )
 		{
 			int lastLenght = i > 0 ? lineLenghts[i - 1] : 0;
