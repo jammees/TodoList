@@ -32,7 +32,7 @@ public sealed class MyComponent : Component
 
 	// TODO: this is a todo message
 	//
-	// that expans multiple lines
+	// that expands multiple lines
 	protected override void OnUpdate()
 	{
 		Log.Info( "wara2" );
