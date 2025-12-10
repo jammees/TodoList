@@ -16,8 +16,10 @@ internal static class FileUtility
 		return "./" + truncatedPath;
 	}
 
-	internal static FileInfo[] GetAllFiles( string root, HashSet<string> allowedExtensions )
+	internal static FileInfo[] GetAllFiles( HashSet<string> allowedExtensions )
 	{
+		string root = Project.Current.GetCodePath();
+
 		List<FileInfo> infos = new();
 
 		DirectoryInfo rootDirectory = new( root );
