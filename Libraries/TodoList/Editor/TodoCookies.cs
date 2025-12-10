@@ -17,6 +17,7 @@ internal sealed class TodoCookies
 	internal bool WidgetsOnTop;
 	internal bool UnCollapseGroupsOnSearch;
 	internal string DefaultGroupName;
+	internal string LastSearch;
 
 	string SettingCookie;
 
@@ -38,6 +39,7 @@ internal sealed class TodoCookies
 		ProjectCookie.Set( $"{SettingCookie}.WidgetsOnTop", WidgetsOnTop );
 		ProjectCookie.Set( $"{SettingCookie}.CollapseGroupsOnSearch", UnCollapseGroupsOnSearch );
 		ProjectCookie.Set( $"{SettingCookie}.DefaultGroupName", DefaultGroupName );
+		ProjectCookie.Set( $"{SettingCookie}.LastSearch", LastSearch );
 	}
 
 	private void Load()
@@ -51,6 +53,7 @@ internal sealed class TodoCookies
 		WidgetsOnTop = ProjectCookie.Get( $"{SettingCookie}.WidgetsOnTop", false );
 		UnCollapseGroupsOnSearch = ProjectCookie.Get( $"{SettingCookie}.CollapseGroupsOnSearch", true );
 		DefaultGroupName = ProjectCookie.Get( $"{SettingCookie}.DefaultGroupName", "Default" );
+		LastSearch = ProjectCookie.Get( $"{SettingCookie}.LastSearch", "" );
 	}
 
 	private string GetCookie()

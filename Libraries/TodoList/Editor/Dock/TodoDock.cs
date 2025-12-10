@@ -33,6 +33,8 @@ internal sealed partial class TodoDock : Widget
 
 		Cookies = new();
 
+		SearchText = Cookies.LastSearch;
+
 		DeleteOnClose = true;
 		MinimumSize = new( 320f, 400f );
 
@@ -66,9 +68,12 @@ internal sealed partial class TodoDock : Widget
 		LineEdit searchBar = Layout.Add( new LineEdit( this ) );
 		searchBar.PlaceholderText = "Search...";
 		searchBar.MinimumHeight = 30f;
+		searchBar.Text = SearchText;
 		searchBar.TextChanged += ( searchText ) =>
 		{
 			SearchText = searchText.ToLower().Trim();
+			Cookies.LastSearch = SearchText;
+			Cookies.Save();
 			RefreshItems();
 		};
 
