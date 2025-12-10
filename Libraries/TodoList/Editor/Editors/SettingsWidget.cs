@@ -115,7 +115,7 @@ internal class SettingsWidget : Widget
 
 		AddTitle( canvas, "Code Words", true );
 
-		Layout.Add( new WarningBox( "It is recommended to make code words end with a \":\"" +
+		canvas.Add( new WarningBox( "It is recommended to make code words end with a \":\"" +
 			"to keep in style with the rest of them and to avoid false positives", this ) );
 
 		Layout codeContainer = canvas.Add( new Widget( this ) ).Layout = Layout.Column();
