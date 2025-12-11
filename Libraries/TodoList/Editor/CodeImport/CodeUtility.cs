@@ -11,7 +11,7 @@ internal static class CodeUtility
 	{
 		foreach ( CommentMatch match in matches )
 		{
-			if ( string.IsNullOrEmpty( match.CommentStub ) )
+			if ( match.MatchSuccess is false )
 				continue;
 
 			if ( desiredStub.Contains( match.CommentStub ) is false )

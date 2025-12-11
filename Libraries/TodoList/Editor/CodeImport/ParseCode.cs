@@ -13,6 +13,7 @@ internal static class ParseCode
 	internal struct CommentMatch
 	{
 		public string CommentStub;
+		public bool MatchSuccess;
 		public int Line;
 	}
 
@@ -92,11 +93,13 @@ internal static class ParseCode
 			}
 
 			Regex stubSearchRegex = new( $"(?<={GetRegexTerminator()}).*", RegexOptions.Singleline | RegexOptions.IgnoreCase );
+			Match stubMatch = stubSearchRegex.Match( lineContent );
 
 			matches.Add( new()
 			{
 				Line = lineIndex,
-				CommentStub = stubSearchRegex.Match( lineContent ).Value.Trim()
+				MatchSuccess = stubMatch.Success,
+				CommentStub = stubMatch.Value.Trim()
 			} );
 
 			commentString.AppendLine( commentMatch.Value.Trim() );
