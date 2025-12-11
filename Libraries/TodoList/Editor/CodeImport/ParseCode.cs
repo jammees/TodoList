@@ -21,8 +21,6 @@ internal static class ParseCode
 
 		foreach ( FileInfo file in files )
 		{
-			List<int> lineOffsets = CodeUtility.GetLineOffsets( file );
-
 			string sourceText = FileUtility.GetFileContents( file );
 			string lines = GetComments( file, out CommentMatch[] lineMatches );
 
