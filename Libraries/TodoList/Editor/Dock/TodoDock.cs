@@ -102,10 +102,24 @@ internal sealed partial class TodoDock : Widget
 		List.Clear();
 
 		if ( Cookies.ShowManualEntries )
+		{
+			if ( Cookies.ShowCodeEntries && IsSearching is false )
+			{
+				List.AddItem( new GroupsTitle( "Manual Entries" ) );
+			}
+
 			LoadManualEntries();
+		}
 
 		if ( Cookies.ShowCodeEntries )
+		{
+			if ( Cookies.ShowManualEntries && IsSearching is false )
+			{
+				List.AddItem( new GroupsTitle( "Code Entries" ) );
+			}
+
 			LoadCodeEntries();
+		}
 
 		PurgeDeadGroups();
 	}
@@ -142,11 +156,6 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadManualEntries()
 	{
-		if ( Cookies.ShowCodeEntries && IsSearching is false )
-		{
-			List.AddItem( new GroupsTitle( "Manual Entries" ) );
-		}
-
 		Dictionary<string, List<TodoEntry>> grouppedEntries = new();
 
 		foreach ( var item in Cookies.Datas )
@@ -195,11 +204,6 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadCodeEntries()
 	{
-		if ( Cookies.ShowManualEntries && IsSearching is false )
-		{
-			List.AddItem( new GroupsTitle( "Code Entries" ) );
-		}
-
 		Dictionary<string, List<CodeEntry>> entries = ImportFromCode();
 
 		List<string> sortedGroups = entries.Keys.ToList();
