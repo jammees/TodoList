@@ -26,7 +26,7 @@ internal static class ParseCode
 			string sourceText = FileUtility.GetFileContents( file );
 			string lines = GetComments( file, out CommentMatch[] lineMatches );
 
-			foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
+			foreach ( TodoCodeWord style in TodoDock.Cookies.CodeWords )
 			{
 				string[] entries = ScanFor( lines, style.CodeWord );
 
@@ -114,7 +114,7 @@ internal static class ParseCode
 	{
 		StringBuilder builder = new();
 
-		string[] codeWords = TodoDock.Instance.Cookies.CodeWords.Select( x => x.CodeWord ).ToArray();
+		string[] codeWords = TodoDock.Cookies.CodeWords.Select( x => x.CodeWord ).ToArray();
 		builder.AppendJoin( "|", codeWords );
 
 		return builder.ToString();

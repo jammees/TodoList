@@ -66,21 +66,21 @@ internal class SettingsWidget : Widget
 
 		{
 			Checkbox checkbox = canvas.Add( new Checkbox( "Refresh on Hotload", this ) );
-			checkbox.State = TodoDock.Instance.Cookies.ReloadOnHotload ? CheckState.On : CheckState.Off;
+			checkbox.State = TodoDock.Cookies.ReloadOnHotload ? CheckState.On : CheckState.Off;
 			checkbox.StateChanged = state =>
 			{
-				TodoDock.Instance.Cookies.ReloadOnHotload = state == CheckState.On ? true : false;
-				TodoDock.Instance.Cookies.Save();
+				TodoDock.Cookies.ReloadOnHotload = state == CheckState.On ? true : false;
+				TodoDock.Cookies.Save();
 			};
 		}
 
 		{
 			Checkbox checkbox = canvas.Add( new Checkbox( "Widgets Stay on Top", this ) );
-			checkbox.State = TodoDock.Instance.Cookies.WidgetsOnTop ? CheckState.On : CheckState.Off;
+			checkbox.State = TodoDock.Cookies.WidgetsOnTop ? CheckState.On : CheckState.Off;
 			checkbox.StateChanged = state =>
 			{
-				TodoDock.Instance.Cookies.WidgetsOnTop = state == CheckState.On ? true : false;
-				TodoDock.Instance.Cookies.Save();
+				TodoDock.Cookies.WidgetsOnTop = state == CheckState.On ? true : false;
+				TodoDock.Cookies.Save();
 			};
 		}
 
@@ -88,11 +88,11 @@ internal class SettingsWidget : Widget
 
 		{
 			Checkbox checkbox = canvas.Add( new Checkbox( "Uncollapse on Search", this ) );
-			checkbox.State = TodoDock.Instance.Cookies.UnCollapseGroupsOnSearch ? CheckState.On : CheckState.Off;
+			checkbox.State = TodoDock.Cookies.UnCollapseGroupsOnSearch ? CheckState.On : CheckState.Off;
 			checkbox.StateChanged = state =>
 			{
-				TodoDock.Instance.Cookies.UnCollapseGroupsOnSearch = state == CheckState.On ? true : false;
-				TodoDock.Instance.Cookies.Save();
+				TodoDock.Cookies.UnCollapseGroupsOnSearch = state == CheckState.On ? true : false;
+				TodoDock.Cookies.Save();
 			};
 		}
 
@@ -102,12 +102,12 @@ internal class SettingsWidget : Widget
 
 			layout.Add( new Label( "Default Group Name", this ) );
 
-			LineEdit group = layout.Add( new LineEdit( TodoDock.Instance.Cookies.DefaultGroupName, this ) );
+			LineEdit group = layout.Add( new LineEdit( TodoDock.Cookies.DefaultGroupName, this ) );
 			group.PlaceholderText = "Insert Group Name";
 			group.EditingFinished += () =>
 			{
-				TodoDock.Instance.Cookies.DefaultGroupName = group.Text;
-				TodoDock.Instance.Cookies.Save();
+				TodoDock.Cookies.DefaultGroupName = group.Text;
+				TodoDock.Cookies.Save();
 			};
 
 			canvas.Add( new GroupWarningBox( this, group ) );
@@ -131,7 +131,7 @@ internal class SettingsWidget : Widget
 
 		codeContainer.Add( new Separator( 8f ) );
 
-		foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
+		foreach ( TodoCodeWord style in TodoDock.Cookies.CodeWords )
 		{
 			codeContainer.Add( new CodeWordControl( this, style ) );
 			codeContainer.Add( new Separator( 5 ) );
@@ -156,7 +156,7 @@ internal class SettingsWidget : Widget
 
 	private void ResetAll()
 	{
-		TodoDock.Instance.Cookies.CodeWords = TodoCodeWord.GetDefault();
+		TodoDock.Cookies.CodeWords = TodoCodeWord.GetDefault();
 		TodoDock.Instance.SaveAndRefresh();
 		Build();
 	}

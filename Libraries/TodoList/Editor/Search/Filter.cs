@@ -66,7 +66,7 @@ internal static class Filter
 		}
 
 		{
-			foreach ( var codeWord in TodoDock.Instance.Cookies.CodeWords )
+			foreach ( var codeWord in TodoDock.Cookies.CodeWords )
 			{
 				string word = codeWord.CodeWord.Replace( ":", "" );
 

@@ -26,7 +26,7 @@ internal class TodoEntryCreatorWidget : Widget
 		MessageEdit = Layout.Add( new TextEdit( this ) );
 		MessageEdit.PlaceholderText = "Todo Message";
 
-		GroupControl = new GroupControl( this, TodoDock.Instance.Cookies.DefaultGroupName );
+		GroupControl = new GroupControl( this, TodoDock.Cookies.DefaultGroupName );
 
 		Layout.AddStretchCell();
 
@@ -56,7 +56,7 @@ internal class TodoEntryCreatorWidget : Widget
 			Group = GroupControl.GetGroupName()
 		};
 
-		TodoDock.Instance.Cookies.Datas.Add( entry );
+		TodoDock.Cookies.Datas.Add( entry );
 
 		TodoDock.Instance.SaveAndRefresh();
 

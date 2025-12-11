@@ -38,7 +38,7 @@ internal static class ItemCodeGroup
 
 		group.IsOpen = !group.IsOpen;
 
-		TodoDock.Instance.Cookies.GroupsState[group.Group] = group.IsOpen;
+		TodoDock.Cookies.GroupsState[group.Group] = group.IsOpen;
 		TodoDock.Instance.SaveAndRefresh();
 	}
 }

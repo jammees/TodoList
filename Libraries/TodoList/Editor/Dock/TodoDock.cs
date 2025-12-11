@@ -14,9 +14,9 @@ namespace Todo;
 [Dock( "Editor", "Todos", "checklist" )]
 internal sealed partial class TodoDock : Widget
 {
-	internal TodoCookies Cookies;
-
 	internal string SearchText = "";
+
+	internal static TodoCookies Cookies;
 
 	internal static TodoDock Instance;
 

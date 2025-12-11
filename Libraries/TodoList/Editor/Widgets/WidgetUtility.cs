@@ -11,7 +11,7 @@ internal static class WidgetUtility
 		widget.WindowTitle = title;
 		widget.SetWindowIcon( icon );
 
-		if ( TodoDock.Instance.Cookies.WidgetsOnTop )
+		if ( TodoDock.Cookies.WidgetsOnTop )
 		{
 			widget.WindowFlags |= WindowFlags.WindowStaysOnTopHint;
 		}

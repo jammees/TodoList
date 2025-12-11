@@ -24,7 +24,7 @@ internal sealed partial class TodoDock : Widget
 
 		string json = System.IO.File.ReadAllText( filePath );
 
-		Instance.Cookies.Datas = JsonSerializer.Deserialize<List<TodoEntry>>( json );
+		Cookies.Datas = JsonSerializer.Deserialize<List<TodoEntry>>( json );
 
 		Instance.SaveAndRefresh();
 	}

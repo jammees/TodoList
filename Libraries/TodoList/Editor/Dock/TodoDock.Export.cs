@@ -21,7 +21,7 @@ internal sealed partial class TodoDock : Widget
 			return;
 		}
 
-		string json = JsonSerializer.Serialize( Instance.Cookies.Datas );
+		string json = JsonSerializer.Serialize( Cookies.Datas );
 
 		StreamWriter file = System.IO.File.CreateText( filePath );
 		file.Write( json );

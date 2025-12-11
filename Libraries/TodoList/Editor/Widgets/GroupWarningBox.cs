@@ -21,7 +21,7 @@ internal sealed class GroupWarningBox: WarningBox
 		if ( string.IsNullOrEmpty( newString.Trim() ) is true )
 		{
 			isValid = false;
-			SetWarningMessage( $"Empty group name, will default to {TodoDock.Instance.Cookies.DefaultGroupName}!" );
+			SetWarningMessage( $"Empty group name, will default to {TodoDock.Cookies.DefaultGroupName}!" );
 		}
 
 		if ( (newString.EndsWith( ".cs" ) || newString.EndsWith( ".razor" )) is true )

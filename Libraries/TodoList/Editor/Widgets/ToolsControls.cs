@@ -41,8 +41,8 @@ internal sealed class ToolsControls : Widget
 	{
 		Color color = Color.White;
 
-		bool showManual = TodoDock.Instance.Cookies.ShowManualEntries;
-		bool showCode = TodoDock.Instance.Cookies.ShowCodeEntries;
+		bool showManual = TodoDock.Cookies.ShowManualEntries;
+		bool showCode = TodoDock.Cookies.ShowCodeEntries;
 
 		if ( showManual && showCode )
 		{
@@ -78,14 +78,14 @@ internal sealed class ToolsControls : Widget
 		{
 			var option = menu.AddOption( new Option( this, "Show Manual Entries", "checklist" ) );
 			option.Checkable = true;
-			option.Checked = TodoDock.Instance.Cookies.ShowManualEntries;
+			option.Checked = TodoDock.Cookies.ShowManualEntries;
 			option.Toggled = SetManual;
 		}
 
 		{
 			var option = menu.AddOption( new Option( this, "Show Code Entries", "code" ) );
 			option.Checkable = true;
-			option.Checked = TodoDock.Instance.Cookies.ShowCodeEntries;
+			option.Checked = TodoDock.Cookies.ShowCodeEntries;
 			option.Toggled = SetCode;
 		}
 
@@ -96,24 +96,24 @@ internal sealed class ToolsControls : Widget
 	[Shortcut( "todo.toggle-manual-entries", "CTRL+1", typeof( TodoDock ), ShortcutType.Application )]
 	private void ToggleManual()
 	{
-		SetManual( !TodoDock.Instance.Cookies.ShowManualEntries );
+		SetManual( !TodoDock.Cookies.ShowManualEntries );
 	}
 
 	[Shortcut( "todo.toggle-code-entries", "CTRL+2", typeof( TodoDock ), ShortcutType.Application )]
 	private void ToggleCode()
 	{
-		SetCode( !TodoDock.Instance.Cookies.ShowCodeEntries );
+		SetCode( !TodoDock.Cookies.ShowCodeEntries );
 	}
 
 	private void SetManual( bool state )
 	{
-		TodoDock.Instance.Cookies.ShowManualEntries = state;
+		TodoDock.Cookies.ShowManualEntries = state;
 		TodoDock.Instance.SaveAndRefresh();
 	}
 
 	private void SetCode( bool state )
 	{
-		TodoDock.Instance.Cookies.ShowCodeEntries = state;
+		TodoDock.Cookies.ShowCodeEntries = state;
 		TodoDock.Instance.SaveAndRefresh();
 	}
 

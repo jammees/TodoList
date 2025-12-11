@@ -61,12 +61,12 @@ internal sealed class GroupControl
 
 		menu.AddHeading( $"Current Group: {CurrentGroup}" );
 
-		foreach ( var item in TodoDock.Instance.Cookies.GroupsState.Keys )
+		foreach ( var item in TodoDock.Cookies.GroupsState.Keys )
 		{
 			if ( item == GroupEdit.Text || (isSearching && item.Contains( searchText ) is false) )
 				continue;
 
-			if ( TodoDock.Instance.Cookies.ShowCodeEntries && (item.EndsWith( ".cs" ) || item.EndsWith( ".razor" )) )
+			if ( TodoDock.Cookies.ShowCodeEntries && (item.EndsWith( ".cs" ) || item.EndsWith( ".razor" )) )
 				continue;
 
 			menu.AddOption( $"{item}", action: () => GroupEdit.Text = item );
