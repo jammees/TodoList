@@ -122,13 +122,6 @@ internal static class ParseCode
 		Regex searchRegex = new( $"(?<=^{searchString}).*(?:\\n(?!\\s*$|{GetRegexTerminator()}).*)*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
 		MatchCollection results = searchRegex.Matches( lines );
 
-		string[] formattedResults = new string[results.Count];
-
-		for ( int i = 0; i < formattedResults.Length; i++ )
-		{
-			formattedResults[i] = results[i].Value.CollapseWhiteSpace();
-		}
-
-		return formattedResults;
+		return results.Select( x => x.Value.CollapseWhiteSpace() ).ToArray();
 	}
 }
