@@ -104,9 +104,7 @@ internal sealed partial class TodoDock : Widget
 		if ( Cookies.ShowManualEntries )
 		{
 			if ( Cookies.ShowCodeEntries && IsSearching is false )
-			{
 				List.AddItem( new GroupsTitle( "Manual Entries" ) );
-			}
 
 			LoadManualEntries();
 		}
@@ -114,9 +112,7 @@ internal sealed partial class TodoDock : Widget
 		if ( Cookies.ShowCodeEntries )
 		{
 			if ( Cookies.ShowManualEntries && IsSearching is false )
-			{
 				List.AddItem( new GroupsTitle( "Code Entries" ) );
-			}
 
 			LoadCodeEntries();
 		}
