@@ -27,6 +27,17 @@ internal static class Filter
 		}
 
 		{
+			bool isSuccess = Utility.GetFlagArguments( flagStubs, "not", out List<string> flagArguments );
+			foreach ( var argument in flagArguments )
+			{
+				if ( Utility.Contains( entry.Group, argument ) is false )
+					continue;
+
+				return false;
+			}
+		}
+
+		{
 			bool isSuccess = Utility.GetFlagArguments( flagStubs, "done", out List<string> flagArguments );
 			foreach ( var argument in flagArguments )
 			{
