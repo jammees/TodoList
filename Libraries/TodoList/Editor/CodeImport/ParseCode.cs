@@ -81,7 +81,7 @@ internal static class ParseCode
 
 			lastWasComment = true;
 
-			Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace );
+			Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Singleline | RegexOptions.IgnoreCase );
 			Match commentMatch = commentRegex.Match( lineContent );
 
 			if ( commentMatch.Success is false )
