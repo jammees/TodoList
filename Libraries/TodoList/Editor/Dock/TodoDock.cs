@@ -101,10 +101,8 @@ internal sealed partial class TodoDock : Widget
 	{
 		List.Clear();
 
-		HashSet<string> usedGroups = new();
-
 		if ( Cookies.ShowManualEntries )
-			LoadManualEntries( ref usedGroups );
+			LoadManualEntries();
 
 		if ( Cookies.ShowCodeEntries )
 			LoadCodeEntries();
@@ -142,7 +140,7 @@ internal sealed partial class TodoDock : Widget
 		return FileUtility.GetAllFiles( new() { ".cs", ".razor" } ).Select( x => x.Name ).ToHashSet();
 	}
 
-	private void LoadManualEntries( ref HashSet<string> groups )
+	private void LoadManualEntries()
 	{
 		if ( Cookies.ShowCodeEntries && IsSearching is false )
 		{
@@ -153,11 +151,10 @@ internal sealed partial class TodoDock : Widget
 
 		foreach ( var item in Cookies.Datas )
 		{
-			groups.Add( item.Group );
 			grouppedEntries.GetOrCreate( item.Group ).Add( item );
 		}
 
-		List<string> sortedGroups = groups.ToList();
+		List<string> sortedGroups = grouppedEntries.Keys.ToList();
 		sortedGroups.Sort();
 
 		foreach ( string group in sortedGroups )
