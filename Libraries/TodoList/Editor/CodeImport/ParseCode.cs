@@ -9,6 +9,12 @@ namespace Todo.CodeImport;
 
 internal static class ParseCode
 {
+	internal struct CommentMatch
+	{
+		public string CommentStub;
+		public int Line;
+	}
+
 	internal static Dictionary<string, List<CodeEntry>> ProcessFiles( FileInfo[] files )
 	{
 		Dictionary<string, List<CodeEntry>> results = new();
@@ -18,7 +24,7 @@ internal static class ParseCode
 			List<int> lineOffsets = CodeUtility.GetLineOffsets( file );
 
 			string sourceText = FileUtility.GetFileContents( file );
-			string lines = GetComments( sourceText, out MatchCollection lineMatches );
+			string lines = GetComments( file, out CommentMatch[] lineMatches );
 
 			foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
 			{
@@ -30,7 +36,7 @@ internal static class ParseCode
 					{
 						SourceFile = FileUtility.GetRelativePath( file.FullName ),
 						Message = entries[i],
-						SourceLine = CodeUtility.GetSourceLine( sourceText, stubEntries[i].Value, lineMatches, lineOffsets ),
+						SourceLine = CodeUtility.GetSourceLine( entries[i], lineMatches ),
 						Style = style
 					} );
 				}
@@ -45,19 +51,59 @@ internal static class ParseCode
 		return results;
 	}
 
-	private static string GetComments( string lines, out MatchCollection matches )
+	private static string GetComments( FileInfo file, out CommentMatch[] lineMatches )
 	{
-		Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace );
-		MatchCollection results = commentRegex.Matches( lines );
-
 		StringBuilder commentString = new();
 
-		foreach ( Match match in results )
+		bool lastWasComment = false;
+
+		using StreamReader reader = file.OpenText();
+
+		List<CommentMatch> matches = new();
+		string lineContent = "";
+		int lineIndex = 0;
+
+		// all of this just to add empty lines
+		// between comments that are not next to
+		// each other
+		while ( reader.EndOfStream is false )
 		{
-			commentString.AppendLine( match.Value.Trim() );
+			lineContent = reader.ReadLine();
+			lineIndex += 1;
+
+			if ( lineContent.Contains( "//" ) is false )
+			{
+				if ( lastWasComment )
+				{
+					lastWasComment = false;
+					commentString.AppendLine( "" );
+				}
+				continue;
+			}
+
+			lastWasComment = true;
+
+			Regex commentRegex = new( "(?<=\\/\\/).*$", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace );
+			Match commentMatch = commentRegex.Match( lineContent );
+
+			if ( commentMatch.Success is false )
+			{
+				lastWasComment = false;
+				continue;
+			}
+
+			Regex stubSearchRegex = new( $"(?<={GetRegexTerminator()}).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
+
+			matches.Add( new()
+			{
+				Line = lineIndex,
+				CommentStub = stubSearchRegex.Match( lineContent ).Value.Trim()
+			} );
+
+			commentString.AppendLine( commentMatch.Value.Trim() );
 		}
 
-		matches = results;
+		lineMatches = matches.ToArray();
 
 		return commentString.ToString();
 	}
@@ -73,7 +119,7 @@ internal static class ParseCode
 
 			builder.Append( style.CodeWord );
 			if ( i + 1 < stylesCount )
-				builder.Append("|");
+				builder.Append( "|" );
 		}
 
 		return builder.ToString();

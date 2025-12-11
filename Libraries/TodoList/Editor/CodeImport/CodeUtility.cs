@@ -1,17 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+using static Todo.CodeImport.ParseCode;
 
 namespace Todo.CodeImport;
 
 internal static class CodeUtility
 {
-	internal static int GetSourceLine( string source, string stubTarget, MatchCollection comments, List<int> lineLenghts )
+	// dear god
+	internal static int GetSourceLine( string desiredStub, CommentMatch[] matches )
 	{
-		int targetIndex = comments.First( x => x.Value.Trim().Contains( stubTarget.Trim() ) ).Index;
+		foreach ( CommentMatch match in matches )
+		{
+			if ( string.IsNullOrEmpty( match.CommentStub ) )
+				continue;
 
-		return GetSourceLine( targetIndex, lineLenghts );
+			if ( desiredStub.Contains( match.CommentStub ) is false )
+				continue;
+
+			return match.Line;
+		}
+
+		Log.Error( $"Failed to find line for: {desiredStub}!" );
+
+		return 0;
 	}
 
 	internal static int GetSourceLine( int targetIndex, List<int> lineLenghts )
