@@ -90,7 +90,7 @@ internal static class ParseCode
 				continue;
 			}
 
-			Regex stubSearchRegex = new( $"(?<={GetRegexTerminator()}).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
+			Regex stubSearchRegex = new( $"(?<={GetRegexTerminator()}).*", RegexOptions.Singleline | RegexOptions.IgnoreCase );
 
 			matches.Add( new()
 			{
