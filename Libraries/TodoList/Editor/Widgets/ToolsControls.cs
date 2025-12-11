@@ -138,8 +138,19 @@ internal sealed class ToolsControls : Widget
 			option.Triggered = () => OpenSettingsWidget();
 		}
 
+		{
+			var option = menu.AddOption( new Option( this, "Help", "question_mark" ) );
+			option.Triggered = () => OpenHelpWidget();
+		}
+
 		menu.DeleteOnClose = true;
 		menu.OpenAtCursor( true );
+	}
+
+	private void OpenHelpWidget()
+	{
+		var widget = new HelpWidget( null );
+		widget.Show();
 	}
 
 	private void OpenSettingsWidget()
