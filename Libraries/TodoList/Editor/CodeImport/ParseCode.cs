@@ -28,7 +28,7 @@ internal static class ParseCode
 
 			foreach ( TodoCodeWord style in TodoDock.Instance.Cookies.CodeWords )
 			{
-				string[] entries = ScanFor( lines, style.CodeWord, out MatchCollection stubEntries );
+				string[] entries = ScanFor( lines, style.CodeWord );
 
 				for ( int i = 0; i < entries.Length; i++ )
 				{
@@ -125,13 +125,10 @@ internal static class ParseCode
 		return builder.ToString();
 	}
 
-	private static string[] ScanFor( string lines, string searchString, out MatchCollection stubResults )
+	private static string[] ScanFor( string lines, string searchString )
 	{
 		Regex searchRegex = new( $"(?<=^{searchString}).*(?:\\n(?!\\s*$|{GetRegexTerminator()}).*)*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
 		MatchCollection results = searchRegex.Matches( lines );
-
-		Regex stubSearchRegex = new( $"(?<=^{searchString}).*", RegexOptions.Multiline | RegexOptions.IgnoreCase );
-		stubResults = stubSearchRegex.Matches( lines );
 
 		string[] formattedResults = new string[results.Count];
 
