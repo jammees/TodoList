@@ -107,7 +107,7 @@ internal sealed partial class TodoDock : Widget
 			LoadManualEntries( ref usedGroups );
 
 		if ( Cookies.ShowCodeEntries )
-			LoadCodeEntries( ref usedGroups );
+			LoadCodeEntries();
 
 		PurgeDeadGroups();
 	}
@@ -196,7 +196,7 @@ internal sealed partial class TodoDock : Widget
 		}
 	}
 
-	private void LoadCodeEntries( ref HashSet<string> groups )
+	private void LoadCodeEntries()
 	{
 		if ( Cookies.ShowManualEntries && IsSearching is false )
 		{
@@ -210,8 +210,6 @@ internal sealed partial class TodoDock : Widget
 
 		foreach ( var group in sortedGroups )
 		{
-			groups.Add( group );
-
 			if ( Cookies.GroupsState.ContainsKey( group ) is false )
 			{
 				Cookies.GroupsState.Add( group, true );
