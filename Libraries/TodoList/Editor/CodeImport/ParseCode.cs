@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Todo.List;
@@ -109,16 +110,9 @@ internal static class ParseCode
 	private static string GetRegexTerminator()
 	{
 		StringBuilder builder = new();
-		int stylesCount = TodoDock.Instance.Cookies.CodeWords.Count;
 
-		for ( int i = 0; i < stylesCount; i++ )
-		{
-			TodoCodeWord style = TodoDock.Instance.Cookies.CodeWords[i];
-
-			builder.Append( style.CodeWord );
-			if ( i + 1 < stylesCount )
-				builder.Append( "|" );
-		}
+		string[] codeWords = TodoDock.Instance.Cookies.CodeWords.Select( x => x.CodeWord ).ToArray();
+		builder.AppendJoin( "|", codeWords );
 
 		return builder.ToString();
 	}
