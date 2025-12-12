@@ -75,16 +75,6 @@ public sealed class SettingsWidget : Dialog
 			};
 		}
 
-		{
-			Checkbox checkbox = canvas.Add( new Checkbox( "Widgets Stay on Top", this ) );
-			checkbox.State = TodoDock.Cookies.WidgetsOnTop ? CheckState.On : CheckState.Off;
-			checkbox.StateChanged = state =>
-			{
-				TodoDock.Cookies.WidgetsOnTop = state == CheckState.On ? true : false;
-				TodoDock.Cookies.Save();
-			};
-		}
-
 		AddTitle( canvas, "Groups", true );
 
 		{

@@ -8,7 +8,8 @@ public static class WidgetUtility
 	public static void SetProperties( Dialog dialog, float height, string title, string icon )
 	{
 		dialog.FocusMode = FocusMode.Click;
-		
+		dialog.SetWindowIcon( icon );
+
 		Window dialogWindow = dialog.Window;
 
 		dialogWindow.IsDialog = false;
@@ -19,10 +20,5 @@ public static class WidgetUtility
 
 		dialogWindow.Parent = EditorWindow.GetWindow();
 		dialogWindow.WindowFlags |= WindowFlags.Window;
-
-		if ( TodoDock.Cookies.WidgetsOnTop )
-		{
-			dialog.WindowFlags |= WindowFlags.WindowStaysOnTopHint;
-		}
 	}
 }
