@@ -4,7 +4,7 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-internal class TodoEntryCreatorWidget : Widget
+internal sealed class TodoEntryCreatorWidget : Widget
 {
 	TextEdit MessageEdit;
 	GroupControl GroupControl;

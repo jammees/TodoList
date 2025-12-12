@@ -5,7 +5,7 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-internal class TodoGroupEditor : Widget
+internal sealed class TodoGroupEditor : Widget
 {
 	GroupControl GroupControl;
 
