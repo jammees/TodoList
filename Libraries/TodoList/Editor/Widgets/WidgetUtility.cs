@@ -20,5 +20,7 @@ public static class WidgetUtility
 
 		dialogWindow.Parent = EditorWindow.GetWindow();
 		dialogWindow.WindowFlags |= WindowFlags.Window;
+
+		dialog.MinimumSize = dialogWindow.Size;
 	}
 }
