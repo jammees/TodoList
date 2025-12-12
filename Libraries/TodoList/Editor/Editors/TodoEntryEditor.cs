@@ -1,8 +1,6 @@
 ﻿using Editor;
-using System.Net;
 using Todo.List;
 using Todo.Widgets;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Todo.Editors;
 
