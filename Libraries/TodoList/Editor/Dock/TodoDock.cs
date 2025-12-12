@@ -118,6 +118,16 @@ public sealed partial class TodoDock : Widget
 			LoadCodeEntries();
 		}
 
+		if ( List.Items.Count() < 1 )
+		{
+			if ( IsSearching )
+				List.AddItem( new ItemText( "Couldn't Find Any Entries", ItemText.TextType.Hint ) );
+			else if ( (Cookies.ShowManualEntries && Cookies.ShowCodeEntries) is false )
+				List.AddItem( new ItemText( "Visibility Turned Off", ItemText.TextType.Hint ) );
+			else
+				List.AddItem( new ItemText( "Add New Entries With \"Add New Entry\"", ItemText.TextType.Hint ) );
+		}
+
 		PurgeDeadGroups();
 	}
 
