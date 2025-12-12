@@ -4,7 +4,7 @@ using Todo.List;
 
 namespace Todo.Widgets.List.ItemControllers;
 
-public static class ItemCodeEntry
+public static class ItemEntryCodeController
 {
 	public static void OnPaint( CodeEntry data, Rect rect )
 	{
