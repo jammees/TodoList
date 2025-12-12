@@ -2,7 +2,8 @@
 using Todo.List;
 using Todo.Widgets.List.ItemControllers;
 using Todo.Widgets.List.Items;
-using static Sandbox.Services.Inventory;
+using static Sandbox.ParticleModelRenderer;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Todo.Widgets.List;
 
@@ -16,37 +17,36 @@ public sealed class TodoList : ListView
 
 	protected override void PaintItem( VirtualWidget item )
 	{
-		if ( item.Object is ItemGroup group )
+		switch ( item.Object )
 		{
-			ItemGroupController.OnPaint( group, item.Rect );
-		}
-		else if ( item.Object is TodoEntry data )
-		{
-			ItemManualEntry.OnPaint( data, item.Rect );
-		}
-		else if ( item.Object is CodeEntry code )
-		{
-			ItemCodeEntry.OnPaint( code, item.Rect );
-		}
-		else if ( item.Object is GroupsTitle title )
-		{
-			ItemTitle.OnPaint( title, item.Rect );
+			case ItemGroup group:
+				ItemGroupController.OnPaint( group, item.Rect );
+				break;
+			case TodoEntry manual:
+				ItemManualEntry.OnPaint( manual, item.Rect );
+				break;
+			case CodeEntry code:
+				ItemCodeEntry.OnPaint( code, item.Rect );
+				break;
+			case ItemText text:
+				ItemTextController.OnPaint( text, item.Rect );
+				break;
 		}
 	}
 
-	protected override bool OnItemPressed( VirtualWidget pressedItem, MouseEvent @event )
+	protected override bool OnItemPressed( VirtualWidget item, MouseEvent @event )
 	{
-		if ( pressedItem.Object is ItemGroup group )
+		switch ( item.Object )
 		{
-			group.Toggle();
-		}
-		else if ( pressedItem.Object is TodoEntry data )
-		{
-			ItemManualEntry.OnClicked( data, @event );
-		}
-		else if ( pressedItem.Object is CodeEntry codeEntry )
-		{
-			ItemCodeEntry.OnClicked( codeEntry, @event );
+			case ItemGroup group:
+				group.Toggle();
+				break;
+			case TodoEntry manual:
+				ItemManualEntry.OnClicked( manual, @event );
+				break;
+			case CodeEntry code:
+				ItemCodeEntry.OnClicked( code, @event );
+				break;
 		}
 
 		return false;
