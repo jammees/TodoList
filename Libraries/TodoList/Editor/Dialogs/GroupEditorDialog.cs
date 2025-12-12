@@ -67,7 +67,7 @@ public sealed class GroupEditorDialog : Dialog
 	{
 		string newGroup = GroupControl.GetGroupName();
 
-		foreach ( TodoEntry entry in TodoDock.Cookies.Datas.Where( x => x.Group == Group.Name ) )
+		foreach ( ManualEntry entry in TodoDock.Cookies.Datas.Where( x => x.Group == Group.Name ) )
 		{
 			entry.Group = newGroup;
 		}

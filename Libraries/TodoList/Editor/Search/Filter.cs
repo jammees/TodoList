@@ -43,7 +43,7 @@ public static class Filter
 				if ( entry.IsCode is true )
 					return false;
 
-				if ( entry.TodoEntry.IsDone is true )
+				if ( entry.ManualEntry.IsDone is true )
 					continue;
 
 				return false;
@@ -57,7 +57,7 @@ public static class Filter
 				if ( entry.IsCode is true )
 					return false;
 
-				if ( entry.TodoEntry.IsDone is false )
+				if ( entry.ManualEntry.IsDone is false )
 					continue;
 
 				return false;

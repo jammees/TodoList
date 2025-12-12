@@ -9,9 +9,9 @@ public sealed class ManualEntryEditorDialog : Dialog
 	TextEdit MessageEdit;
 	GroupControl GroupControl;
 
-	TodoEntry Data;
+	ManualEntry Data;
 
-	public ManualEntryEditorDialog( Widget parent, TodoEntry data ) : base( parent, false )
+	public ManualEntryEditorDialog( Widget parent, ManualEntry data ) : base( parent, false )
 	{
 		Data = data;
 

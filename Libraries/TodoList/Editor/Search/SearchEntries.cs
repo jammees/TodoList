@@ -4,7 +4,7 @@ namespace Todo.Search;
 
 public static class SearchEntries
 {
-	public static bool FilterEntry( TodoEntry entry, ref int validSearches )
+	public static bool FilterEntry( ManualEntry entry, ref int validSearches )
 	{
 		return Filter.FilterEntry( new AbstractEntry()
 		{

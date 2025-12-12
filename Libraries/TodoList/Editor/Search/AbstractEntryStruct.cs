@@ -11,7 +11,7 @@ public struct AbstractEntry
 
 	public CodeEntry CodeEntry => (CodeEntry)Entry;
 
-	public TodoEntry TodoEntry => (TodoEntry)Entry;
+	public ManualEntry ManualEntry => (ManualEntry)Entry;
 
 	public bool IsCode => Entry is CodeEntry;
 }

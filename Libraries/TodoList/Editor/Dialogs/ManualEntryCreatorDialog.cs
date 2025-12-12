@@ -50,7 +50,7 @@ public sealed class ManualEntryCreatorDialog : Dialog
 
 	private void CreateEntry()
 	{
-		TodoEntry entry = new()
+		ManualEntry entry = new()
 		{
 			Message = MessageEdit.PlainText,
 			Group = GroupControl.GetGroupName()

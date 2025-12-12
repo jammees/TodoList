@@ -41,7 +41,7 @@ public struct ItemGroup
 
 			string groupName = Name;
 
-			IEnumerable<TodoEntry> entries =
+			IEnumerable<ManualEntry> entries =
 				TodoDock.Cookies.Datas.Where( x => x.Group == groupName );
 
 			return entries.Count( x => x.IsDone );
@@ -57,7 +57,7 @@ public struct ItemGroup
 
 			string groupName = Name;
 
-			IEnumerable<TodoEntry> entries =
+			IEnumerable<ManualEntry> entries =
 				TodoDock.Cookies.Datas.Where( x => x.Group == groupName );
 
 			return entries.Count();

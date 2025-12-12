@@ -22,7 +22,7 @@ public sealed class TodoList : ListView
 			case ItemGroup group:
 				ItemGroupController.OnPaint( group, item.Rect );
 				break;
-			case TodoEntry manual:
+			case ManualEntry manual:
 				ItemManualEntry.OnPaint( manual, item.Rect );
 				break;
 			case CodeEntry code:
@@ -41,7 +41,7 @@ public sealed class TodoList : ListView
 			case ItemGroup group:
 				ItemGroupController.OnClicked( group, @event );
 				break;
-			case TodoEntry manual:
+			case ManualEntry manual:
 				ItemManualEntry.OnClicked( manual, @event );
 				break;
 			case CodeEntry code:

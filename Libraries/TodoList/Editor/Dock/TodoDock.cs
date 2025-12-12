@@ -163,7 +163,7 @@ public sealed partial class TodoDock : Widget
 
 	private void LoadManualEntries()
 	{
-		Dictionary<string, List<TodoEntry>> grouppedEntries = new();
+		Dictionary<string, List<ManualEntry>> grouppedEntries = new();
 
 		foreach ( var item in Cookies.Datas )
 		{

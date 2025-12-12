@@ -2,7 +2,7 @@
 
 namespace Todo.List;
 
-public sealed class TodoEntry
+public sealed class ManualEntry
 {
 	public string Message { get; set; } = "None";
 
