@@ -13,7 +13,7 @@ public static class Utility
 
 		foreach ( var stub in searchStubs )
 		{
-			if ( string.IsNullOrEmpty( stub ) )
+			if ( string.IsNullOrWhiteSpace( stub ) )
 				continue;
 
 			string normalizedStub = stub.Trim().ToLower();

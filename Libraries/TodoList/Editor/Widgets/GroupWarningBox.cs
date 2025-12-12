@@ -18,7 +18,7 @@ public sealed class GroupWarningBox: WarningBox
 	{
 		bool isValid = true;
 
-		if ( string.IsNullOrEmpty( newString.Trim() ) is true )
+		if ( string.IsNullOrWhiteSpace( newString.Trim() ) is true )
 		{
 			isValid = false;
 			SetWarningMessage( $"Empty group name, will default to {TodoDock.Cookies.DefaultGroupName}!" );

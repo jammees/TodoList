@@ -28,7 +28,7 @@ public sealed class GroupControl
 
 	public string GetGroupName()
 	{
-		return string.IsNullOrEmpty( GroupEdit.Text ) ? "Default" : GroupEdit.Text;
+		return string.IsNullOrWhiteSpace( GroupEdit.Text ) ? "Default" : GroupEdit.Text;
 	}
 
 	private void OnEditingFinished()
@@ -57,7 +57,7 @@ public sealed class GroupControl
 	{
 		ClearMenu( ref menu );
 
-		bool isSearching = string.IsNullOrEmpty( searchText ) is false;
+		bool isSearching = string.IsNullOrWhiteSpace( searchText ) is false;
 
 		menu.AddHeading( $"Current Group: {CurrentGroup}" );
 

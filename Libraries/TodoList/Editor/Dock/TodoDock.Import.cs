@@ -12,7 +12,7 @@ public sealed partial class TodoDock : Widget
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.OpenFileDialog( "Import Todo Entries", "txt", defaultPath );
 
-		if ( string.IsNullOrEmpty( filePath ) )
+		if ( string.IsNullOrWhiteSpace( filePath ) )
 		{
 			Log.Error( "An invalid or empty path had been provided!" );
 			return;

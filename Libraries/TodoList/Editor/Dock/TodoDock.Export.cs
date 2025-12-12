@@ -11,7 +11,7 @@ public sealed partial class TodoDock : Widget
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.SaveFileDialog( "Export Todo Entries", "txt", defaultPath + "\\TodoEntries.txt" );
 
-		if ( string.IsNullOrEmpty( filePath ) )
+		if ( string.IsNullOrWhiteSpace( filePath ) )
 		{
 			Log.Error( "An invalid or empty path had been provided!" );
 			return;

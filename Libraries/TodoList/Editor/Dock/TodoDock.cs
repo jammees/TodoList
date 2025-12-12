@@ -23,7 +23,7 @@ public sealed partial class TodoDock : Widget
 
 	public bool IsGroupUncollapsed => IsSearching && Cookies.UnCollapseGroupsOnSearch;
 
-	public bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
+	public bool IsSearching => string.IsNullOrWhiteSpace( SearchText ) is false;
 
 	int VerticalScrollHeight = 0;
 	TodoList List;
