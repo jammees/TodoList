@@ -184,6 +184,7 @@ public sealed partial class TodoDock : Widget
 				new ItemGroup()
 				{
 					Name = groupName,
+					CanBeEdited = true,
 					ShowProgress = true
 				}
 			);
@@ -226,7 +227,8 @@ public sealed partial class TodoDock : Widget
 			ItemGroup group = List.AddItem(
 				new ItemGroup()
 				{
-					Name = groupName
+					Name = groupName,
+					CanBeEdited = false
 				}
 			);
 

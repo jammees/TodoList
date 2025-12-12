@@ -10,6 +10,8 @@ public struct ItemGroup
 
 	public bool ShowProgress { get; set; }
 
+	public bool CanBeEdited { get; set; }
+
 	public bool IsOpen
 	{
 		get

@@ -44,7 +44,7 @@ public static class ItemGroupController
 
 	public static void OnClicked( ItemGroup group, MouseEvent @event )
 	{
-		if ( @event.HasShift is true )
+		if ( @event.HasShift is true && group.CanBeEdited )
 		{
 			new GroupEditorDialog( null, group ).Show();
 			return;
