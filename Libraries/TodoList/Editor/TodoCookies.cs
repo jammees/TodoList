@@ -30,7 +30,7 @@ public sealed class TodoCookies
 
 	public void Save()
 	{
-		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
+		ProjectCookie.Set( $"{SettingCookie}.Entries", Datas );
 		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );
 		ProjectCookie.Set( $"{SettingCookie}.ShowManual", ShowManualEntries );
 		ProjectCookie.Set( $"{SettingCookie}.ShowCode", ShowCodeEntries );
@@ -43,7 +43,7 @@ public sealed class TodoCookies
 
 	private void Load()
 	{
-		Datas = ProjectCookie.Get( $"{SettingCookie}.List", new List<ManualEntry>() );
+		Datas = ProjectCookie.Get( $"{SettingCookie}.Entries", new List<ManualEntry>() );
 		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
 		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
 		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );
