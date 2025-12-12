@@ -3,7 +3,7 @@ using Sandbox;
 using Todo.CodeImport;
 using Todo.Widgets;
 
-namespace Todo.Editors;
+namespace Todo.Dialogs;
 
 public sealed class SettingsWidget : Dialog
 {

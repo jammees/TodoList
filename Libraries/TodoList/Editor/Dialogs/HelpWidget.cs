@@ -2,7 +2,7 @@
 using Sandbox;
 using Todo.Widgets;
 
-namespace Todo.Editors;
+namespace Todo.Dialogs;
 
 public sealed class HelpWidget : Dialog
 {

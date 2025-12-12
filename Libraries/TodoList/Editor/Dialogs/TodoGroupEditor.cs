@@ -4,7 +4,7 @@ using Todo.List;
 using Todo.Widgets;
 using Todo.Widgets.List.Items;
 
-namespace Todo.Editors;
+namespace Todo.Dialogs;
 
 public sealed class TodoGroupEditor : Dialog
 {

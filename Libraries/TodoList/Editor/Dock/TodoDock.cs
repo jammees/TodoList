@@ -3,7 +3,7 @@ using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 using Todo.CodeImport;
-using Todo.Editors;
+using Todo.Dialogs;
 using Todo.List;
 using Todo.Search;
 using Todo.Widgets;

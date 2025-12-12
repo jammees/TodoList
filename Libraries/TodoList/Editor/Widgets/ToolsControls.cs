@@ -1,6 +1,6 @@
 ﻿using Editor;
 using Sandbox;
-using Todo.Editors;
+using Todo.Dialogs;
 
 namespace Todo.Widgets;
 

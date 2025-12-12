@@ -2,7 +2,7 @@
 using Todo.List;
 using Todo.Widgets;
 
-namespace Todo.Editors;
+namespace Todo.Dialogs;
 
 public sealed class TodoEntryEditor : Dialog
 {

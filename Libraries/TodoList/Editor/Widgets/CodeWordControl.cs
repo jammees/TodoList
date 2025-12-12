@@ -1,7 +1,7 @@
 ﻿using Editor;
 using Sandbox;
 using Todo.CodeImport;
-using Todo.Editors;
+using Todo.Dialogs;
 
 namespace Todo.Widgets;
 

@@ -1,6 +1,6 @@
 ﻿using Editor;
 using Sandbox;
-using Todo.Editors;
+using Todo.Dialogs;
 using Todo.Widgets.List.Items;
 
 namespace Todo.Widgets.List.ItemControllers;
