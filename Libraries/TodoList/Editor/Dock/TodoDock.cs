@@ -8,6 +8,7 @@ using Todo.List;
 using Todo.Search;
 using Todo.Widgets;
 using Todo.Widgets.List;
+using Todo.Widgets.List.Items;
 
 namespace Todo;
 
@@ -162,28 +163,27 @@ internal sealed partial class TodoDock : Widget
 		List<string> sortedGroups = grouppedEntries.Keys.ToList();
 		sortedGroups.Sort();
 
-		foreach ( string group in sortedGroups )
+		foreach ( string groupName in sortedGroups )
 		{
-			if ( Cookies.GroupsState.ContainsKey( group ) is false )
+			if ( Cookies.GroupsState.ContainsKey( groupName ) is false )
 			{
-				Cookies.GroupsState.Add( group, true );
+				Cookies.GroupsState.Add( groupName, true );
 			}
 
-			EntryGroup groupListItem = List.AddItem(
-				new EntryGroup()
+			ItemGroup group = List.AddItem(
+				new ItemGroup()
 				{
-					Group = group,
-					Datas = grouppedEntries[group],
-					IsOpen = Cookies.GroupsState[group]
+					Name = groupName,
+					ShowProgress = true
 				}
 			);
 
-			if ( Cookies.GroupsState[group] is false && IsGroupUncollapsed is false )
+			if ( group.IsOpen is false )
 				continue;
 
 			int validSearches = 0;
 
-			foreach ( var entry in grouppedEntries[group] )
+			foreach ( var entry in grouppedEntries[groupName] )
 			{
 				if ( SearchEntries.FilterEntry( entry, ref validSearches ) is false )
 					continue;
@@ -193,7 +193,7 @@ internal sealed partial class TodoDock : Widget
 
 			if ( validSearches == 0 )
 			{
-				List.RemoveItem( groupListItem );
+				List.RemoveItem( group );
 			}
 		}
 	}
@@ -206,29 +206,28 @@ internal sealed partial class TodoDock : Widget
 		List<string> sortedGroups = entries.Keys.ToList();
 		sortedGroups.Sort();
 
-		foreach ( var group in sortedGroups )
+		foreach ( var groupName in sortedGroups )
 		{
-			if ( Cookies.GroupsState.ContainsKey( group ) is false )
+			if ( Cookies.GroupsState.ContainsKey( groupName ) is false )
 			{
-				Cookies.GroupsState.Add( group, true );
+				Cookies.GroupsState.Add( groupName, true );
 			}
 
-			CodeGroup groupListItem = List.AddItem(
-				new CodeGroup()
+			ItemGroup group = List.AddItem(
+				new ItemGroup()
 				{
-					Group = group,
-					IsOpen = Cookies.GroupsState[group]
+					Name = groupName
 				}
 			);
 
-			if ( Cookies.GroupsState[group] is false && IsGroupUncollapsed is false )
+			if ( group.IsOpen is false )
 				continue;
 
 			int validSearches = 0;
 
-			foreach ( var entry in entries[group] )
+			foreach ( var entry in entries[groupName] )
 			{
-				if ( SearchEntries.FilterCode( entry, group, ref validSearches ) is false )
+				if ( SearchEntries.FilterCode( entry, groupName, ref validSearches ) is false )
 					continue;
 
 				List.AddItem( entry );
@@ -236,7 +235,7 @@ internal sealed partial class TodoDock : Widget
 
 			if ( validSearches == 0 )
 			{
-				List.RemoveItem( groupListItem );
+				List.RemoveItem( group );
 			}
 		}
 	}

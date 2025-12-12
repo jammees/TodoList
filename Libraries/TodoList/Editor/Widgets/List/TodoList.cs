@@ -1,6 +1,8 @@
 ﻿using Editor;
 using Todo.List;
 using Todo.Widgets.List.ItemControllers;
+using Todo.Widgets.List.Items;
+using static Sandbox.Services.Inventory;
 
 namespace Todo.Widgets.List;
 
@@ -14,9 +16,9 @@ internal sealed class TodoList : ListView
 
 	protected override void PaintItem( VirtualWidget item )
 	{
-		if ( item.Object is EntryGroup group )
+		if ( item.Object is ItemGroup group )
 		{
-			ItemManualGroup.OnPaint( group, item.Rect );
+			ItemGroupController.OnPaint( group, item.Rect );
 		}
 		else if ( item.Object is TodoEntry data )
 		{
@@ -30,25 +32,17 @@ internal sealed class TodoList : ListView
 		{
 			ItemTitle.OnPaint( title, item.Rect );
 		}
-		else if ( item.Object is CodeGroup codeGroup )
-		{
-			ItemCodeGroup.OnPaint( codeGroup, item.Rect );
-		}
 	}
 
 	protected override bool OnItemPressed( VirtualWidget pressedItem, MouseEvent @event )
 	{
-		if ( pressedItem.Object is EntryGroup group )
+		if ( pressedItem.Object is ItemGroup group )
 		{
-			ItemManualGroup.OnClicked( group, @event );
+			group.Toggle();
 		}
 		else if ( pressedItem.Object is TodoEntry data )
 		{
 			ItemManualEntry.OnClicked( data, @event );
-		}
-		else if ( pressedItem.Object is CodeGroup codeGroup )
-		{
-			ItemCodeGroup.OnClicked( codeGroup, @event );
 		}
 		else if ( pressedItem.Object is CodeEntry codeEntry )
 		{
