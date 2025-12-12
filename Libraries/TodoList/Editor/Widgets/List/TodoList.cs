@@ -39,7 +39,7 @@ public sealed class TodoList : ListView
 		switch ( item.Object )
 		{
 			case ItemGroup group:
-				group.Toggle();
+				ItemGroupController.OnClicked( group, @event );
 				break;
 			case TodoEntry manual:
 				ItemManualEntry.OnClicked( manual, @event );

@@ -1,5 +1,6 @@
 ﻿using Editor;
 using Sandbox;
+using Todo.Editors;
 using Todo.Widgets.List.Items;
 
 namespace Todo.Widgets.List.ItemControllers;
@@ -39,5 +40,16 @@ public static class ItemGroupController
 		}
 
 		Paint.DrawText( rect.Shrink( 22f, 0f, 0f, 0f ), displayText, TextFlag.LeftCenter );
+	}
+
+	public static void OnClicked( ItemGroup group, MouseEvent @event )
+	{
+		if ( @event.HasShift is true )
+		{
+			new TodoGroupEditor( null, group ).Show();
+			return;
+		}
+
+		group.Toggle();
 	}
 }

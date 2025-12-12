@@ -2,6 +2,7 @@
 using System.Linq;
 using Todo.List;
 using Todo.Widgets;
+using Todo.Widgets.List.Items;
 
 namespace Todo.Editors;
 
@@ -9,16 +10,16 @@ public sealed class TodoGroupEditor : Widget
 {
 	GroupControl GroupControl;
 
-	EntryGroup Group;
+	ItemGroup Group;
 
-	public TodoGroupEditor( Widget parent, EntryGroup data ) : base( parent, true )
+	public TodoGroupEditor( Widget parent, ItemGroup group ) : base( parent, true )
 	{
-		Group = data;
+		Group = group;
 
 		WidgetUtility.SetProperties(
 			this,
 			200f,
-			$"Edit {data.Group}",
+			$"Edit {group.Name}",
 			"edit"
 		);
 
@@ -26,7 +27,7 @@ public sealed class TodoGroupEditor : Widget
 		Layout.Margin = 4;
 		Layout.Spacing = 5;
 
-		GroupControl = new GroupControl( this, data.Group );
+		GroupControl = new GroupControl( this, group.Name );
 
 		Layout.AddStretchCell();
 
@@ -50,12 +51,12 @@ public sealed class TodoGroupEditor : Widget
 
 	private void PromptDelete()
 	{
-		Dialog.AskConfirm( DeleteData, "Are you sure you want to delete this group?", $"Delete {Group.Group}?", "Yes", "No" );
+		Dialog.AskConfirm( DeleteData, "Are you sure you want to delete this group?", $"Delete {Group.Name}?", "Yes", "No" );
 	}
 
 	private void DeleteData()
 	{
-		TodoDock.Cookies.Datas.RemoveAll( x => x.Group == Group.Group );
+		TodoDock.Cookies.Datas.RemoveAll( x => x.Group == Group.Name );
 
 		TodoDock.Instance.SaveAndRefresh();
 
@@ -66,10 +67,12 @@ public sealed class TodoGroupEditor : Widget
 	{
 		string newGroup = GroupControl.GetGroupName();
 
-		foreach ( TodoEntry entry in TodoDock.Cookies.Datas.Where( x => x.Group == Group.Group ) )
+		foreach ( TodoEntry entry in TodoDock.Cookies.Datas.Where( x => x.Group == Group.Name ) )
 		{
-			entry.Group = newGroup;	
+			entry.Group = newGroup;
 		}
+
+		TodoDock.Cookies.GroupsState[newGroup] = Group.IsOpen;
 
 		TodoDock.Instance.SaveAndRefresh();
 
