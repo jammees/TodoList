@@ -1,20 +1,28 @@
 ﻿using Editor;
+using Sandbox.Internal;
 
 namespace Todo.Widgets;
 
 public static class WidgetUtility
 {
-	public static void SetProperties( Widget widget, float height, string title, string icon )
+	public static void SetProperties( Dialog dialog, float height, string title, string icon )
 	{
-		widget.DeleteOnClose = true;
-		widget.MinimumSize = new( 500f, height );
-		widget.WindowTitle = title;
-		widget.SetWindowIcon( icon );
-		widget.FocusMode = FocusMode.Click;
+		dialog.FocusMode = FocusMode.Click;
+		
+		Window dialogWindow = dialog.Window;
+
+		dialogWindow.IsDialog = false;
+		dialogWindow.SetWindowIcon( icon );
+		dialogWindow.StatusBar = null;
+		dialogWindow.Title = title;
+		dialogWindow.Size = new( 500f, height );
+
+		dialogWindow.Parent = EditorWindow.GetWindow();
+		dialogWindow.WindowFlags |= WindowFlags.Window;
 
 		if ( TodoDock.Cookies.WidgetsOnTop )
 		{
-			widget.WindowFlags |= WindowFlags.WindowStaysOnTopHint;
+			dialog.WindowFlags |= WindowFlags.WindowStaysOnTopHint;
 		}
 	}
 }

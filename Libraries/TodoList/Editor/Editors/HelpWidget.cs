@@ -1,15 +1,16 @@
 ﻿using Editor;
 using Sandbox;
+using Sandbox.Internal;
 using Todo.Widgets;
 
 namespace Todo.Editors;
 
-public sealed class HelpWidget : Widget
+public sealed class HelpWidget : Dialog
 {
 	ScrollArea Scroll { get; set; }
 	int VerticalScrollHeight { get; set; }
 
-	public HelpWidget( Widget parent ) : base( parent, true )
+	public HelpWidget( Widget parent ) : base( parent, false )
 	{
 		WidgetUtility.SetProperties(
 			this,

@@ -5,14 +5,14 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-public sealed class CodeWordCreatorWidget : Widget
+public sealed class CodeWordCreatorWidget : Dialog
 {
 	TodoCodeWord CodeWord;
 
 	SettingsWidget SettingsWidget;
 
 	public CodeWordCreatorWidget( Widget parent, SettingsWidget settingsWidget )
-		: base( parent, true )
+		: base( parent, false )
 	{
 		SettingsWidget = settingsWidget;
 

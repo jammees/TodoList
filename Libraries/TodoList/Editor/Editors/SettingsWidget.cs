@@ -5,12 +5,12 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-public sealed class SettingsWidget : Widget
+public sealed class SettingsWidget : Dialog
 {
 	ScrollArea Scroll { get; set; }
 	int VerticalScrollHeight { get; set; }
 
-	public SettingsWidget( Widget parent ) : base( parent, true )
+	public SettingsWidget( Widget parent ) : base( parent, false )
 	{
 		WidgetUtility.SetProperties(
 			this,

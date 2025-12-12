@@ -4,12 +4,12 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-public sealed class TodoEntryCreatorWidget : Widget
+public sealed class TodoEntryCreatorWidget : Dialog
 {
 	TextEdit MessageEdit;
 	GroupControl GroupControl;
 
-	public TodoEntryCreatorWidget( Widget parent ) : base( parent, true )
+	public TodoEntryCreatorWidget( Widget parent ) : base( parent, false )
 	{
 		WidgetUtility.SetProperties(
 			this,
