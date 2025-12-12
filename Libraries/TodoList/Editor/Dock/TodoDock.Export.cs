@@ -7,11 +7,8 @@ namespace Todo;
 
 internal sealed partial class TodoDock : Widget
 {
-	internal static void Export()
+	internal void Export()
 	{
-		if ( Instance.IsValid() is false )
-			return;
-
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.SaveFileDialog( "Export Todo Entries", "txt", defaultPath + "\\TodoEntries.txt" );
 

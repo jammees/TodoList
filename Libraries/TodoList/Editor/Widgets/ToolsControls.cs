@@ -123,24 +123,24 @@ internal sealed class ToolsControls : Widget
 
 		{
 			var option = menu.AddOption( new Option( this, "Import Entries", "download" ) );
-			option.Triggered = () => TodoDock.Import();
+			option.Triggered = TodoDock.Instance.Import;
 		}
 
 		{
 			var option = menu.AddOption( new Option( this, "Export Entries", "upload" ) );
-			option.Triggered = () => TodoDock.Export();
+			option.Triggered = TodoDock.Instance.Export;
 		}
 
 		menu.AddSeparator();
 
 		{
 			var option = menu.AddOption( new Option( this, "Settings", "settings" ) );
-			option.Triggered = () => OpenSettingsWidget();
+			option.Triggered = OpenSettingsWidget;
 		}
 
 		{
 			var option = menu.AddOption( new Option( this, "Help", "question_mark" ) );
-			option.Triggered = () => OpenHelpWidget();
+			option.Triggered = OpenHelpWidget;
 		}
 
 		menu.DeleteOnClose = true;

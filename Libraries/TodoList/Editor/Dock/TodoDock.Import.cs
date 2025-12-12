@@ -8,11 +8,8 @@ namespace Todo;
 
 internal sealed partial class TodoDock : Widget
 {
-	internal static void Import()
+	internal void Import()
 	{
-		if ( Instance.IsValid() is false )
-			return;
-
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.OpenFileDialog( "Import Todo Entries", "txt", defaultPath );
 
