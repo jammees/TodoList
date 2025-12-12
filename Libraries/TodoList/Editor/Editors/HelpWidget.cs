@@ -1,8 +1,6 @@
 ﻿using Editor;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Sandbox;
 using Todo.Widgets;
-using static Editor.Label;
 
 namespace Todo.Editors;
 
