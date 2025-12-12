@@ -4,12 +4,12 @@ using Todo.Widgets;
 
 namespace Todo.Dialogs;
 
-public sealed class HelpWidget : Dialog
+public sealed class HelpDialog : Dialog
 {
 	ScrollArea Scroll { get; set; }
 	int VerticalScrollHeight { get; set; }
 
-	public HelpWidget( Widget parent ) : base( parent, false )
+	public HelpDialog( Widget parent ) : base( parent, false )
 	{
 		WidgetUtility.SetProperties(
 			this,

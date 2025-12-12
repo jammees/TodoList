@@ -54,7 +54,7 @@ public static class ItemManualEntry
 
 	private static void OpenEntryEditor( TodoEntry data )
 	{
-		var windowExample = new TodoEntryEditor( null, data );
+		var windowExample = new ManualEntryEditorDialog( null, data );
 		windowExample.Show();
 	}
 }

@@ -5,13 +5,13 @@ using Todo.Widgets;
 
 namespace Todo.Dialogs;
 
-public sealed class CodeWordCreatorWidget : Dialog
+public sealed class CodeWordCreatorDialog : Dialog
 {
 	TodoCodeWord CodeWord;
 
-	SettingsWidget SettingsWidget;
+	SettingsDialog SettingsWidget;
 
-	public CodeWordCreatorWidget( Widget parent, SettingsWidget settingsWidget )
+	public CodeWordCreatorDialog( Widget parent, SettingsDialog settingsWidget )
 		: base( parent, false )
 	{
 		SettingsWidget = settingsWidget;

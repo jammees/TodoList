@@ -5,12 +5,12 @@ using Todo.Widgets;
 
 namespace Todo.Dialogs;
 
-public sealed class SettingsWidget : Dialog
+public sealed class SettingsDialog : Dialog
 {
 	ScrollArea Scroll { get; set; }
 	int VerticalScrollHeight { get; set; }
 
-	public SettingsWidget( Widget parent ) : base( parent, false )
+	public SettingsDialog( Widget parent ) : base( parent, false )
 	{
 		WidgetUtility.SetProperties(
 			this,
@@ -154,7 +154,7 @@ public sealed class SettingsWidget : Dialog
 
 	private void OpenStyleCreatorWidget()
 	{
-		var widget = new CodeWordCreatorWidget( null, this );
+		var widget = new CodeWordCreatorDialog( null, this );
 		widget.Show();
 	}
 

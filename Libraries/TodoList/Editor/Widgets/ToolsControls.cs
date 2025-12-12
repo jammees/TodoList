@@ -149,13 +149,13 @@ public sealed class ToolsControls : Widget
 
 	private void OpenHelpWidget()
 	{
-		var widget = new HelpWidget( null );
+		var widget = new HelpDialog( null );
 		widget.Show();
 	}
 
 	private void OpenSettingsWidget()
 	{
-		var widget = new SettingsWidget( null );
+		var widget = new SettingsDialog( null );
 		widget.Show();
 	}
 }

@@ -46,7 +46,7 @@ public static class ItemGroupController
 	{
 		if ( @event.HasShift is true )
 		{
-			new TodoGroupEditor( null, group ).Show();
+			new GroupEditorDialog( null, group ).Show();
 			return;
 		}
 

@@ -94,7 +94,7 @@ public sealed partial class TodoDock : Widget
 	[Shortcut( "todo.new-entry", "CTRL+W", ShortcutType.Application )]
 	private void OpenEntryWidget()
 	{
-		var widget = new TodoEntryCreatorWidget( null );
+		var widget = new ManualEntryCreatorDialog( null );
 		widget.Show();
 	}
 

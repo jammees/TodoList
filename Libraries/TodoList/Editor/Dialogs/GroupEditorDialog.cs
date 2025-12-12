@@ -6,13 +6,13 @@ using Todo.Widgets.List.Items;
 
 namespace Todo.Dialogs;
 
-public sealed class TodoGroupEditor : Dialog
+public sealed class GroupEditorDialog : Dialog
 {
 	GroupControl GroupControl;
 
 	ItemGroup Group;
 
-	public TodoGroupEditor( Widget parent, ItemGroup group ) : base( parent, false )
+	public GroupEditorDialog( Widget parent, ItemGroup group ) : base( parent, false )
 	{
 		Group = group;
 

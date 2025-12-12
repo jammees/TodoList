@@ -9,9 +9,9 @@ public sealed class CodeWordControl : Widget
 {
 	TodoCodeWord CodeWord;
 
-	SettingsWidget SettingsWidget;
+	SettingsDialog SettingsWidget;
 
-	public CodeWordControl( SettingsWidget settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
+	public CodeWordControl( SettingsDialog settingsWidget, TodoCodeWord style ) : base( settingsWidget, false )
 	{
 		SettingsWidget = settingsWidget;
 
