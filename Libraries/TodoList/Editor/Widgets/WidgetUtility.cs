@@ -18,8 +18,11 @@ public static class WidgetUtility
 		dialogWindow.Title = title;
 		dialogWindow.Size = new( 500f, height );
 
+		// but of a hack I suppose to force
+		// all the dialogs to not go behind the editor window
+		// once clicking off of them.
 		dialogWindow.Parent = EditorWindow.GetWindow();
-		dialogWindow.WindowFlags |= WindowFlags.Window;
+		dialogWindow.WindowFlags |= WindowFlags.Window | WindowFlags.WindowTitle | WindowFlags.Customized;
 
 		dialog.MinimumSize = dialogWindow.Size;
 	}
