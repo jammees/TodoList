@@ -185,7 +185,7 @@ internal sealed partial class TodoDock : Widget
 
 			foreach ( var entry in grouppedEntries[group] )
 			{
-				if ( SearchEntries.IsFilterEntry( entry, ref validSearches ) is false )
+				if ( SearchEntries.FilterEntry( entry, ref validSearches ) is false )
 					continue;
 
 				List.AddItem( entry );
@@ -227,7 +227,7 @@ internal sealed partial class TodoDock : Widget
 
 			foreach ( var entry in entries[group] )
 			{
-				if ( SearchEntries.IsFilterCode( entry, group, ref validSearches ) is false )
+				if ( SearchEntries.FilterCode( entry, group, ref validSearches ) is false )
 					continue;
 
 				List.AddItem( entry );
