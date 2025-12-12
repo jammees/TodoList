@@ -137,6 +137,7 @@ public sealed partial class TodoDock : Widget
 		HashSet<string> codeGroups = GetAllCodeGroups();
 
 		List<string> deadGroups = new List<string>();
+
 		foreach ( string group in Cookies.GroupsState.Keys )
 		{
 			if ( manualGroups.Contains( group ) || codeGroups.Contains( group ) )
@@ -163,7 +164,7 @@ public sealed partial class TodoDock : Widget
 
 	private void LoadManualEntries()
 	{
-		Dictionary<string, List<ManualEntry>> grouppedEntries = new();
+		Dictionary<string, List<TodoEntry>> grouppedEntries = new();
 
 		foreach ( var item in Cookies.Datas )
 		{

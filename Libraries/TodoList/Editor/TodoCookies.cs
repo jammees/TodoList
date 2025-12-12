@@ -7,7 +7,7 @@ namespace Todo;
 
 public sealed class TodoCookies
 {
-	public List<ManualEntry> Datas;
+	public List<TodoEntry> Datas;
 	public List<TodoCodeWord> CodeWords;
 
 	public Dictionary<string, bool> GroupsState;
@@ -41,9 +41,9 @@ public sealed class TodoCookies
 		ProjectCookie.Set( $"{SettingCookie}.LastSearch", LastSearch );
 	}
 
-	private void Load()
+	public void Load()
 	{
-		Datas = ProjectCookie.Get( $"{SettingCookie}.List", new List<ManualEntry>() );
+		Datas = ProjectCookie.Get( $"{SettingCookie}.List", new List<TodoEntry>() );
 		GroupsState = ProjectCookie.Get( $"{SettingCookie}.Groups", new Dictionary<string, bool>() );
 		ShowManualEntries = ProjectCookie.Get( $"{SettingCookie}.ShowManual", true );
 		ShowCodeEntries = ProjectCookie.Get( $"{SettingCookie}.ShowCode", false );

@@ -7,7 +7,7 @@ namespace Todo.Widgets.List.ItemControllers;
 
 public static class ItemEntryManualController
 {
-	public static void OnPaint( ManualEntry data, Rect rect )
+	public static void OnPaint( TodoEntry data, Rect rect )
 	{
 		Color color = Theme.Text;
 		if ( Paint.HasMouseOver )
@@ -39,7 +39,7 @@ public static class ItemEntryManualController
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
-	public static void OnClicked( ManualEntry entry, MouseEvent e )
+	public static void OnClicked( TodoEntry entry, MouseEvent e )
 	{
 		if ( e.HasShift )
 		{
@@ -52,7 +52,7 @@ public static class ItemEntryManualController
 		TodoDock.Instance.SaveAndRefresh();
 	}
 
-	private static void OpenEntryEditor( ManualEntry data )
+	private static void OpenEntryEditor( TodoEntry data )
 	{
 		var windowExample = new ManualEntryEditorDialog( null, data );
 		windowExample.Show();
