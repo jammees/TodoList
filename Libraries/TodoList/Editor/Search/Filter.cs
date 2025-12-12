@@ -2,9 +2,9 @@
 
 namespace Todo.Search;
 
-internal static class Filter
+public static class Filter
 {
-	internal static bool FilterEntry( AbstractEntry entry, ref int validSearches )
+	public static bool FilterEntry( AbstractEntry entry, ref int validSearches )
 	{
 		if ( TodoDock.Instance.IsSearching is false )
 		{

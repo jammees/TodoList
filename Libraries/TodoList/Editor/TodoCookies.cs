@@ -5,20 +5,20 @@ using Todo.List;
 
 namespace Todo;
 
-internal sealed class TodoCookies
+public sealed class TodoCookies
 {
-	internal List<TodoEntry> Datas;
-	internal List<TodoCodeWord> CodeWords;
+	public List<TodoEntry> Datas;
+	public List<TodoCodeWord> CodeWords;
 
-	internal Dictionary<string, bool> GroupsState;
+	public Dictionary<string, bool> GroupsState;
 
-	internal bool ShowManualEntries;
-	internal bool ShowCodeEntries;
-	internal bool ReloadOnHotload;
-	internal bool WidgetsOnTop;
-	internal bool UnCollapseGroupsOnSearch;
-	internal string DefaultGroupName;
-	internal string LastSearch;
+	public bool ShowManualEntries;
+	public bool ShowCodeEntries;
+	public bool ReloadOnHotload;
+	public bool WidgetsOnTop;
+	public bool UnCollapseGroupsOnSearch;
+	public string DefaultGroupName;
+	public string LastSearch;
 
 	string SettingCookie;
 
@@ -29,7 +29,7 @@ internal sealed class TodoCookies
 		Load();
 	}
 
-	internal void Save()
+	public void Save()
 	{
 		ProjectCookie.Set( $"{SettingCookie}.List", Datas );
 		ProjectCookie.Set( $"{SettingCookie}.Groups", GroupsState );

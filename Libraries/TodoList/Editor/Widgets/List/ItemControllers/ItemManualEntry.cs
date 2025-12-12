@@ -5,9 +5,9 @@ using Todo.List;
 
 namespace Todo.Widgets.List.ItemControllers;
 
-internal static class ItemManualEntry
+public static class ItemManualEntry
 {
-	internal static void OnPaint( TodoEntry data, Rect rect )
+	public static void OnPaint( TodoEntry data, Rect rect )
 	{
 		Color color = Theme.Text;
 		if ( Paint.HasMouseOver )
@@ -39,7 +39,7 @@ internal static class ItemManualEntry
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( TodoEntry entry, MouseEvent e )
+	public static void OnClicked( TodoEntry entry, MouseEvent e )
 	{
 		if ( e.HasShift )
 		{

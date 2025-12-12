@@ -1,6 +1,6 @@
 ﻿namespace Todo.List;
 
-internal struct GroupsTitle
+public struct GroupsTitle
 {
 	public string Title { get; set; } = "Default";
 

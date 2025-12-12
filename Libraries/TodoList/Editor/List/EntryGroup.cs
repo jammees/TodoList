@@ -2,7 +2,7 @@
 
 namespace Todo.List;
 
-internal sealed class EntryGroup
+public sealed class EntryGroup
 {
 	public string Group { get; set; } = "Default";
 

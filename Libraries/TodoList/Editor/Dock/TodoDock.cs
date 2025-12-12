@@ -13,17 +13,17 @@ using Todo.Widgets.List.Items;
 namespace Todo;
 
 [Dock( "Editor", "Todos", "checklist" )]
-internal sealed partial class TodoDock : Widget
+public sealed partial class TodoDock : Widget
 {
-	internal string SearchText = "";
+	public string SearchText = "";
 
-	internal static TodoCookies Cookies;
+	public static TodoCookies Cookies;
 
-	internal static TodoDock Instance;
+	public static TodoDock Instance;
 
-	internal bool IsGroupUncollapsed => IsSearching && Cookies.UnCollapseGroupsOnSearch;
+	public bool IsGroupUncollapsed => IsSearching && Cookies.UnCollapseGroupsOnSearch;
 
-	internal bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
+	public bool IsSearching => string.IsNullOrEmpty( SearchText ) is false;
 
 	int VerticalScrollHeight = 0;
 	TodoList List;
@@ -48,7 +48,7 @@ internal sealed partial class TodoDock : Widget
 		Build();
 	}
 
-	internal void RefreshItems()
+	public void RefreshItems()
 	{
 		if ( List.IsValid() )
 			VerticalScrollHeight = List.VerticalScrollbar.Value;
@@ -56,7 +56,7 @@ internal sealed partial class TodoDock : Widget
 		LoadItems();
 	}
 
-	internal void SaveAndRefresh()
+	public void SaveAndRefresh()
 	{
 		Cookies.Save();
 		RefreshItems();

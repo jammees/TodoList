@@ -6,7 +6,7 @@ using static Sandbox.Services.Inventory;
 
 namespace Todo.Widgets.List;
 
-internal sealed class TodoList : ListView
+public sealed class TodoList : ListView
 {
 	public TodoList()
 	{

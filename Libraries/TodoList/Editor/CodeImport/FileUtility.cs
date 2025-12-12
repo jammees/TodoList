@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Todo.CodeImport;
 
-internal static class FileUtility
+public static class FileUtility
 {
-	internal static string GetRelativePath( string absolutePath )
+	public static string GetRelativePath( string absolutePath )
 	{
 		string codeFolderPath = Project.Current.GetCodePath();
 		string truncatedPath = absolutePath.Remove( 0, codeFolderPath.Length );
@@ -16,7 +16,7 @@ internal static class FileUtility
 		return "./" + truncatedPath;
 	}
 
-	internal static FileInfo[] GetAllFiles( HashSet<string> allowedExtensions )
+	public static FileInfo[] GetAllFiles( HashSet<string> allowedExtensions )
 	{
 		string root = Project.Current.GetCodePath();
 
@@ -38,7 +38,7 @@ internal static class FileUtility
 		return infos.ToArray();
 	}
 
-	internal static string GetFileContents( FileInfo file )
+	public static string GetFileContents( FileInfo file )
 	{
 		using StreamReader reader = file.OpenText();
 

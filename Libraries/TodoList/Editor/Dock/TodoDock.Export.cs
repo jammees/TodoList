@@ -4,9 +4,9 @@ using System.Text.Json;
 
 namespace Todo;
 
-internal sealed partial class TodoDock : Widget
+public sealed partial class TodoDock : Widget
 {
-	internal void Export()
+	public void Export()
 	{
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.SaveFileDialog( "Export Todo Entries", "txt", defaultPath + "\\TodoEntries.txt" );

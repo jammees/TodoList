@@ -4,9 +4,9 @@ using Todo.List;
 
 namespace Todo.Widgets.List.ItemControllers;
 
-internal static class ItemCodeEntry
+public static class ItemCodeEntry
 {
-	internal static void OnPaint( CodeEntry data, Rect rect )
+	public static void OnPaint( CodeEntry data, Rect rect )
 	{
 		Color color = Theme.Text;
 		if ( Paint.HasMouseOver )
@@ -28,7 +28,7 @@ internal static class ItemCodeEntry
 		Paint.DrawText( rect.Shrink( 30, 8f, 8f, 8f ), data.Message, TextFlag.LeftCenter );
 	}
 
-	internal static void OnClicked( CodeEntry entry, MouseEvent e )
+	public static void OnClicked( CodeEntry entry, MouseEvent e )
 	{
 		if ( CodeEditor.CanOpenFile( entry.SourceFile ) is false )
 		{

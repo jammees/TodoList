@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Todo.Search;
 
-internal static class Utility
+public static class Utility
 {
-	internal static void GetSearchStubs( out string genericSearch, out List<string> flagStubs )
+	public static void GetSearchStubs( out string genericSearch, out List<string> flagStubs )
 	{
 		List<string> generic = new();
 		List<string> flags = new();
@@ -32,12 +32,12 @@ internal static class Utility
 		flagStubs = flags;
 	}
 
-	internal static bool Contains( string target, string searchText )
+	public static bool Contains( string target, string searchText )
 	{
 		return target.Contains( searchText, System.StringComparison.CurrentCultureIgnoreCase );
 	}
 
-	internal static bool GetFlagArguments( List<string> flagStubs, string flagName, out List<string> flagArguments )
+	public static bool GetFlagArguments( List<string> flagStubs, string flagName, out List<string> flagArguments )
 	{
 		List<string> arguments = new();
 

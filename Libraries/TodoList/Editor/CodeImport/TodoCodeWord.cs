@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Todo.CodeImport;
 
-internal sealed class TodoCodeWord
+public sealed class TodoCodeWord
 {
 	public string CodeWord { get; set; }
 
@@ -13,7 +13,7 @@ internal sealed class TodoCodeWord
 	[IconName]
 	public string Icon { get; set; }
 
-	internal static List<TodoCodeWord> GetDefault()
+	public static List<TodoCodeWord> GetDefault()
 	{
 		return new List<TodoCodeWord>()
 		{

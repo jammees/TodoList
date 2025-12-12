@@ -2,7 +2,7 @@
 
 namespace Todo.Search;
 
-internal struct AbstractEntry
+public struct AbstractEntry
 {
 	public object Entry;
 

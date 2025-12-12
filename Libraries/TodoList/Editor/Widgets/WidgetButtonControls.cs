@@ -4,7 +4,7 @@ using static Editor.Button;
 
 namespace Todo.Widgets;
 
-internal static class WidgetButtonControls
+public static class WidgetButtonControls
 {
 	public static void AddWidgetButtonControls( Widget parent, Action onSave, Action onDelete = null )
 	{

@@ -4,7 +4,7 @@ using Todo.Editors;
 
 namespace Todo.Widgets;
 
-internal sealed class ToolsControls : Widget
+public sealed class ToolsControls : Widget
 {
 	public ToolsControls( Widget parent ) : base( parent )
 	{

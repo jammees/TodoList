@@ -1,13 +1,13 @@
 ﻿namespace Todo.CodeImport;
 
-internal static class IgnoredFolders
+public static class IgnoredFolders
 {
 	private static readonly string[] Folders = {
 		"obj",
 		"properties"
 	};
 
-	internal static bool IsIgnored( string path )
+	public static bool IsIgnored( string path )
 	{
 		foreach ( var ignoredPath in Folders )
 		{

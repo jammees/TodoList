@@ -2,7 +2,7 @@
 
 namespace Todo.List;
 
-internal sealed class TodoEntry
+public sealed class TodoEntry
 {
 	public string Message { get; set; } = "None";
 
@@ -11,7 +11,7 @@ internal sealed class TodoEntry
 	public bool IsDone { get; set; } = false;
 }
 
-internal struct CodeEntry
+public struct CodeEntry
 {
 	public string Message = "";
 

@@ -2,9 +2,9 @@
 
 namespace Todo.Widgets;
 
-internal static class WidgetUtility
+public static class WidgetUtility
 {
-	internal static void SetProperties( Widget widget, float height, string title, string icon )
+	public static void SetProperties( Widget widget, float height, string title, string icon )
 	{
 		widget.DeleteOnClose = true;
 		widget.MinimumSize = new( 500f, height );

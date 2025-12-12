@@ -2,10 +2,10 @@
 
 namespace Todo.CodeImport;
 
-internal static class CodeUtility
+public static class CodeUtility
 {
 	// dear god
-	internal static int GetSourceLine( string desiredStub, CommentMatch[] matches )
+	public static int GetSourceLine( string desiredStub, CommentMatch[] matches )
 	{
 		foreach ( CommentMatch match in matches )
 		{

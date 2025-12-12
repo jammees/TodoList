@@ -5,7 +5,7 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-internal sealed class CodeWordCreatorWidget : Widget
+public sealed class CodeWordCreatorWidget : Widget
 {
 	TodoCodeWord CodeWord;
 

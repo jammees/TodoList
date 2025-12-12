@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Todo.Widgets;
 
-internal sealed class GroupControl
+public sealed class GroupControl
 {
 	LineEdit GroupEdit;
 

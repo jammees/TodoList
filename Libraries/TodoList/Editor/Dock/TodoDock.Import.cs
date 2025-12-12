@@ -5,9 +5,9 @@ using Todo.List;
 
 namespace Todo;
 
-internal sealed partial class TodoDock : Widget
+public sealed partial class TodoDock : Widget
 {
-	internal void Import()
+	public void Import()
 	{
 		string defaultPath = Editor.FileSystem.Root.GetFullPath( "" );
 		string filePath = EditorUtility.OpenFileDialog( "Import Todo Entries", "txt", defaultPath );

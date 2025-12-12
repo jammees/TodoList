@@ -8,16 +8,16 @@ using Todo.List;
 
 namespace Todo.CodeImport;
 
-internal static class ParseCode
+public static class ParseCode
 {
-	internal struct CommentMatch
+	public struct CommentMatch
 	{
 		public string CommentStub;
 		public bool MatchSuccess;
 		public int Line;
 	}
 
-	internal static Dictionary<string, List<CodeEntry>> ProcessFiles( FileInfo[] files )
+	public static Dictionary<string, List<CodeEntry>> ProcessFiles( FileInfo[] files )
 	{
 		Dictionary<string, List<CodeEntry>> results = new();
 

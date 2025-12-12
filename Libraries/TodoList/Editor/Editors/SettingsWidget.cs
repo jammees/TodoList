@@ -5,7 +5,7 @@ using Todo.Widgets;
 
 namespace Todo.Editors;
 
-internal sealed class SettingsWidget : Widget
+public sealed class SettingsWidget : Widget
 {
 	ScrollArea Scroll { get; set; }
 	int VerticalScrollHeight { get; set; }
@@ -48,7 +48,7 @@ internal sealed class SettingsWidget : Widget
 		return base.OnClose();
 	}
 
-	internal void Build()
+	public void Build()
 	{
 		if ( Scroll.IsValid() )
 		{

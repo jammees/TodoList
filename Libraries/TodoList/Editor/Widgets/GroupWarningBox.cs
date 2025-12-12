@@ -2,7 +2,7 @@
 
 namespace Todo.Widgets;
 
-internal sealed class GroupWarningBox: WarningBox
+public sealed class GroupWarningBox: WarningBox
 {
 	public GroupWarningBox( Widget parent, LineEdit groupEdit )
 	{

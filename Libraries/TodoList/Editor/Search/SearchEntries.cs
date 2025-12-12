@@ -2,9 +2,9 @@
 
 namespace Todo.Search;
 
-internal static class SearchEntries
+public static class SearchEntries
 {
-	internal static bool FilterEntry( TodoEntry entry, ref int validSearches )
+	public static bool FilterEntry( TodoEntry entry, ref int validSearches )
 	{
 		return Filter.FilterEntry( new AbstractEntry()
 		{
@@ -14,7 +14,7 @@ internal static class SearchEntries
 		}, ref validSearches );
 	}
 
-	internal static bool FilterCode( CodeEntry entry, string fileName, ref int validSearches )
+	public static bool FilterCode( CodeEntry entry, string fileName, ref int validSearches )
 	{
 		return Filter.FilterEntry( new AbstractEntry()
 		{

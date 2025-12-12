@@ -4,9 +4,9 @@ using Todo.List;
 
 namespace Todo.Widgets.List.ItemControllers;
 
-internal static class ItemTitle
+public static class ItemTitle
 {
-	internal static void OnPaint( GroupsTitle title, Rect rect )
+	public static void OnPaint( GroupsTitle title, Rect rect )
 	{
 		Paint.ClearBrush();
 		Paint.ClearPen();
