@@ -6,7 +6,7 @@ using System.Linq;
 using Todo.Editors;
 using Todo.List;
 
-namespace Todo.Widgets.List.Items;
+namespace Todo.Widgets.List.ItemControllers;
 
 internal static class ItemManualGroup
 {

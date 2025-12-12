@@ -2,7 +2,7 @@
 using Sandbox;
 using Todo.List;
 
-namespace Todo.Widgets.List.Items;
+namespace Todo.Widgets.List.ItemControllers;
 
 internal static class ItemCodeEntry
 {

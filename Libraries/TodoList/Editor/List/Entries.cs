@@ -1,4 +1,6 @@
-﻿namespace Todo.List;
+﻿using Todo.CodeImport;
+
+namespace Todo.List;
 
 internal sealed class TodoEntry
 {

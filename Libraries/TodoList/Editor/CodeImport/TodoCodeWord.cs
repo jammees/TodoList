@@ -2,7 +2,7 @@
 using Sandbox;
 using System.Collections.Generic;
 
-namespace Todo;
+namespace Todo.CodeImport;
 
 internal sealed class TodoCodeWord
 {
