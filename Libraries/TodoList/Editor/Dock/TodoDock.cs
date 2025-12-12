@@ -200,7 +200,8 @@ internal sealed partial class TodoDock : Widget
 
 	private void LoadCodeEntries()
 	{
-		Dictionary<string, List<CodeEntry>> entries = ImportFromCode();
+		Dictionary<string, List<CodeEntry>> entries =
+			ParseCode.ProcessFiles( FileUtility.GetAllFiles( new() { ".cs", ".razor" } ) );
 
 		List<string> sortedGroups = entries.Keys.ToList();
 		sortedGroups.Sort();
